@@ -116,7 +116,12 @@
       <div><label>عدد الليالي / Nights</label><input id="nights" type="number" min="1" placeholder="تلقائي / Auto"/></div>
       <div><label>الوجبات (عربي)</label><input id="meals_ar" placeholder="إقامة شاملة"/></div>
       <div><label>Meals (English)</label><input id="meals_en" placeholder="All Inclusive"/></div>
-      <div><label>الموظف المختص / Issued By</label><input id="issuer" placeholder="أحمد محمود - Reservations"/></div>
+      <div><label>الموظف المختص / Issued By</label>
+        <select id="issuer">
+          <option value="Basent - Reservations Dept">Basent - بسنت</option>
+          <option value="Marwa - Reservations Dept">Marwa - مروة</option>
+        </select>
+      </div>
     </div>
     <div class="actions">
       <button class="btn-primary" onclick="generate()">توليد القسيمة / Generate</button>
