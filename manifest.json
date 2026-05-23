@@ -1,0 +1,27 @@
+{
+  "name": "Hotel Voucher - اليامي",
+  "short_name": "Hotel Voucher",
+  "description": "نظام إصدار قسائم الحجز الفندقي مع رمز QR",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#f0f2f5",
+  "theme_color": "#0f172a",
+  "lang": "ar",
+  "dir": "rtl",
+  "icons": [
+    {
+      "src": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'><rect width='192' height='192' rx='28' fill='%230f172a'/><text x='96' y='100' font-size='70' font-weight='700' text-anchor='middle' fill='%23C5A059' font-family='serif'>H</text><text x='96' y='140' font-size='20' font-weight='600' text-anchor='middle' fill='white' font-family='Arial'>VOUCHER</text><text x='96' y='165' font-size='14' text-anchor='middle' fill='%23C5A059' font-family='Arial'>اليامي</text></svg>",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><rect width='512' height='512' rx='72' fill='%230f172a'/><text x='256' y='270' font-size='180' font-weight='700' text-anchor='middle' fill='%23C5A059' font-family='serif'>H</text><text x='256' y='370' font-size='52' font-weight='600' text-anchor='middle' fill='white' font-family='Arial'>VOUCHER</text><text x='256' y='440' font-size='36' text-anchor='middle' fill='%23C5A059' font-family='Arial'>اليامي للسفر</text></svg>",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
