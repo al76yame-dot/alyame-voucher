@@ -35,6 +35,7 @@
   .v-ref{position:absolute;top:8mm;right:14mm;font-size:11px;color:#666}
 
   .v-header{text-align:center;margin-top:6mm;padding-bottom:6mm;border-bottom:2px solid #C5A059}
+  .v-logo-img{width:80px;height:80px;object-fit:contain;margin-bottom:4mm}
   .v-header h2{margin:0;font-size:24px;letter-spacing:1px;color:#0f172a;font-family:'Times New Roman',serif}
   .v-header h3{margin:4px 0 0;font-size:18px;font-weight:500;color:#0f172a}
   .v-logo-band{display:flex;justify-content:space-between;align-items:center;margin-top:4mm}
@@ -111,6 +112,7 @@
       <div><label>Room Type (English)</label><input id="room_en" placeholder="Royal Suite"/></div>
       <div><label>تاريخ الدخول / Check-in</label><input id="checkin" type="date"/></div>
       <div><label>تاريخ الخروج / Check-out</label><input id="checkout" type="date"/></div>
+      <div><label>عدد الليالي / Nights</label><input id="nights" type="number" min="1" placeholder="تلقائي / Auto"/></div>
       <div><label>الوجبات (عربي)</label><input id="meals_ar" placeholder="إقامة شاملة"/></div>
       <div><label>Meals (English)</label><input id="meals_en" placeholder="All Inclusive"/></div>
       <div><label>الموظف المختص / Issued By</label><input id="issuer" placeholder="أحمد محمود - Reservations"/></div>
@@ -130,6 +132,7 @@
       <div class="watermark">ALYAME</div>
 
       <div class="v-header">
+        <img src="logo.png" alt="Alyame Travel" class="v-logo-img"/>
         <h2>HOTEL VOUCHER</h2>
         <h3>قسيمة حجز فندقي</h3>
         <div class="v-logo-band">
@@ -263,7 +266,10 @@
     $('d_room').textContent = (data.room_ar || '—') + (data.room_en ? ' / ' + data.room_en : '');
     $('d_checkin').textContent = fmtDate(data.checkin);
     $('d_checkout').textContent = fmtDate(data.checkout);
-    const n = calcNights(data.checkin, data.checkout);
+    const manualN = parseInt($('nights').value, 10);
+    const autoN = calcNights(data.checkin, data.checkout);
+    const n = (manualN && manualN > 0) ? manualN : autoN;
+    data.nights = n;
     $('d_nights').textContent = n ? `${n} ليالي / ${n} Nights` : '—';
     $('d_meals').textContent = (data.meals_ar || '—') + (data.meals_en ? ' / ' + data.meals_en : '');
     $('d_issuer').textContent = data.issuer || '—';
@@ -319,6 +325,7 @@
       $('room_en').value = saved.room_en || '';
       $('checkin').value = saved.checkin || '';
       $('checkout').value = saved.checkout || '';
+      $('nights').value = saved.nights || '';
       $('meals_ar').value = saved.meals_ar || '';
       $('meals_en').value = saved.meals_en || '';
       $('issuer').value = saved.issuer || '';
@@ -329,6 +336,14 @@
   generate();
 
   $('ref').addEventListener('dblclick', () => { $('ref').value = genRef(); });
+
+  // Auto-update nights when dates change
+  function syncNights(){
+    const n = calcNights($('checkin').value, $('checkout').value);
+    if(n) $('nights').value = n;
+  }
+  $('checkin').addEventListener('change', syncNights);
+  $('checkout').addEventListener('change', syncNights);
 
   if('serviceWorker' in navigator){
     window.addEventListener('load', () => {
