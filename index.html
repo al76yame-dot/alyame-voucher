@@ -29,64 +29,110 @@
   .btn-print{background:#198754;color:#fff}
   button:hover{opacity:.9}
 
-  .doc-wrap{display:flex;justify-content:center}
-  .voucher{width:210mm;min-height:297mm;padding:14mm;background:#fff;position:relative;border:2px solid #0f172a;color:#111;font-size:12px}
-  .v-date{position:absolute;top:8mm;left:14mm;font-size:11px;color:#666}
-  .v-ref{position:absolute;top:8mm;right:14mm;font-size:11px;color:#666}
+  .doc-wrap{display:flex;justify-content:center;padding:20px 0}
+  .voucher{
+    width:210mm;min-height:297mm;padding:18mm 16mm;background:#fff;position:relative;
+    color:#1a1a1a;font-size:11.5px;line-height:1.5;
+    font-family:'Cambria','Georgia','Times New Roman',serif;
+    box-shadow:0 4px 18px rgba(0,0,0,.12);
+  }
 
-  .v-header{text-align:center;margin-top:6mm;padding-bottom:6mm;border-bottom:2px solid #C5A059}
-  .v-logo-img{width:160px;height:160px;object-fit:contain;margin-bottom:4mm}
-  @media (max-width:768px){ .v-logo-img{width:110px;height:110px} }
-  .v-header h2{margin:0;font-size:24px;letter-spacing:1px;color:#0f172a;font-family:'Times New Roman',serif}
-  .v-header h3{margin:4px 0 0;font-size:18px;font-weight:500;color:#0f172a}
-  .v-logo-band{display:flex;justify-content:space-between;align-items:center;margin-top:4mm}
-  .v-logo{font-size:14px;font-weight:700;color:#C5A059;letter-spacing:2px}
-  .v-tagline{font-size:11px;color:#666}
+  /* ===== Letterhead Header ===== */
+  .v-letterhead{display:flex;align-items:flex-start;justify-content:space-between;gap:10mm;padding-bottom:5mm;border-bottom:3px double #C5A059}
+  .v-letterhead-info{flex:1;text-align:left;direction:ltr;font-size:10px;color:#555;line-height:1.6}
+  .v-letterhead-info .co-name-en{font-size:13px;font-weight:700;color:#0f172a;letter-spacing:1px;margin-bottom:2mm;font-family:'Times New Roman',serif}
+  .v-letterhead-info .co-row{display:flex;gap:4px;align-items:center}
+  .v-letterhead-info .co-row svg{width:10px;height:10px;flex-shrink:0;fill:#C5A059}
+  .v-letterhead-logo{flex-shrink:0;text-align:center}
+  .v-logo-img{width:150px;height:150px;object-fit:contain;display:block}
+  .v-letterhead-ar{flex:1;text-align:right;direction:rtl;font-size:10px;color:#555;line-height:1.7}
+  .v-letterhead-ar .co-name-ar{font-size:14px;font-weight:700;color:#0f172a;margin-bottom:2mm;font-family:'Tahoma',sans-serif}
 
-  .status-badge{display:inline-block;background:#0f172a;color:#C5A059;padding:4px 14px;border:1px solid #C5A059;border-radius:3px;font-size:12px;font-weight:700;letter-spacing:1px;margin-top:4mm}
-  .status-pending{background:#fef3c7;color:#92400e;border-color:#f59e0b}
-  .status-cancelled{background:#fee2e2;color:#991b1b;border-color:#dc2626}
+  /* ===== Title Bar ===== */
+  .v-title-bar{text-align:center;margin:6mm 0 4mm;position:relative}
+  .v-title-bar h2{margin:0;font-size:26px;letter-spacing:3px;color:#0f172a;font-weight:700;font-family:'Times New Roman',serif}
+  .v-title-bar h3{margin:1mm 0 0;font-size:18px;font-weight:600;color:#C5A059;font-family:'Tahoma',sans-serif}
+  .v-title-bar .ruler{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:3mm}
+  .v-title-bar .ruler::before,.v-title-bar .ruler::after{content:'';flex:1;max-width:60mm;height:1px;background:linear-gradient(to right,transparent,#C5A059,transparent)}
+  .v-title-bar .ruler-diamond{width:6px;height:6px;background:#C5A059;transform:rotate(45deg)}
 
-  .section-title{text-align:center;font-weight:700;font-size:13px;margin:7mm 0 3mm;color:#0f172a;letter-spacing:.5px}
-  .section-title .gold{color:#C5A059}
+  /* ===== Meta bar (date + ref + status) ===== */
+  .v-meta{display:flex;justify-content:space-between;align-items:center;margin:4mm 0 5mm;padding:2.5mm 4mm;background:#0f172a;color:#fff;font-size:10.5px}
+  .v-meta .meta-item{display:flex;flex-direction:column;gap:1mm}
+  .v-meta .meta-lbl{font-size:8px;color:#C5A059;letter-spacing:1px;text-transform:uppercase}
+  .v-meta .meta-val{font-size:11px;font-weight:600;color:#fff;font-family:'Consolas',monospace}
+  .status-badge{display:inline-block;background:#C5A059;color:#0f172a;padding:2px 10px;border-radius:2px;font-size:10px;font-weight:700;letter-spacing:1px}
+  .status-pending{background:#f59e0b;color:#fff}
+  .status-cancelled{background:#dc2626;color:#fff}
 
-  table.doc-table{width:100%;border-collapse:collapse;margin-bottom:2mm}
-  table.doc-table td{border:1px solid #b9c2cc;padding:6px 9px;vertical-align:middle;font-size:12px}
-  .label-cell{background:#eff4ff;font-weight:600;width:25%;color:#0f172a}
-  .value-cell{background:#fff}
+  /* ===== Hotel Block ===== */
+  .v-hotel-row{display:flex;gap:5mm;align-items:center;padding:5mm;background:linear-gradient(to right,#fafafa,#fff);border:1px solid #e5e0d0;border-right:5px solid #C5A059;border-radius:2px;margin-bottom:5mm}
+  .v-hotel-icon{width:18mm;height:18mm;background:#0f172a;border-radius:4px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+  .v-hotel-icon svg{width:11mm;height:11mm;fill:#C5A059}
+  .v-hotel-body{flex:1}
+  .v-hotel-label{font-size:9px;color:#888;letter-spacing:1px;text-transform:uppercase;margin-bottom:1mm}
+  .v-hotel-name{font-size:17px;font-weight:700;color:#0f172a;margin:0;line-height:1.3;font-family:'Times New Roman',serif}
+  .v-hotel-loc{font-size:11px;color:#555;margin-top:1.5mm;display:flex;align-items:center;gap:4px}
+  .v-hotel-loc svg{width:11px;height:11px;fill:#C5A059;flex-shrink:0}
 
-  .v-hotel-row{display:flex;gap:4mm;margin:5mm 0;align-items:center;padding:4mm;background:#eff4ff;border-right:4px solid #C5A059;border-radius:4px}
-  .v-hotel-icon{width:50px;height:50px;background:#0f172a;border-radius:8px;display:flex;align-items:center;justify-content:center;color:#C5A059;font-size:24px;flex-shrink:0}
-  .v-hotel-name{font-size:16px;font-weight:700;color:#0f172a;margin:0}
-  .v-hotel-loc{font-size:11px;color:#666;margin-top:2px}
+  /* ===== Section Headers ===== */
+  .section-title{font-weight:700;font-size:12px;margin:5mm 0 2mm;color:#0f172a;letter-spacing:1.5px;text-transform:uppercase;padding-bottom:1.5mm;border-bottom:1px solid #C5A059;display:flex;align-items:center;gap:3mm}
+  .section-title::before{content:'';width:3mm;height:3mm;background:#C5A059;transform:rotate(45deg)}
+  .section-title .ar{margin-right:auto;font-family:'Tahoma',sans-serif;color:#555;font-weight:600;font-size:11px;letter-spacing:0}
 
-  .v-footer{margin-top:6mm;display:flex;justify-content:space-between;align-items:center;padding-top:4mm;border-top:1px solid #ddd}
+  /* ===== Data Table ===== */
+  table.doc-table{width:100%;border-collapse:collapse;margin-bottom:3mm;page-break-inside:avoid}
+  table.doc-table td{border:1px solid #d4d0c0;padding:3mm 4mm;vertical-align:middle;font-size:11px}
+  .label-cell{background:#f5f2e8;font-weight:700;width:22%;color:#0f172a;font-size:10px;letter-spacing:.3px}
+  .value-cell{background:#fff;color:#1a1a1a;font-weight:500}
+
+  /* ===== Signature Footer ===== */
+  .v-sigfooter{margin-top:6mm;display:flex;justify-content:space-between;align-items:flex-end;gap:8mm;padding:4mm;border:1px solid #e5e0d0;background:#fafafa;page-break-inside:avoid}
   .v-issued{flex:1}
-  .v-issued .lbl{font-size:10px;color:#666;text-transform:uppercase;letter-spacing:.5px}
-  .v-issued .val{font-size:13px;color:#0f172a;font-weight:600;margin-top:2px}
-  .v-qr{text-align:center}
-  .v-qr canvas{width:90px;height:90px;border:1px solid #ddd;padding:4px;background:#fff}
-  .v-qr p{font-size:9px;color:#666;margin:2px 0 0;line-height:1.3}
+  .v-issued .lbl{font-size:9px;color:#888;text-transform:uppercase;letter-spacing:1px;margin-bottom:2mm}
+  .v-issued .val{font-size:13px;color:#0f172a;font-weight:700;margin-bottom:2mm}
+  .v-issued .sig-line{border-top:1px solid #999;width:50mm;padding-top:1mm;font-size:9px;color:#888;font-style:italic}
+  .v-qr{text-align:center;flex-shrink:0}
+  .v-qr canvas{width:24mm;height:24mm;border:1px solid #C5A059;padding:1mm;background:#fff;display:block}
+  .v-qr p{font-size:8px;color:#666;margin:1.5mm 0 0;line-height:1.3;letter-spacing:.3px}
 
-  .notes{margin-top:5mm;border:1.5px solid #C5A059;border-radius:4px;padding:4mm;background:#fffbf3}
-  .notes h4{margin:0 0 2mm;font-size:12px;color:#0f172a}
-  .notes p{margin:1mm 0;font-size:10.5px;line-height:1.5;color:#444}
+  /* ===== Notes ===== */
+  .notes{margin-top:5mm;border:1px solid #C5A059;border-left:4px solid #C5A059;padding:4mm 5mm;background:#fffbf3;page-break-inside:avoid}
+  .notes h4{margin:0 0 2mm;font-size:11px;color:#0f172a;letter-spacing:1px;text-transform:uppercase}
+  .notes p{margin:1.2mm 0;font-size:10px;line-height:1.5;color:#333}
 
-  .watermark{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;opacity:.05;font-size:80px;font-weight:800;color:#0f172a;transform:rotate(-25deg)}
+  /* ===== Document Footer ===== */
+  .v-docfooter{margin-top:6mm;padding-top:3mm;border-top:2px solid #C5A059;display:flex;justify-content:space-between;font-size:9px;color:#666;line-height:1.5}
+  .v-docfooter .col{flex:1}
+  .v-docfooter .col.right{text-align:left;direction:ltr}
+  .v-docfooter strong{color:#0f172a}
 
+  /* ===== Watermark ===== */
+  .watermark{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;opacity:.04;font-size:120px;font-weight:800;color:#0f172a;transform:rotate(-25deg);letter-spacing:8px;font-family:'Times New Roman',serif;z-index:0}
+  .voucher > *{position:relative;z-index:1}
+
+  /* ===== Print ===== */
   @media print{
     body{background:#fff}
     .panel,h1,.no-print{display:none!important}
-    .voucher{border:2px solid #0f172a;box-shadow:none;margin:0}
-    @page{size:A4;margin:0}
+    .voucher{box-shadow:none;margin:0;width:auto;min-height:auto;padding:12mm}
+    @page{size:A4;margin:8mm}
+    *{-webkit-print-color-adjust:exact !important;print-color-adjust:exact !important;color-adjust:exact !important}
+    .v-meta,.v-hotel-row,.v-sigfooter,.notes,table.doc-table{page-break-inside:avoid}
+    .v-letterhead{page-break-after:avoid}
   }
 
   @media (max-width:768px){
-    .voucher{width:100%;min-height:auto;padding:6mm;font-size:11px}
-    .v-header h2{font-size:18px}
-    .v-header h3{font-size:14px}
-    table.doc-table td{padding:4px 6px;font-size:10.5px}
-    .v-qr canvas{width:70px;height:70px}
+    .voucher{width:100%;min-height:auto;padding:8mm;font-size:11px}
+    .v-letterhead{flex-wrap:wrap}
+    .v-logo-img{width:90px;height:90px}
+    .v-title-bar h2{font-size:20px;letter-spacing:1px}
+    .v-title-bar h3{font-size:14px}
+    .v-meta{flex-wrap:wrap;gap:3mm}
+    table.doc-table td{padding:2mm 3mm;font-size:10px}
+    .label-cell{font-size:9px}
+    .v-qr canvas{width:20mm;height:20mm}
+    .v-docfooter{flex-direction:column;gap:2mm}
   }
 </style>
 </head>
@@ -133,60 +179,103 @@
 
   <div class="doc-wrap">
     <div class="voucher" id="doc">
-      <div class="v-date" id="d_date"></div>
-      <div class="v-ref" id="d_ref_top"></div>
       <div class="watermark">ALYAME</div>
 
-      <div class="v-header">
-        <img src="logo.png" alt="Alyame Travel" class="v-logo-img"/>
+      <!-- Letterhead -->
+      <div class="v-letterhead">
+        <div class="v-letterhead-ar">
+          <div class="co-name-ar">اليامي للسفر والسياحة</div>
+          <div>📞 +966 11 XXX XXXX</div>
+          <div>✉ info@alyametravel.com</div>
+          <div>📍 الرياض، المملكة العربية السعودية</div>
+          <div>الرخصة التجارية: XXXXXXXXX</div>
+        </div>
+        <div class="v-letterhead-logo">
+          <img src="logo.png" alt="Alyame Travel" class="v-logo-img"/>
+        </div>
+        <div class="v-letterhead-info">
+          <div class="co-name-en">ALYAME TRAVEL & TOURISM</div>
+          <div class="co-row"><svg viewBox="0 0 24 24"><path d="M20 15.5c-1.25 0-2.45-.2-3.57-.57-.35-.11-.74-.03-1.02.25l-2.2 2.2c-2.83-1.44-5.15-3.75-6.59-6.58l2.2-2.21c.28-.27.36-.66.25-1.01C8.7 6.45 8.5 5.25 8.5 4c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.5c0-.55-.45-1-1-1z"/></svg> +966 11 XXX XXXX</div>
+          <div class="co-row"><svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg> info@alyametravel.com</div>
+          <div class="co-row"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg> Riyadh, Kingdom of Saudi Arabia</div>
+          <div>License: XXXXXXXXX</div>
+        </div>
+      </div>
+
+      <!-- Title Bar -->
+      <div class="v-title-bar">
         <h2>HOTEL VOUCHER</h2>
         <h3>قسيمة حجز فندقي</h3>
-        <div class="v-logo-band">
-          <span class="v-logo">ALYAME TRAVEL</span>
-          <span class="v-tagline">اليامي للسفر والسياحة</span>
-        </div>
-        <div style="text-align:center"><span id="d_status" class="status-badge">مؤكد / Confirmed</span></div>
+        <div class="ruler"><span class="ruler-diamond"></span></div>
       </div>
 
+      <!-- Meta Bar -->
+      <div class="v-meta">
+        <div class="meta-item">
+          <span class="meta-lbl">Voucher Ref / المرجع</span>
+          <span class="meta-val" id="d_ref_top">—</span>
+        </div>
+        <div class="meta-item" style="text-align:center">
+          <span class="meta-lbl">Status / الحالة</span>
+          <span id="d_status" class="status-badge">مؤكد / Confirmed</span>
+        </div>
+        <div class="meta-item" style="text-align:left;direction:ltr">
+          <span class="meta-lbl">Issue Date / تاريخ الإصدار</span>
+          <span class="meta-val" id="d_date">—</span>
+        </div>
+      </div>
+
+      <!-- Hotel Block -->
       <div class="v-hotel-row">
-        <div class="v-hotel-icon">🏨</div>
-        <div>
-          <p class="v-hotel-name"><span id="d_hotel_ar">—</span> / <span id="d_hotel_en">—</span></p>
-          <p class="v-hotel-loc">📍 <span id="d_loc_ar">—</span> / <span id="d_loc_en">—</span></p>
+        <div class="v-hotel-icon">
+          <svg viewBox="0 0 24 24"><path d="M7 13c1.66 0 3-1.34 3-3S8.66 7 7 7s-3 1.34-3 3 1.34 3 3 3zm12-6h-8v7H3V5H1v15h2v-3h18v3h2v-9c0-2.21-1.79-4-4-4z"/></svg>
+        </div>
+        <div class="v-hotel-body">
+          <div class="v-hotel-label">Hotel / الفندق</div>
+          <p class="v-hotel-name"><span id="d_hotel_en">—</span> · <span id="d_hotel_ar">—</span></p>
+          <p class="v-hotel-loc">
+            <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+            <span id="d_loc_en">—</span> · <span id="d_loc_ar">—</span>
+          </p>
         </div>
       </div>
 
-      <div class="section-title">VOUCHER DETAILS <span class="gold">|</span> تفاصيل القسيمة</div>
-
+      <!-- Guest Info -->
+      <div class="section-title">Guest Information <span class="ar">معلومات العميل</span></div>
       <table class="doc-table">
         <tr>
-          <td class="label-cell">Voucher Ref | المرجع</td>
-          <td class="value-cell" id="d_ref">—</td>
-          <td class="label-cell">Guest Name | اسم العميل</td>
-          <td class="value-cell" id="d_guest">—</td>
+          <td class="label-cell">Guest Name<br/>اسم العميل</td>
+          <td class="value-cell" colspan="3" id="d_guest">—</td>
         </tr>
+      </table>
+
+      <!-- Booking Details -->
+      <div class="section-title">Booking Details <span class="ar">تفاصيل الحجز</span></div>
+      <table class="doc-table">
         <tr>
-          <td class="label-cell">Check-in | تاريخ الدخول</td>
+          <td class="label-cell">Check-in<br/>تاريخ الدخول</td>
           <td class="value-cell" id="d_checkin">—</td>
-          <td class="label-cell">Check-out | تاريخ الخروج</td>
+          <td class="label-cell">Check-out<br/>تاريخ الخروج</td>
           <td class="value-cell" id="d_checkout">—</td>
         </tr>
         <tr>
-          <td class="label-cell">Nights | عدد الليالي</td>
+          <td class="label-cell">Nights<br/>عدد الليالي</td>
           <td class="value-cell" id="d_nights">—</td>
-          <td class="label-cell">Room Type | نوع الغرفة</td>
+          <td class="label-cell">Room Type<br/>نوع الغرفة</td>
           <td class="value-cell" id="d_room">—</td>
         </tr>
         <tr>
-          <td class="label-cell">Meals | الوجبات</td>
+          <td class="label-cell">Meals<br/>الوجبات</td>
           <td class="value-cell" colspan="3" id="d_meals">—</td>
         </tr>
       </table>
 
-      <div class="v-footer">
+      <!-- Signature & QR -->
+      <div class="v-sigfooter">
         <div class="v-issued">
           <div class="lbl">Issued By / الموظف المختص</div>
           <div class="val" id="d_issuer">—</div>
+          <div class="sig-line">Authorized Signature / التوقيع المعتمد</div>
         </div>
         <div class="v-qr">
           <canvas id="qr"></canvas>
@@ -194,16 +283,31 @@
         </div>
       </div>
 
+      <!-- Terms & Notes -->
       <div class="notes">
-        <h4>IMPORTANT NOTES | إشعارات هامة</h4>
-        <p>- Please present this voucher and a valid ID upon arrival at the hotel.</p>
-        <p style="text-align:right">يُرجى تقديم هذه القسيمة مع هوية سارية عند الوصول إلى الفندق</p>
-        <p>- Check-in time: 14:00 / Check-out time: 12:00 (subject to hotel policy).</p>
-        <p style="text-align:right">وقت الدخول: 2 ظهراً / وقت الخروج: 12 ظهراً (حسب سياسة الفندق)</p>
-        <p>- Any changes or cancellations must be made at least 48 hours before check-in.</p>
-        <p style="text-align:right">أي تعديل أو إلغاء يجب أن يتم قبل 48 ساعة من تاريخ الدخول على الأقل</p>
-        <p>- This voucher is non-transferable and valid only for the named guest.</p>
-        <p style="text-align:right">هذه القسيمة غير قابلة للتحويل وصالحة فقط للعميل المذكور</p>
+        <h4>Important Notes · إشعارات هامة</h4>
+        <p>1. Please present this voucher together with a valid photo ID upon arrival at the hotel.</p>
+        <p style="text-align:right">١. يُرجى تقديم هذه القسيمة مع هوية شخصية سارية عند الوصول إلى الفندق.</p>
+        <p>2. Standard check-in 14:00 · Check-out 12:00 (subject to hotel policy).</p>
+        <p style="text-align:right">٢. وقت الدخول القياسي ٢ ظهراً · الخروج ١٢ ظهراً (حسب سياسة الفندق).</p>
+        <p>3. Any changes or cancellations must be made at least 48 hours before check-in.</p>
+        <p style="text-align:right">٣. أي تعديل أو إلغاء يجب أن يتم قبل ٤٨ ساعة من تاريخ الدخول على الأقل.</p>
+        <p>4. This voucher is non-transferable and is valid only for the named guest.</p>
+        <p style="text-align:right">٤. هذه القسيمة غير قابلة للتحويل وصالحة فقط للعميل المذكور.</p>
+      </div>
+
+      <!-- Document Footer -->
+      <div class="v-docfooter">
+        <div class="col">
+          <strong>اليامي للسفر والسياحة</strong><br/>
+          المملكة العربية السعودية · الرياض<br/>
+          هذه الوثيقة صادرة إلكترونياً ولا تحتاج إلى توقيع
+        </div>
+        <div class="col right">
+          <strong>Alyame Travel & Tourism</strong><br/>
+          Riyadh · Kingdom of Saudi Arabia<br/>
+          Electronically generated · No signature required
+        </div>
       </div>
     </div>
   </div>
