@@ -49,10 +49,8 @@
 
   .v-letterhead{display:flex;align-items:center;justify-content:space-between;gap:5mm;margin-top:4mm;padding-bottom:3mm;border-bottom:2px solid #0f172a;position:relative}
   .v-letterhead::after{content:'';position:absolute;bottom:-3px;left:0;right:0;height:1px;background:#C5A059}
-  .v-logo-side{flex-shrink:0;display:flex;flex-direction:column;align-items:center;gap:1mm}
-  .v-logo-img{width:90px;height:90px;object-fit:contain}
-  .v-logo-tag{font-size:7.5px;font-weight:700;letter-spacing:1.5px;color:#C5A059;text-transform:uppercase;text-align:center;padding:1px 6px;border:1px solid #C5A059;border-radius:2px;background:#fffbf3}
-  .v-logo-side.partner .v-logo-tag{color:#0f172a;border-color:#0f172a;background:#f5f2e8}
+  .v-logo-side{flex-shrink:0;display:flex;flex-direction:column;align-items:center}
+  .v-logo-img{width:140px;height:140px;object-fit:contain}
   .v-co-block{flex:1;text-align:center;padding:0 3mm}
   .v-co-name{font-size:17px;font-weight:700;color:#0f172a;letter-spacing:.5px;margin:0 0 1mm}
   .voucher[data-lang="en"] .v-co-name{font-family:'Times New Roman',serif;letter-spacing:2px}
@@ -103,40 +101,80 @@
   .label-cell{background:#f5f2e8;font-weight:700;width:22%;color:#0f172a;font-size:8.5px;letter-spacing:.4px;text-transform:uppercase}
   .value-cell{background:#fff;color:#1a1a1a;font-weight:500;font-size:10.5px}
 
-  .v-sigfooter{margin-top:3mm;display:flex;justify-content:space-between;align-items:center;gap:5mm;padding:3mm 4mm;border:1px solid #e5e0d0;background:#fafafa;page-break-inside:avoid}
-  .v-issued{flex:1;min-width:0}
-  .v-issued .lbl{font-size:8px;color:#888;text-transform:uppercase;letter-spacing:1.3px;margin-bottom:1mm;font-weight:600}
-  .v-issued .val{font-size:12px;color:#0f172a;font-weight:700;margin-bottom:1mm}
-  .v-issued-email{font-size:8.5px;color:#0f172a;margin-bottom:1.5mm;direction:ltr;text-align:start;font-family:'Consolas','Courier New',monospace}
+  .v-sigfooter{
+    margin-top:4mm;display:grid;
+    grid-template-columns:1fr auto auto;gap:6mm;
+    padding:4mm 5mm;border:1px solid #e5e0d0;
+    background:linear-gradient(135deg,#fcfaf4 0%,#fafafa 50%,#f5f2e8 100%);
+    page-break-inside:avoid;align-items:center;
+    border-radius:2px;position:relative;
+  }
+  .v-sigfooter::before{content:'';position:absolute;top:0;left:5mm;right:5mm;height:2px;background:linear-gradient(to right,transparent,#C5A059,transparent)}
+  .v-issued{min-width:0}
+  .v-issued .lbl{font-size:8px;color:#888;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:1.5mm;font-weight:700}
+  .v-issued .val{font-size:14px;color:#0f172a;font-weight:700;margin-bottom:1mm;letter-spacing:.3px}
+  .v-issued-email{font-size:9px;color:#555;margin-bottom:2.5mm;direction:ltr;text-align:start;font-family:'Consolas','Courier New',monospace;letter-spacing:.2px}
   .voucher[data-lang="ar"] .v-issued-email{text-align:right}
-  .v-issued .sig-line{border-top:1px solid #999;width:45mm;padding-top:1mm;font-size:8px;color:#888;font-style:italic}
+  .v-issued .sig-line{border-top:1.5px solid #0f172a;width:50mm;padding-top:1mm;font-size:8px;color:#666;font-style:italic;letter-spacing:.5px}
 
-  .v-stamp{flex-shrink:0;display:flex;align-items:center;justify-content:center}
-  .stamp-circle{width:22mm;height:22mm;border:2px solid #C5A059;border-radius:50%;display:flex;align-items:center;justify-content:center;position:relative;transform:rotate(-12deg);opacity:.85}
-  .stamp-circle::before{content:'';position:absolute;inset:1.5mm;border:1px dashed #C5A059;border-radius:50%}
+  .v-stamp{display:flex;align-items:center;justify-content:center;padding:0 2mm}
+  .stamp-circle{
+    width:24mm;height:24mm;border:2.5px solid #C5A059;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;position:relative;
+    transform:rotate(-10deg);
+    background:radial-gradient(circle,#fffbf3 0%,#fff 100%);
+  }
+  .stamp-circle::before{content:'';position:absolute;inset:2mm;border:1px dashed #C5A059;border-radius:50%}
   .stamp-inner{text-align:center;color:#C5A059}
-  .stamp-co{font-size:8.5px;font-weight:800;letter-spacing:1.5px;line-height:1}
-  .stamp-sub{font-size:6px;font-weight:600;letter-spacing:2px;margin-top:1mm}
+  .stamp-co{font-size:10px;font-weight:800;letter-spacing:2px;line-height:1}
+  .stamp-sub{font-size:6.5px;font-weight:600;letter-spacing:2.5px;margin-top:1.5mm}
 
-  .v-qr{text-align:center;flex-shrink:0}
-  .v-qr canvas{width:22mm;height:22mm;border:1px solid #C5A059;padding:1mm;background:#fff;display:block}
-  .v-qr p{font-size:7.5px;color:#666;margin:1mm 0 0;line-height:1.3;letter-spacing:.3px;font-weight:600}
+  .v-qr{text-align:center;display:flex;flex-direction:column;align-items:center;gap:1mm}
+  .v-qr canvas{width:24mm;height:24mm;border:1.5px solid #0f172a;padding:1mm;background:#fff;display:block;border-radius:2px}
+  .v-qr p{font-size:7.5px;color:#0f172a;margin:0;line-height:1.3;letter-spacing:.5px;font-weight:700;text-transform:uppercase}
 
-  .notes{margin-top:3mm;border:1px solid #C5A059;padding:2.5mm 4mm;background:#fffbf3;page-break-inside:avoid}
+  .notes{
+    margin-top:3mm;border:1px solid #e0d8c0;padding:3mm 4mm;
+    background:linear-gradient(to bottom,#fffbf3 0%,#fff 100%);
+    page-break-inside:avoid;border-radius:2px;position:relative;
+  }
   .voucher[data-lang="ar"] .notes{border-right:3px solid #C5A059}
   .voucher[data-lang="en"] .notes{border-left:3px solid #C5A059}
-  .notes h4{margin:0 0 1.5mm;font-size:9px;color:#0f172a;letter-spacing:1.3px;text-transform:uppercase;padding-bottom:.8mm;border-bottom:1px solid #C5A05955}
-  .notes ol{margin:0;padding-inline-start:4mm;font-size:8.5px;line-height:1.5;color:#333}
-  .notes li{margin:.5mm 0}
+  .notes h4{
+    margin:0 0 1.5mm;font-size:9px;color:#0f172a;letter-spacing:1.5px;
+    text-transform:uppercase;padding-bottom:1mm;
+    border-bottom:1px solid #C5A05955;display:flex;align-items:center;gap:2mm;
+  }
+  .notes h4::before{content:'';width:2mm;height:2mm;background:#C5A059;transform:rotate(45deg);flex-shrink:0}
+  .notes ol{margin:0;padding-inline-start:4mm;font-size:8.5px;line-height:1.55;color:#333;counter-reset:item}
+  .notes li{margin:.6mm 0;padding-inline-start:1mm}
+  .notes li::marker{color:#C5A059;font-weight:700}
 
-  .v-docfooter{position:absolute;bottom:4mm;left:14mm;right:14mm}
-  .v-docfooter-line{height:1px;background:linear-gradient(to right,transparent,#C5A059,#0f172a,#C5A059,transparent);margin-bottom:1.5mm}
-  .v-docfooter-row{display:flex;justify-content:space-between;align-items:center;font-size:8px;color:#666;padding:.5mm 0;gap:3mm}
-  .v-docfooter strong{color:#0f172a}
-  .v-docfooter .seal{font-size:8.5px;letter-spacing:1.3px;color:#C5A059;font-weight:700;flex-shrink:0}
-  .v-docfooter .center{font-size:7.5px;color:#888;text-align:center;letter-spacing:.8px;text-transform:uppercase;flex:1}
-  .v-docfooter .left{flex:1;text-align:start}
-  .v-docfooter-bar{margin-top:1mm;height:2mm;background:linear-gradient(to right,#0f172a 0%,#0f172a 35%,#C5A059 35%,#C5A059 65%,#0f172a 65%,#0f172a 100%)}
+  .v-docfooter{position:absolute;bottom:0;left:0;right:0;padding:0 14mm 5mm}
+  .v-docfooter-deco{
+    display:flex;align-items:center;justify-content:center;gap:6px;
+    margin-bottom:2mm;
+  }
+  .v-docfooter-deco .line{flex:1;height:1px;background:linear-gradient(to right,transparent 0%,#C5A059 50%,transparent 100%)}
+  .v-docfooter-deco .diamond{width:5px;height:5px;background:#C5A059;transform:rotate(45deg)}
+  .v-docfooter-deco .dot{width:3px;height:3px;background:#0f172a;border-radius:50%}
+  .v-docfooter-row{
+    display:grid;grid-template-columns:1fr auto 1fr;gap:4mm;
+    align-items:center;font-size:8.5px;color:#555;padding:1mm 0 2mm;
+  }
+  .v-docfooter strong{color:#0f172a;font-weight:700}
+  .v-docfooter .seal{
+    font-size:9px;letter-spacing:1.5px;color:#0f172a;font-weight:800;
+    padding:1mm 3mm;border:1px solid #C5A059;border-radius:1mm;
+    background:#fffbf3;text-align:center;
+  }
+  .v-docfooter .center{
+    font-size:8px;color:#666;text-align:center;letter-spacing:.6px;
+    direction:ltr;font-family:'Consolas','Courier New',monospace;
+  }
+  .v-docfooter .left{text-align:start;line-height:1.5}
+  .voucher[data-lang="ar"] .v-docfooter .left{font-family:'Cairo',sans-serif}
+  .v-docfooter-bar{height:2.5mm;background:linear-gradient(to right,#0f172a 0%,#0f172a 30%,#C5A059 30%,#C5A059 70%,#0f172a 70%,#0f172a 100%);border-radius:1px}
 
   .watermark{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;opacity:.04;font-size:110px;font-weight:800;color:#0f172a;transform:rotate(-25deg);letter-spacing:8px;font-family:'Times New Roman',serif;z-index:0}
   .voucher > *:not(.watermark):not(.v-topband){position:relative;z-index:1}
@@ -216,7 +254,6 @@
       <div class="v-letterhead">
         <div class="v-logo-side primary">
           <img src="logo.png" alt="Alyame Travel" class="v-logo-img"/>
-          <div class="v-logo-tag" id="d_tag_primary">شركة الإصدار</div>
         </div>
         <div class="v-co-block">
           <h3 class="v-co-name" id="d_co_name"></h3>
@@ -243,7 +280,6 @@
         </div>
         <div class="v-logo-side partner">
           <img src="imagine-logo.svg" alt="Imagine Travel" class="v-logo-img"/>
-          <div class="v-logo-tag" id="d_tag_partner">شريك التشغيل</div>
         </div>
       </div>
 
@@ -341,11 +377,17 @@
       </div>
 
       <div class="v-docfooter">
-        <div class="v-docfooter-line"></div>
+        <div class="v-docfooter-deco">
+          <span class="line"></span>
+          <span class="dot"></span>
+          <span class="diamond"></span>
+          <span class="dot"></span>
+          <span class="line"></span>
+        </div>
         <div class="v-docfooter-row">
           <div class="left" id="d_footer_left"></div>
-          <div class="center" id="d_footer_center"></div>
           <div class="seal" id="d_footer_right"></div>
+          <div class="center" id="d_footer_center"></div>
         </div>
         <div class="v-docfooter-bar"></div>
       </div>
@@ -558,8 +600,6 @@
     $('d_co_name').textContent = d.co_name;
     $('d_co_sub').textContent = d.co_sub;
     $('d_partner_label').textContent = d.partner;
-    $('d_tag_primary').textContent = d.tag_primary;
-    $('d_tag_partner').textContent = d.tag_partner;
     $('d_stamp_co').textContent = 'ALYAME';
     $('d_stamp_sub').textContent = lang === 'ar' ? 'رسمي' : 'OFFICIAL';
 
