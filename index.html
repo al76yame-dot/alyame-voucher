@@ -35,43 +35,47 @@
   .lang-switch button{padding:7px 18px;border-radius:6px;background:transparent;color:#666;font-size:13px;font-weight:700}
   .lang-switch button.active{background:#0f172a;color:#C5A059;box-shadow:0 1px 4px rgba(0,0,0,.15)}
 
-  /* ===== A4 Voucher ===== */
+  /* ===== A4 Voucher (compact, single page) ===== */
   .doc-wrap{display:flex;justify-content:center;padding:20px 0}
   .voucher{
-    width:210mm;min-height:297mm;padding:18mm 16mm 14mm;background:#fff;position:relative;
-    color:#1a1a1a;font-size:11.5px;line-height:1.55;
-    box-shadow:0 4px 18px rgba(0,0,0,.12);
+    width:210mm;height:297mm;padding:12mm 14mm 18mm;background:#fff;position:relative;
+    color:#1a1a1a;font-size:10.5px;line-height:1.45;
+    box-shadow:0 4px 18px rgba(0,0,0,.12);overflow:hidden;
   }
   .voucher[data-lang="ar"]{direction:rtl;font-family:'Cairo','Tahoma','Segoe UI',sans-serif}
   .voucher[data-lang="en"]{direction:ltr;font-family:'Cambria','Georgia','Times New Roman',serif}
 
-  .v-topband{position:absolute;top:0;left:0;right:0;height:6mm;background:linear-gradient(to right,#0f172a 0%,#0f172a 40%,#C5A059 40%,#C5A059 60%,#0f172a 60%,#0f172a 100%)}
+  .v-topband{position:absolute;top:0;left:0;right:0;height:3mm;background:linear-gradient(to right,#0f172a 0%,#0f172a 40%,#C5A059 40%,#C5A059 60%,#0f172a 60%,#0f172a 100%)}
 
-  .v-letterhead{display:flex;align-items:center;justify-content:space-between;gap:10mm;margin-top:8mm;padding-bottom:5mm;border-bottom:2px solid #0f172a;position:relative}
-  .v-letterhead::after{content:'';position:absolute;bottom:-4px;left:0;right:0;height:1px;background:#C5A059}
-  .v-logo-img{width:140px;height:140px;object-fit:contain;flex-shrink:0}
-  .v-co-block{flex:1}
-  .v-co-name{font-size:22px;font-weight:700;color:#0f172a;letter-spacing:.5px;margin:0 0 2mm}
+  .v-letterhead{display:flex;align-items:center;justify-content:space-between;gap:5mm;margin-top:4mm;padding-bottom:3mm;border-bottom:2px solid #0f172a;position:relative}
+  .v-letterhead::after{content:'';position:absolute;bottom:-3px;left:0;right:0;height:1px;background:#C5A059}
+  .v-logo-side{flex-shrink:0;display:flex;flex-direction:column;align-items:center;gap:1mm}
+  .v-logo-img{width:90px;height:90px;object-fit:contain}
+  .v-logo-tag{font-size:7.5px;font-weight:700;letter-spacing:1.5px;color:#C5A059;text-transform:uppercase;text-align:center;padding:1px 6px;border:1px solid #C5A059;border-radius:2px;background:#fffbf3}
+  .v-logo-side.partner .v-logo-tag{color:#0f172a;border-color:#0f172a;background:#f5f2e8}
+  .v-co-block{flex:1;text-align:center;padding:0 3mm}
+  .v-co-name{font-size:17px;font-weight:700;color:#0f172a;letter-spacing:.5px;margin:0 0 1mm}
   .voucher[data-lang="en"] .v-co-name{font-family:'Times New Roman',serif;letter-spacing:2px}
-  .v-co-sub{font-size:11px;color:#C5A059;font-weight:600;letter-spacing:1.5px;margin-bottom:3mm;text-transform:uppercase}
-  .v-co-contact{font-size:10px;color:#444;line-height:1.7}
-  .v-co-contact .row{display:flex;align-items:center;gap:5px;margin:.8mm 0}
-  .v-co-contact svg{width:10px;height:10px;fill:#0f172a;flex-shrink:0}
-  .v-co-contact .label{font-weight:700;color:#0f172a;min-width:42px;display:inline-block}
-  .v-co-contact .phone-list{display:flex;flex-wrap:wrap;gap:0 8px;direction:ltr}
+  .v-co-sub{font-size:9px;color:#C5A059;font-weight:600;letter-spacing:1.5px;margin-bottom:1.5mm;text-transform:uppercase}
+  .v-co-partner{font-size:8px;color:#666;font-style:italic;margin-bottom:2mm;letter-spacing:.5px}
+  .v-co-contact{font-size:8.5px;color:#444;line-height:1.5}
+  .v-co-contact .row{display:flex;align-items:center;justify-content:center;gap:4px;margin:.5mm 0;flex-wrap:wrap}
+  .v-co-contact svg{width:9px;height:9px;fill:#0f172a;flex-shrink:0}
+  .v-co-contact .label{font-weight:700;color:#0f172a;display:inline-block}
+  .v-co-contact .phone-list{display:flex;flex-wrap:wrap;gap:0 6px;direction:ltr}
 
-  .v-title{text-align:center;margin:7mm 0 5mm}
-  .v-title .t-pill{display:inline-block;background:#0f172a;color:#C5A059;padding:1.5mm 8mm;font-size:11px;font-weight:700;letter-spacing:3px;border-radius:2px;margin-bottom:3mm;text-transform:uppercase}
-  .v-title h2{margin:0;font-size:30px;letter-spacing:4px;color:#0f172a;font-weight:700}
+  .v-title{text-align:center;margin:3mm 0 2mm}
+  .v-title .t-pill{display:inline-block;background:#0f172a;color:#C5A059;padding:1mm 6mm;font-size:9px;font-weight:700;letter-spacing:3px;border-radius:2px;margin-bottom:1.5mm;text-transform:uppercase}
+  .v-title h2{margin:0;font-size:22px;letter-spacing:3px;color:#0f172a;font-weight:700}
   .voucher[data-lang="en"] .v-title h2{font-family:'Times New Roman',serif}
-  .v-title .deco{display:flex;align-items:center;justify-content:center;gap:6px;margin-top:3mm}
-  .v-title .deco span{height:1px;width:40mm;background:linear-gradient(to right,transparent,#C5A059,transparent)}
-  .v-title .deco .dot{width:5px;height:5px;background:#C5A059;transform:rotate(45deg)}
+  .v-title .deco{display:flex;align-items:center;justify-content:center;gap:5px;margin-top:1.5mm}
+  .v-title .deco span{height:1px;width:30mm;background:linear-gradient(to right,transparent,#C5A059,transparent)}
+  .v-title .deco .dot{width:4px;height:4px;background:#C5A059;transform:rotate(45deg)}
 
-  .v-meta{display:grid;grid-template-columns:1fr 1fr 1fr;gap:4mm;margin:5mm 0;padding:4mm 5mm;background:#0f172a;color:#fff;border-radius:2px}
-  .v-meta .item{display:flex;flex-direction:column;gap:1mm}
-  .v-meta .lbl{font-size:8px;color:#C5A059;letter-spacing:1.5px;text-transform:uppercase;font-weight:600}
-  .v-meta .val{font-size:12px;font-weight:700;color:#fff}
+  .v-meta{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:3mm;margin:3mm 0;padding:2.5mm 4mm;background:#0f172a;color:#fff;border-radius:2px}
+  .v-meta .item{display:flex;flex-direction:column;gap:.5mm}
+  .v-meta .lbl{font-size:7px;color:#C5A059;letter-spacing:1.2px;text-transform:uppercase;font-weight:600}
+  .v-meta .val{font-size:10.5px;font-weight:700;color:#fff}
   .v-meta .center{text-align:center}
   .v-meta .right{text-align:right}
   .voucher[data-lang="en"] .v-meta .right{text-align:left}
@@ -79,71 +83,72 @@
   .status-pending{background:#f59e0b;color:#fff}
   .status-cancelled{background:#dc2626;color:#fff}
 
-  .v-hotel{display:flex;gap:6mm;align-items:center;padding:6mm;background:linear-gradient(135deg,#fafafa 0%,#fff 100%);border:1px solid #e5e0d0;margin:5mm 0}
-  .voucher[data-lang="ar"] .v-hotel{border-right:5px solid #C5A059}
-  .voucher[data-lang="en"] .v-hotel{border-left:5px solid #C5A059}
-  .v-hotel-icon{width:20mm;height:20mm;background:#0f172a;border-radius:4px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-  .v-hotel-icon svg{width:12mm;height:12mm;fill:#C5A059}
+  .v-hotel{display:flex;gap:4mm;align-items:center;padding:3.5mm 4mm;background:linear-gradient(135deg,#fafafa 0%,#fff 100%);border:1px solid #e5e0d0;margin:3mm 0}
+  .voucher[data-lang="ar"] .v-hotel{border-right:4px solid #C5A059}
+  .voucher[data-lang="en"] .v-hotel{border-left:4px solid #C5A059}
+  .v-hotel-icon{width:14mm;height:14mm;background:#0f172a;border-radius:3px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+  .v-hotel-icon svg{width:8mm;height:8mm;fill:#C5A059}
   .v-hotel-body{flex:1}
-  .v-hotel-lbl{font-size:9px;color:#888;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:1.5mm;font-weight:600}
-  .v-hotel-name{font-size:20px;font-weight:700;color:#0f172a;margin:0;line-height:1.25}
+  .v-hotel-lbl{font-size:8px;color:#888;letter-spacing:1.2px;text-transform:uppercase;margin-bottom:.8mm;font-weight:600}
+  .v-hotel-name{font-size:15px;font-weight:700;color:#0f172a;margin:0;line-height:1.2}
   .voucher[data-lang="en"] .v-hotel-name{font-family:'Times New Roman',serif}
-  .v-hotel-loc{font-size:12px;color:#555;margin-top:2mm;display:flex;align-items:center;gap:5px}
-  .v-hotel-loc svg{width:11px;height:11px;fill:#C5A059;flex-shrink:0}
+  .v-hotel-loc{font-size:10px;color:#555;margin-top:1mm;display:flex;align-items:center;gap:4px}
+  .v-hotel-loc svg{width:10px;height:10px;fill:#C5A059;flex-shrink:0}
 
-  .section-title{font-weight:700;font-size:12px;margin:6mm 0 3mm;color:#0f172a;letter-spacing:2px;text-transform:uppercase;padding-bottom:1.5mm;border-bottom:1px solid #C5A059;display:flex;align-items:center;gap:3mm}
-  .section-title::before{content:'';width:3mm;height:3mm;background:#C5A059;transform:rotate(45deg);flex-shrink:0}
+  .section-title{font-weight:700;font-size:10px;margin:3.5mm 0 1.5mm;color:#0f172a;letter-spacing:1.8px;text-transform:uppercase;padding-bottom:1mm;border-bottom:1px solid #C5A059;display:flex;align-items:center;gap:2.5mm}
+  .section-title::before{content:'';width:2.5mm;height:2.5mm;background:#C5A059;transform:rotate(45deg);flex-shrink:0}
 
-  table.doc-table{width:100%;border-collapse:collapse;margin-bottom:3mm;page-break-inside:avoid}
-  table.doc-table td{border:1px solid #d4d0c0;padding:3.5mm 4mm;vertical-align:middle;font-size:11.5px}
-  .label-cell{background:#f5f2e8;font-weight:700;width:24%;color:#0f172a;font-size:10px;letter-spacing:.5px;text-transform:uppercase}
-  .value-cell{background:#fff;color:#1a1a1a;font-weight:500;font-size:12px}
+  table.doc-table{width:100%;border-collapse:collapse;margin-bottom:1.5mm;page-break-inside:avoid}
+  table.doc-table td{border:1px solid #d4d0c0;padding:2mm 3mm;vertical-align:middle;font-size:10px}
+  .label-cell{background:#f5f2e8;font-weight:700;width:22%;color:#0f172a;font-size:8.5px;letter-spacing:.4px;text-transform:uppercase}
+  .value-cell{background:#fff;color:#1a1a1a;font-weight:500;font-size:10.5px}
 
-  .v-sigfooter{margin-top:6mm;display:flex;justify-content:space-between;align-items:flex-end;gap:6mm;padding:5mm;border:1px solid #e5e0d0;background:#fafafa;page-break-inside:avoid}
+  .v-sigfooter{margin-top:3mm;display:flex;justify-content:space-between;align-items:center;gap:5mm;padding:3mm 4mm;border:1px solid #e5e0d0;background:#fafafa;page-break-inside:avoid}
   .v-issued{flex:1;min-width:0}
-  .v-issued .lbl{font-size:9px;color:#888;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:2mm;font-weight:600}
-  .v-issued .val{font-size:14px;color:#0f172a;font-weight:700;margin-bottom:1.5mm}
-  .v-issued-email{font-size:9.5px;color:#0f172a;margin-bottom:3mm;direction:ltr;text-align:start;font-family:'Consolas','Courier New',monospace}
+  .v-issued .lbl{font-size:8px;color:#888;text-transform:uppercase;letter-spacing:1.3px;margin-bottom:1mm;font-weight:600}
+  .v-issued .val{font-size:12px;color:#0f172a;font-weight:700;margin-bottom:1mm}
+  .v-issued-email{font-size:8.5px;color:#0f172a;margin-bottom:1.5mm;direction:ltr;text-align:start;font-family:'Consolas','Courier New',monospace}
   .voucher[data-lang="ar"] .v-issued-email{text-align:right}
-  .v-issued .sig-line{border-top:1px solid #999;width:55mm;padding-top:1.5mm;font-size:9px;color:#888;font-style:italic}
+  .v-issued .sig-line{border-top:1px solid #999;width:45mm;padding-top:1mm;font-size:8px;color:#888;font-style:italic}
 
   .v-stamp{flex-shrink:0;display:flex;align-items:center;justify-content:center}
-  .stamp-circle{width:28mm;height:28mm;border:2px solid #C5A059;border-radius:50%;display:flex;align-items:center;justify-content:center;position:relative;transform:rotate(-12deg);opacity:.85}
-  .stamp-circle::before{content:'';position:absolute;inset:2mm;border:1px dashed #C5A059;border-radius:50%}
+  .stamp-circle{width:22mm;height:22mm;border:2px solid #C5A059;border-radius:50%;display:flex;align-items:center;justify-content:center;position:relative;transform:rotate(-12deg);opacity:.85}
+  .stamp-circle::before{content:'';position:absolute;inset:1.5mm;border:1px dashed #C5A059;border-radius:50%}
   .stamp-inner{text-align:center;color:#C5A059}
-  .stamp-co{font-size:10px;font-weight:800;letter-spacing:2px;line-height:1}
-  .stamp-sub{font-size:7px;font-weight:600;letter-spacing:3px;margin-top:1.5mm}
+  .stamp-co{font-size:8.5px;font-weight:800;letter-spacing:1.5px;line-height:1}
+  .stamp-sub{font-size:6px;font-weight:600;letter-spacing:2px;margin-top:1mm}
 
   .v-qr{text-align:center;flex-shrink:0}
-  .v-qr canvas{width:25mm;height:25mm;border:1px solid #C5A059;padding:1mm;background:#fff;display:block}
-  .v-qr p{font-size:8.5px;color:#666;margin:2mm 0 0;line-height:1.3;letter-spacing:.3px;font-weight:600}
+  .v-qr canvas{width:22mm;height:22mm;border:1px solid #C5A059;padding:1mm;background:#fff;display:block}
+  .v-qr p{font-size:7.5px;color:#666;margin:1mm 0 0;line-height:1.3;letter-spacing:.3px;font-weight:600}
 
-  .notes{margin-top:5mm;border:1px solid #C5A059;padding:5mm;background:#fffbf3;page-break-inside:avoid}
-  .voucher[data-lang="ar"] .notes{border-right:4px solid #C5A059}
-  .voucher[data-lang="en"] .notes{border-left:4px solid #C5A059}
-  .notes h4{margin:0 0 3mm;font-size:11px;color:#0f172a;letter-spacing:1.5px;text-transform:uppercase;padding-bottom:1.5mm;border-bottom:1px solid #C5A05955}
-  .notes ol{margin:0;padding-inline-start:5mm;font-size:10.5px;line-height:1.7;color:#333}
-  .notes li{margin:1.5mm 0}
+  .notes{margin-top:3mm;border:1px solid #C5A059;padding:2.5mm 4mm;background:#fffbf3;page-break-inside:avoid}
+  .voucher[data-lang="ar"] .notes{border-right:3px solid #C5A059}
+  .voucher[data-lang="en"] .notes{border-left:3px solid #C5A059}
+  .notes h4{margin:0 0 1.5mm;font-size:9px;color:#0f172a;letter-spacing:1.3px;text-transform:uppercase;padding-bottom:.8mm;border-bottom:1px solid #C5A05955}
+  .notes ol{margin:0;padding-inline-start:4mm;font-size:8.5px;line-height:1.5;color:#333}
+  .notes li{margin:.5mm 0}
 
-  .v-docfooter{position:absolute;bottom:6mm;left:16mm;right:16mm}
-  .v-docfooter-line{height:1px;background:linear-gradient(to right,transparent,#C5A059,#0f172a,#C5A059,transparent);margin-bottom:2mm}
-  .v-docfooter-row{display:flex;justify-content:space-between;align-items:center;font-size:9px;color:#666;padding:1mm 0}
+  .v-docfooter{position:absolute;bottom:4mm;left:14mm;right:14mm}
+  .v-docfooter-line{height:1px;background:linear-gradient(to right,transparent,#C5A059,#0f172a,#C5A059,transparent);margin-bottom:1.5mm}
+  .v-docfooter-row{display:flex;justify-content:space-between;align-items:center;font-size:8px;color:#666;padding:.5mm 0;gap:3mm}
   .v-docfooter strong{color:#0f172a}
-  .v-docfooter .seal{font-size:9.5px;letter-spacing:1.5px;color:#C5A059;font-weight:700}
-  .v-docfooter .center{font-size:8.5px;color:#888;text-align:center;letter-spacing:1px;text-transform:uppercase}
-  .v-docfooter-bar{margin-top:1.5mm;height:3mm;background:linear-gradient(to right,#0f172a 0%,#0f172a 35%,#C5A059 35%,#C5A059 65%,#0f172a 65%,#0f172a 100%)}
+  .v-docfooter .seal{font-size:8.5px;letter-spacing:1.3px;color:#C5A059;font-weight:700;flex-shrink:0}
+  .v-docfooter .center{font-size:7.5px;color:#888;text-align:center;letter-spacing:.8px;text-transform:uppercase;flex:1}
+  .v-docfooter .left{flex:1;text-align:start}
+  .v-docfooter-bar{margin-top:1mm;height:2mm;background:linear-gradient(to right,#0f172a 0%,#0f172a 35%,#C5A059 35%,#C5A059 65%,#0f172a 65%,#0f172a 100%)}
 
-  .watermark{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;opacity:.035;font-size:140px;font-weight:800;color:#0f172a;transform:rotate(-25deg);letter-spacing:10px;font-family:'Times New Roman',serif;z-index:0}
+  .watermark{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;opacity:.04;font-size:110px;font-weight:800;color:#0f172a;transform:rotate(-25deg);letter-spacing:8px;font-family:'Times New Roman',serif;z-index:0}
   .voucher > *:not(.watermark):not(.v-topband){position:relative;z-index:1}
 
   @media print{
-    body{background:#fff}
+    body{background:#fff;margin:0;padding:0}
     .panel,h1,.no-print{display:none!important}
-    .voucher{box-shadow:none;margin:0;width:auto;min-height:auto}
+    .doc-wrap{padding:0;display:block}
+    .voucher{box-shadow:none;margin:0;width:210mm;height:297mm;page-break-after:avoid}
     @page{size:A4;margin:0}
     *{-webkit-print-color-adjust:exact !important;print-color-adjust:exact !important;color-adjust:exact !important}
-    .v-meta,.v-hotel,.v-sigfooter,.notes,table.doc-table{page-break-inside:avoid}
-    .v-letterhead{page-break-after:avoid}
+    .v-meta,.v-hotel,.v-sigfooter,.notes,table.doc-table,.v-letterhead{page-break-inside:avoid}
   }
 
   @media (max-width:768px){
@@ -167,13 +172,8 @@
 
   <div class="panel no-print">
     <div class="grid">
-      <div><label id="lbl_company">الشركة المُصدِرة</label>
-        <select id="company">
-          <option value="alyame">اليامي للسفر والسياحة - Alyame</option>
-          <option value="imagine">Imagine Travel - إميجن ترافل</option>
-        </select>
-      </div>
       <div><label id="lbl_ref">مرجع القسيمة</label><input id="ref" placeholder="MR-2026-0001"/></div>
+      <div><label id="lbl_confirm">رقم التأكيد من الفندق</label><input id="confirm" placeholder="HTL-CONF-XXXXXX"/></div>
       <div><label id="lbl_status">الحالة</label>
         <select id="status">
           <option value="confirmed" id="opt_confirmed">مؤكد</option>
@@ -214,26 +214,36 @@
       <div class="watermark" id="d_watermark">ALYAME</div>
 
       <div class="v-letterhead">
-        <img id="d_logo" src="logo.png" alt="Company Logo" class="v-logo-img"/>
+        <div class="v-logo-side primary">
+          <img src="logo.png" alt="Alyame Travel" class="v-logo-img"/>
+          <div class="v-logo-tag" id="d_tag_primary">شركة الإصدار</div>
+        </div>
         <div class="v-co-block">
           <h3 class="v-co-name" id="d_co_name"></h3>
           <div class="v-co-sub" id="d_co_sub"></div>
+          <div class="v-co-partner" id="d_partner_label"></div>
           <div class="v-co-contact">
-            <div class="row" id="d_row_libya">
+            <div class="row">
               <svg viewBox="0 0 24 24"><path d="M20 15.5c-1.25 0-2.45-.2-3.57-.57-.35-.11-.74-.03-1.02.25l-2.2 2.2c-2.83-1.44-5.15-3.75-6.59-6.58l2.2-2.21c.28-.27.36-.66.25-1.01C8.7 6.45 8.5 5.25 8.5 4c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.5c0-.55-.45-1-1-1z"/></svg>
               <span class="label" id="d_lbl_libya"></span>
-              <span class="phone-list" id="d_phones_libya"></span>
+              <span class="phone-list"><span>+218 91 325 7652</span></span>
             </div>
             <div class="row">
               <svg viewBox="0 0 24 24"><path d="M20 15.5c-1.25 0-2.45-.2-3.57-.57-.35-.11-.74-.03-1.02.25l-2.2 2.2c-2.83-1.44-5.15-3.75-6.59-6.58l2.2-2.21c.28-.27.36-.66.25-1.01C8.7 6.45 8.5 5.25 8.5 4c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.5c0-.55-.45-1-1-1z"/></svg>
               <span class="label" id="d_lbl_egypt"></span>
-              <span class="phone-list" id="d_phones_egypt"></span>
+              <span class="phone-list">
+                <span>+20 110 110 9022</span><span>· +20 101 785 7655</span><span>· +20 114 337 7200</span>
+              </span>
             </div>
             <div class="row">
               <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
-              <span id="d_email"></span>
+              <span>info@alyametravel.com</span>
             </div>
           </div>
+        </div>
+        <div class="v-logo-side partner">
+          <img src="imagine-logo.svg" alt="Imagine Travel" class="v-logo-img"/>
+          <div class="v-logo-tag" id="d_tag_partner">شريك التشغيل</div>
         </div>
       </div>
 
@@ -247,6 +257,10 @@
         <div class="item">
           <span class="lbl" id="d_lbl_ref"></span>
           <span class="val" id="d_ref_top">—</span>
+        </div>
+        <div class="item">
+          <span class="lbl" id="d_lbl_confirm"></span>
+          <span class="val" id="d_confirm">—</span>
         </div>
         <div class="item center">
           <span class="lbl" id="d_lbl_status"></span>
@@ -329,7 +343,7 @@
       <div class="v-docfooter">
         <div class="v-docfooter-line"></div>
         <div class="v-docfooter-row">
-          <div id="d_footer_left"></div>
+          <div class="left" id="d_footer_left"></div>
           <div class="center" id="d_footer_center"></div>
           <div class="seal" id="d_footer_right"></div>
         </div>
@@ -346,41 +360,9 @@
   // Per-language data store (so switching preserves what was typed in other lang)
   const store = { ar: {}, en: {} };
   const TEXT_FIELDS = ['hotel','loc','guest','room','meals'];
-  const SHARED_FIELDS = ['ref','status','checkin','checkout','nights','issuer','company'];
+  const SHARED_FIELDS = ['ref','confirm','status','checkin','checkout','nights','issuer'];
 
-  // Company profiles
-  const COMPANIES = {
-    alyame: {
-      logo: 'logo.png',
-      name_ar: 'اليامي للسفر والسياحة',
-      name_en: 'ALYAME TRAVEL & TOURISM',
-      sub_ar: 'خدمات السفر والسياحة',
-      sub_en: 'Travel & Tourism Services',
-      phones_libya: ['+218 91 325 7652'],
-      phones_egypt: ['+20 110 110 9022', '+20 101 785 7655', '+20 114 337 7200'],
-      email: 'info@alyametravel.com',
-      watermark: 'ALYAME',
-      stamp: 'ALYAME',
-      seal_ar: 'اليامي · ٢٠٢٦ ©',
-      seal_en: 'ALYAME · 2026 ©'
-    },
-    imagine: {
-      logo: 'imagine-logo.svg',
-      name_ar: 'إميجن ترافل',
-      name_en: 'IMAGINE TRAVEL',
-      sub_ar: 'خدمات السفر والسياحة',
-      sub_en: 'Travel & Tourism Services',
-      phones_libya: [],
-      phones_egypt: ['+20 110 110 9022', '+20 101 785 7655', '+20 114 337 7200'],
-      email: 'info@imaginetravelegypt.com',
-      watermark: 'IMAGINE',
-      stamp: 'IMAGINE',
-      seal_ar: 'إميجن · ٢٠٢٦ ©',
-      seal_en: 'IMAGINE · 2026 ©'
-    }
-  };
-
-  // Staff emails (work at Imagine Travel)
+  // Staff emails (Imagine Travel operations)
   const STAFF_EMAIL = {
     Basent: 'Operation2@imaginetravelegypt.com',
     Marwa: 'Operation3@imaginetravelegypt.com'
@@ -390,25 +372,28 @@
     ar: {
       page_title: 'نظام إصدار قسائم الحجز الفندقي',
       form: {
-        company:'الشركة المُصدِرة',
-        ref:'مرجع القسيمة', status:'الحالة',
+        ref:'مرجع القسيمة', confirm:'رقم التأكيد من الفندق', status:'الحالة',
         hotel:'اسم الفندق', loc:'الموقع', guest:'اسم العميل',
         room:'نوع الغرفة', checkin:'تاريخ الدخول', checkout:'تاريخ الخروج',
         nights:'عدد الليالي', meals:'الوجبات', issuer:'الموظف المختص',
         gen:'توليد القسيمة', print:'طباعة / PDF', reset:'مسح', install:'📲 تثبيت'
       },
       placeholders: {
-        ref:'MR-2026-0001', hotel:'فندق ريجنسي بالاس', loc:'طريق الملك فهد، الرياض',
+        ref:'MR-2026-0001', confirm:'HTL-CONF-XXXXXX',
+        hotel:'فندق ريجنسي بالاس', loc:'طريق الملك فهد، الرياض',
         guest:'محمد أحمد علي', room:'جناح ملكي', meals:'إقامة شاملة', nights:'تلقائي'
       },
       status_opt: { confirmed:'مؤكد', pending:'قيد المراجعة', cancelled:'ملغي' },
       doc: {
         co_name: 'اليامي للسفر والسياحة',
         co_sub: 'خدمات السفر والسياحة',
+        partner: 'بشراكة مع Imagine Travel · مشغّل الحجوزات',
+        tag_primary: 'شركة الإصدار',
+        tag_partner: 'شريك التشغيل',
         libya: 'ليبيا:', egypt: 'مصر:',
         pill: 'وثيقة رسمية',
         title: 'قسيمة حجز فندقي',
-        ref: 'المرجع', status: 'الحالة', date: 'تاريخ الإصدار',
+        ref: 'المرجع', confirm: 'رقم التأكيد', status: 'الحالة', date: 'تاريخ الإصدار',
         hotel: 'الفندق',
         sec_guest: 'معلومات العميل', sec_booking: 'تفاصيل الحجز',
         guest: 'اسم العميل', checkin: 'تاريخ الدخول', checkout: 'تاريخ الخروج',
@@ -431,25 +416,28 @@
     en: {
       page_title: 'Hotel Voucher Issuing System',
       form: {
-        company:'Issuing Company',
-        ref:'Voucher Reference', status:'Status',
+        ref:'Voucher Reference', confirm:'Hotel Confirmation No.', status:'Status',
         hotel:'Hotel Name', loc:'Location', guest:'Guest Name',
         room:'Room Type', checkin:'Check-in Date', checkout:'Check-out Date',
         nights:'Nights', meals:'Meals', issuer:'Issued By',
         gen:'Generate Voucher', print:'Print / PDF', reset:'Reset', install:'📲 Install'
       },
       placeholders: {
-        ref:'MR-2026-0001', hotel:'Regency Palace Hotel', loc:'King Fahd Rd, Riyadh',
+        ref:'MR-2026-0001', confirm:'HTL-CONF-XXXXXX',
+        hotel:'Regency Palace Hotel', loc:'King Fahd Rd, Riyadh',
         guest:'Mohammed Ahmed Ali', room:'Royal Suite', meals:'All Inclusive', nights:'Auto'
       },
       status_opt: { confirmed:'Confirmed', pending:'Pending', cancelled:'Cancelled' },
       doc: {
         co_name: 'ALYAME TRAVEL & TOURISM',
         co_sub: 'Travel & Tourism Services',
+        partner: 'In partnership with Imagine Travel · Booking Operator',
+        tag_primary: 'Issuing Company',
+        tag_partner: 'Operations Partner',
         libya: 'Libya:', egypt: 'Egypt:',
         pill: 'Official Document',
         title: 'HOTEL VOUCHER',
-        ref: 'Voucher Ref', status: 'Status', date: 'Issue Date',
+        ref: 'Voucher Ref', confirm: 'Confirmation No.', status: 'Status', date: 'Issue Date',
         hotel: 'Hotel',
         sec_guest: 'Guest Information', sec_booking: 'Booking Details',
         guest: 'Guest Name', checkin: 'Check-in', checkout: 'Check-out',
@@ -512,8 +500,8 @@
     document.body.setAttribute('data-lang', l);
     $('ui_title').textContent = t.page_title;
     // Labels
-    $('lbl_company').textContent = t.form.company;
     $('lbl_ref').textContent = t.form.ref;
+    $('lbl_confirm').textContent = t.form.confirm;
     $('lbl_status').textContent = t.form.status;
     $('lbl_hotel_in').textContent = t.form.hotel;
     $('lbl_loc_in').textContent = t.form.loc;
@@ -564,26 +552,21 @@
     saveCurrent();
     const t = T[lang];
     const d = t.doc;
-    const co = COMPANIES[$('company').value] || COMPANIES.alyame;
 
-    // Company-specific letterhead
-    $('d_logo').src = co.logo;
-    $('d_logo').alt = co.name_en;
-    $('d_watermark').textContent = co.watermark;
-    $('d_co_name').textContent = lang === 'ar' ? co.name_ar : co.name_en;
-    $('d_co_sub').textContent = lang === 'ar' ? co.sub_ar : co.sub_en;
-    $('d_email').textContent = co.email;
-    $('d_stamp_co').textContent = co.stamp;
-    $('d_stamp_sub').textContent = lang === 'ar' ? 'مختوم' : 'OFFICIAL';
-
-    // Phone rows (hide Libya row if no Libya phones)
-    $('d_row_libya').style.display = co.phones_libya.length ? 'flex' : 'none';
-    $('d_phones_libya').innerHTML = co.phones_libya.map((p,i) => `<span>${i?'· ':''}${p}</span>`).join('');
-    $('d_phones_egypt').innerHTML = co.phones_egypt.map((p,i) => `<span>${i?'· ':''}${p}</span>`).join('');
+    // Letterhead (Alyame is the primary issuer)
+    $('d_watermark').textContent = 'ALYAME';
+    $('d_co_name').textContent = d.co_name;
+    $('d_co_sub').textContent = d.co_sub;
+    $('d_partner_label').textContent = d.partner;
+    $('d_tag_primary').textContent = d.tag_primary;
+    $('d_tag_partner').textContent = d.tag_partner;
+    $('d_stamp_co').textContent = 'ALYAME';
+    $('d_stamp_sub').textContent = lang === 'ar' ? 'رسمي' : 'OFFICIAL';
 
     // Bilingual labels
     $('d_lbl_libya').textContent = d.libya;
     $('d_lbl_egypt').textContent = d.egypt;
+    $('d_lbl_confirm').textContent = d.confirm;
     $('d_pill').textContent = d.pill;
     $('d_title').textContent = d.title;
     $('d_lbl_ref').textContent = d.ref;
@@ -602,18 +585,16 @@
     $('d_lbl_sig').textContent = d.sig;
     $('d_lbl_qr').textContent = d.qr;
     $('d_lbl_notes').textContent = d.notes;
-    const coFooterName = lang === 'ar' ? co.name_ar : co.name_en;
-    $('d_footer_left').innerHTML = `<strong>${coFooterName}</strong> · ` + (lang === 'ar'
+    $('d_footer_left').innerHTML = `<strong>${d.co_name}</strong> · ` + (lang === 'ar'
       ? 'وثيقة إلكترونية لا تحتاج إلى توقيع'
       : 'Electronically generated · No signature required');
-    $('d_footer_center').textContent = lang === 'ar'
-      ? `${co.email}  ·  Hotel Voucher`
-      : `${co.email}  ·  قسيمة فندق`;
-    $('d_footer_right').textContent = lang === 'ar' ? co.seal_ar : co.seal_en;
+    $('d_footer_center').textContent = 'info@alyametravel.com  ·  www.alyametravel.com';
+    $('d_footer_right').textContent = lang === 'ar' ? 'اليامي · ٢٠٢٦ ©' : 'ALYAME · 2026 ©';
     $('d_notes').innerHTML = d.notes_list.map(n => `<li>${n}</li>`).join('');
 
     // Dynamic values
     $('d_ref_top').textContent = $('ref').value || '—';
+    $('d_confirm').textContent = $('confirm').value || '—';
     $('d_date').textContent = fmtDate(todayISO(), lang);
     $('d_hotel').textContent = $('hotel').value || '—';
     $('d_loc').textContent = $('loc').value || '—';
@@ -642,6 +623,7 @@
     // QR (always uses raw data, language-agnostic)
     const qrPayload = JSON.stringify({
       ref: $('ref').value,
+      confirm: $('confirm').value,
       guest_ar: store.ar.guest || '',
       guest_en: store.en.guest || '',
       hotel_ar: store.ar.hotel || '',
@@ -693,7 +675,6 @@
   }
   $('checkin').addEventListener('change', syncNights);
   $('checkout').addEventListener('change', syncNights);
-  $('company').addEventListener('change', generate);
   $('issuer').addEventListener('change', generate);
 
   generate();
