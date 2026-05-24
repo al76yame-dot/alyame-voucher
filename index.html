@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
-<title>Hotel Voucher - قسيمة حجز فندقي | اليامي</title>
+<title>Hotel Voucher | اليامي</title>
 <link rel="manifest" href="manifest.json"/>
 <meta name="theme-color" content="#0f172a"/>
 <meta name="apple-mobile-web-app-capable" content="yes"/>
@@ -13,7 +13,9 @@
 <script src="https://cdn.jsdelivr.net/npm/qrious@4.0.2/dist/qrious.min.js"></script>
 <style>
   *{box-sizing:border-box}
-  body{font-family:'Segoe UI',Tahoma,Arial,sans-serif;margin:0;padding:0;background:#f0f2f5;color:#222}
+  body{margin:0;padding:0;background:#f0f2f5;color:#222}
+  body[data-lang="ar"]{font-family:'Cairo','Tahoma','Segoe UI',sans-serif;direction:rtl}
+  body[data-lang="en"]{font-family:'Segoe UI','Helvetica Neue',Arial,sans-serif;direction:ltr}
   .app{max-width:1100px;margin:0 auto;padding:16px}
   h1{font-size:20px;margin:8px 0 16px;text-align:center;color:#0f172a}
 
@@ -29,7 +31,7 @@
   .btn-print{background:#198754;color:#fff}
   button:hover{opacity:.9}
 
-  .lang-switch{display:inline-flex;background:#eef0f3;border-radius:8px;padding:3px;gap:2px;margin-left:auto}
+  .lang-switch{display:inline-flex;background:#eef0f3;border-radius:8px;padding:3px;gap:2px;margin-inline-start:auto}
   .lang-switch button{padding:7px 18px;border-radius:6px;background:transparent;color:#666;font-size:13px;font-weight:700}
   .lang-switch button.active{background:#0f172a;color:#C5A059;box-shadow:0 1px 4px rgba(0,0,0,.15)}
 
@@ -43,10 +45,8 @@
   .voucher[data-lang="ar"]{direction:rtl;font-family:'Cairo','Tahoma','Segoe UI',sans-serif}
   .voucher[data-lang="en"]{direction:ltr;font-family:'Cambria','Georgia','Times New Roman',serif}
 
-  /* ===== Top accent band ===== */
   .v-topband{position:absolute;top:0;left:0;right:0;height:6mm;background:linear-gradient(to right,#0f172a 0%,#0f172a 40%,#C5A059 40%,#C5A059 60%,#0f172a 60%,#0f172a 100%)}
 
-  /* ===== Letterhead ===== */
   .v-letterhead{display:flex;align-items:center;justify-content:space-between;gap:10mm;margin-top:8mm;padding-bottom:5mm;border-bottom:2px solid #0f172a;position:relative}
   .v-letterhead::after{content:'';position:absolute;bottom:-4px;left:0;right:0;height:1px;background:#C5A059}
   .v-logo-img{width:140px;height:140px;object-fit:contain;flex-shrink:0}
@@ -59,9 +59,7 @@
   .v-co-contact svg{width:10px;height:10px;fill:#0f172a;flex-shrink:0}
   .v-co-contact .label{font-weight:700;color:#0f172a;min-width:42px;display:inline-block}
   .v-co-contact .phone-list{display:flex;flex-wrap:wrap;gap:0 8px;direction:ltr}
-  .v-co-contact .phone-list span{display:inline-block}
 
-  /* ===== Title ===== */
   .v-title{text-align:center;margin:7mm 0 5mm}
   .v-title .t-pill{display:inline-block;background:#0f172a;color:#C5A059;padding:1.5mm 8mm;font-size:11px;font-weight:700;letter-spacing:3px;border-radius:2px;margin-bottom:3mm;text-transform:uppercase}
   .v-title h2{margin:0;font-size:30px;letter-spacing:4px;color:#0f172a;font-weight:700}
@@ -70,7 +68,6 @@
   .v-title .deco span{height:1px;width:40mm;background:linear-gradient(to right,transparent,#C5A059,transparent)}
   .v-title .deco .dot{width:5px;height:5px;background:#C5A059;transform:rotate(45deg)}
 
-  /* ===== Meta bar ===== */
   .v-meta{display:grid;grid-template-columns:1fr 1fr 1fr;gap:4mm;margin:5mm 0;padding:4mm 5mm;background:#0f172a;color:#fff;border-radius:2px}
   .v-meta .item{display:flex;flex-direction:column;gap:1mm}
   .v-meta .lbl{font-size:8px;color:#C5A059;letter-spacing:1.5px;text-transform:uppercase;font-weight:600}
@@ -82,9 +79,9 @@
   .status-pending{background:#f59e0b;color:#fff}
   .status-cancelled{background:#dc2626;color:#fff}
 
-  /* ===== Hotel hero ===== */
-  .v-hotel{display:flex;gap:6mm;align-items:center;padding:6mm;background:linear-gradient(135deg,#fafafa 0%,#fff 100%);border:1px solid #e5e0d0;border-right:5px solid #C5A059;margin:5mm 0}
-  .voucher[data-lang="en"] .v-hotel{border-right:1px solid #e5e0d0;border-left:5px solid #C5A059}
+  .v-hotel{display:flex;gap:6mm;align-items:center;padding:6mm;background:linear-gradient(135deg,#fafafa 0%,#fff 100%);border:1px solid #e5e0d0;margin:5mm 0}
+  .voucher[data-lang="ar"] .v-hotel{border-right:5px solid #C5A059}
+  .voucher[data-lang="en"] .v-hotel{border-left:5px solid #C5A059}
   .v-hotel-icon{width:20mm;height:20mm;background:#0f172a;border-radius:4px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
   .v-hotel-icon svg{width:12mm;height:12mm;fill:#C5A059}
   .v-hotel-body{flex:1}
@@ -94,17 +91,14 @@
   .v-hotel-loc{font-size:12px;color:#555;margin-top:2mm;display:flex;align-items:center;gap:5px}
   .v-hotel-loc svg{width:11px;height:11px;fill:#C5A059;flex-shrink:0}
 
-  /* ===== Sections ===== */
   .section-title{font-weight:700;font-size:12px;margin:6mm 0 3mm;color:#0f172a;letter-spacing:2px;text-transform:uppercase;padding-bottom:1.5mm;border-bottom:1px solid #C5A059;display:flex;align-items:center;gap:3mm}
   .section-title::before{content:'';width:3mm;height:3mm;background:#C5A059;transform:rotate(45deg);flex-shrink:0}
 
-  /* ===== Tables ===== */
   table.doc-table{width:100%;border-collapse:collapse;margin-bottom:3mm;page-break-inside:avoid}
   table.doc-table td{border:1px solid #d4d0c0;padding:3.5mm 4mm;vertical-align:middle;font-size:11.5px}
   .label-cell{background:#f5f2e8;font-weight:700;width:24%;color:#0f172a;font-size:10px;letter-spacing:.5px;text-transform:uppercase}
   .value-cell{background:#fff;color:#1a1a1a;font-weight:500;font-size:12px}
 
-  /* ===== Signature footer ===== */
   .v-sigfooter{margin-top:6mm;display:flex;justify-content:space-between;align-items:flex-end;gap:8mm;padding:5mm;border:1px solid #e5e0d0;background:#fafafa;page-break-inside:avoid}
   .v-issued{flex:1}
   .v-issued .lbl{font-size:9px;color:#888;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:2mm;font-weight:600}
@@ -114,7 +108,6 @@
   .v-qr canvas{width:25mm;height:25mm;border:1px solid #C5A059;padding:1mm;background:#fff;display:block}
   .v-qr p{font-size:8.5px;color:#666;margin:2mm 0 0;line-height:1.3;letter-spacing:.3px;font-weight:600}
 
-  /* ===== Notes ===== */
   .notes{margin-top:5mm;border:1px solid #C5A059;padding:5mm;background:#fffbf3;page-break-inside:avoid}
   .voucher[data-lang="ar"] .notes{border-right:4px solid #C5A059}
   .voucher[data-lang="en"] .notes{border-left:4px solid #C5A059}
@@ -122,16 +115,13 @@
   .notes ol{margin:0;padding-inline-start:5mm;font-size:10.5px;line-height:1.7;color:#333}
   .notes li{margin:1.5mm 0}
 
-  /* ===== Doc footer ===== */
   .v-docfooter{position:absolute;bottom:8mm;left:16mm;right:16mm;padding-top:3mm;border-top:2px solid #C5A059;display:flex;justify-content:space-between;align-items:center;font-size:9px;color:#666}
   .v-docfooter strong{color:#0f172a}
   .v-docfooter .seal{font-size:9.5px;letter-spacing:1px;color:#C5A059;font-weight:700}
 
-  /* ===== Watermark ===== */
   .watermark{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;opacity:.035;font-size:140px;font-weight:800;color:#0f172a;transform:rotate(-25deg);letter-spacing:10px;font-family:'Times New Roman',serif;z-index:0}
   .voucher > *:not(.watermark):not(.v-topband){position:relative;z-index:1}
 
-  /* ===== Print ===== */
   @media print{
     body{background:#fff}
     .panel,h1,.no-print{display:none!important}
@@ -157,44 +147,39 @@
   }
 </style>
 </head>
-<body>
+<body data-lang="ar">
 <div class="app">
-  <h1 class="no-print">نظام إصدار قسائم الحجز الفندقي / Hotel Voucher System</h1>
+  <h1 class="no-print" id="ui_title">نظام إصدار قسائم الحجز الفندقي</h1>
 
   <div class="panel no-print">
     <div class="grid">
-      <div><label>مرجع القسيمة / Voucher Ref</label><input id="ref" placeholder="MR-2026-0001"/></div>
-      <div><label>الحالة / Status</label>
+      <div><label id="lbl_ref">مرجع القسيمة</label><input id="ref" placeholder="MR-2026-0001"/></div>
+      <div><label id="lbl_status">الحالة</label>
         <select id="status">
-          <option value="confirmed">مؤكد / Confirmed</option>
-          <option value="pending">قيد المراجعة / Pending</option>
-          <option value="cancelled">ملغي / Cancelled</option>
+          <option value="confirmed" id="opt_confirmed">مؤكد</option>
+          <option value="pending" id="opt_pending">قيد المراجعة</option>
+          <option value="cancelled" id="opt_cancelled">ملغي</option>
         </select>
       </div>
-      <div><label>اسم الفندق (عربي)</label><input id="hotel_ar" placeholder="فندق ريجنسي بالاس"/></div>
-      <div><label>Hotel Name (English)</label><input id="hotel_en" placeholder="Regency Palace Hotel"/></div>
-      <div><label>الموقع (عربي)</label><input id="loc_ar" placeholder="طريق الملك فهد، الرياض"/></div>
-      <div><label>Location (English)</label><input id="loc_en" placeholder="King Fahd Rd, Riyadh"/></div>
-      <div><label>اسم العميل (عربي)</label><input id="guest_ar" placeholder="محمد أحمد علي"/></div>
-      <div><label>Guest Name (English)</label><input id="guest_en" placeholder="Mohammed Ahmed Ali"/></div>
-      <div><label>نوع الغرفة (عربي)</label><input id="room_ar" placeholder="جناح ملكي"/></div>
-      <div><label>Room Type (English)</label><input id="room_en" placeholder="Royal Suite"/></div>
-      <div><label>تاريخ الدخول / Check-in</label><input id="checkin" type="date"/></div>
-      <div><label>تاريخ الخروج / Check-out</label><input id="checkout" type="date"/></div>
-      <div><label>عدد الليالي / Nights</label><input id="nights" type="number" min="1" placeholder="تلقائي / Auto"/></div>
-      <div><label>الوجبات (عربي)</label><input id="meals_ar" placeholder="إقامة شاملة"/></div>
-      <div><label>Meals (English)</label><input id="meals_en" placeholder="All Inclusive"/></div>
-      <div><label>الموظف المختص / Issued By</label>
+      <div><label id="lbl_hotel_in">اسم الفندق</label><input id="hotel"/></div>
+      <div><label id="lbl_loc_in">الموقع</label><input id="loc"/></div>
+      <div><label id="lbl_guest_in">اسم العميل</label><input id="guest"/></div>
+      <div><label id="lbl_room_in">نوع الغرفة</label><input id="room"/></div>
+      <div><label id="lbl_checkin_in">تاريخ الدخول</label><input id="checkin" type="date"/></div>
+      <div><label id="lbl_checkout_in">تاريخ الخروج</label><input id="checkout" type="date"/></div>
+      <div><label id="lbl_nights_in">عدد الليالي</label><input id="nights" type="number" min="1"/></div>
+      <div><label id="lbl_meals_in">الوجبات</label><input id="meals"/></div>
+      <div><label id="lbl_issuer_in">الموظف المختص</label>
         <select id="issuer">
-          <option value="Basent">Basent - بسنت</option>
-          <option value="Marwa">Marwa - مروة</option>
+          <option value="Basent">Basent</option>
+          <option value="Marwa">Marwa</option>
         </select>
       </div>
     </div>
     <div class="actions">
-      <button class="btn-primary" onclick="generate()">توليد القسيمة / Generate</button>
-      <button class="btn-print" onclick="window.print()">طباعة / حفظ PDF</button>
-      <button class="btn-secondary" onclick="resetForm()">مسح / Reset</button>
+      <button class="btn-primary" id="btn_gen" onclick="generate()">توليد القسيمة</button>
+      <button class="btn-print" id="btn_print" onclick="window.print()">طباعة / PDF</button>
+      <button class="btn-secondary" id="btn_reset" onclick="resetForm()">مسح</button>
       <button id="btnInstall" class="btn-primary" style="display:none;background:#198754;color:#fff" onclick="installApp()">📲 تثبيت</button>
       <div class="lang-switch">
         <button id="btnAr" class="active" onclick="setLang('ar')">العربية</button>
@@ -208,21 +193,20 @@
       <div class="v-topband"></div>
       <div class="watermark">ALYAME</div>
 
-      <!-- Letterhead -->
       <div class="v-letterhead">
         <img src="logo.png" alt="Alyame Travel" class="v-logo-img"/>
         <div class="v-co-block">
-          <h3 class="v-co-name" id="d_co_name">اليامي للسفر والسياحة</h3>
-          <div class="v-co-sub" id="d_co_sub">Alyame Travel & Tourism</div>
+          <h3 class="v-co-name" id="d_co_name"></h3>
+          <div class="v-co-sub" id="d_co_sub"></div>
           <div class="v-co-contact">
             <div class="row">
               <svg viewBox="0 0 24 24"><path d="M20 15.5c-1.25 0-2.45-.2-3.57-.57-.35-.11-.74-.03-1.02.25l-2.2 2.2c-2.83-1.44-5.15-3.75-6.59-6.58l2.2-2.21c.28-.27.36-.66.25-1.01C8.7 6.45 8.5 5.25 8.5 4c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.5c0-.55-.45-1-1-1z"/></svg>
-              <span class="label" id="d_lbl_libya">ليبيا:</span>
+              <span class="label" id="d_lbl_libya"></span>
               <span class="phone-list"><span>+218 91 325 7652</span></span>
             </div>
             <div class="row">
               <svg viewBox="0 0 24 24"><path d="M20 15.5c-1.25 0-2.45-.2-3.57-.57-.35-.11-.74-.03-1.02.25l-2.2 2.2c-2.83-1.44-5.15-3.75-6.59-6.58l2.2-2.21c.28-.27.36-.66.25-1.01C8.7 6.45 8.5 5.25 8.5 4c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.5c0-.55-.45-1-1-1z"/></svg>
-              <span class="label" id="d_lbl_egypt">مصر:</span>
+              <span class="label" id="d_lbl_egypt"></span>
               <span class="phone-list">
                 <span>+20 110 110 9022</span>
                 <span>· +20 101 785 7655</span>
@@ -237,36 +221,33 @@
         </div>
       </div>
 
-      <!-- Title -->
       <div class="v-title">
-        <div class="t-pill" id="d_pill">Official Document · وثيقة رسمية</div>
-        <h2 id="d_title">قسيمة حجز فندقي</h2>
+        <div class="t-pill" id="d_pill"></div>
+        <h2 id="d_title"></h2>
         <div class="deco"><span></span><span class="dot"></span><span></span></div>
       </div>
 
-      <!-- Meta -->
       <div class="v-meta">
         <div class="item">
-          <span class="lbl" id="d_lbl_ref">المرجع</span>
+          <span class="lbl" id="d_lbl_ref"></span>
           <span class="val" id="d_ref_top">—</span>
         </div>
         <div class="item center">
-          <span class="lbl" id="d_lbl_status">الحالة</span>
-          <span id="d_status" class="status-badge">مؤكد</span>
+          <span class="lbl" id="d_lbl_status"></span>
+          <span id="d_status" class="status-badge">—</span>
         </div>
         <div class="item right">
-          <span class="lbl" id="d_lbl_date">تاريخ الإصدار</span>
+          <span class="lbl" id="d_lbl_date"></span>
           <span class="val" id="d_date">—</span>
         </div>
       </div>
 
-      <!-- Hotel -->
       <div class="v-hotel">
         <div class="v-hotel-icon">
           <svg viewBox="0 0 24 24"><path d="M7 13c1.66 0 3-1.34 3-3S8.66 7 7 7s-3 1.34-3 3 1.34 3 3 3zm12-6h-8v7H3V5H1v15h2v-3h18v3h2v-9c0-2.21-1.79-4-4-4z"/></svg>
         </div>
         <div class="v-hotel-body">
-          <div class="v-hotel-lbl" id="d_lbl_hotel">الفندق</div>
+          <div class="v-hotel-lbl" id="d_lbl_hotel"></div>
           <p class="v-hotel-name" id="d_hotel">—</p>
           <p class="v-hotel-loc">
             <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
@@ -275,59 +256,54 @@
         </div>
       </div>
 
-      <!-- Guest Section -->
-      <div class="section-title" id="d_sec_guest">معلومات العميل</div>
+      <div class="section-title" id="d_sec_guest"></div>
       <table class="doc-table">
         <tr>
-          <td class="label-cell" id="d_lbl_guest">اسم العميل</td>
+          <td class="label-cell" id="d_lbl_guest"></td>
           <td class="value-cell" colspan="3" id="d_guest">—</td>
         </tr>
       </table>
 
-      <!-- Booking Section -->
-      <div class="section-title" id="d_sec_booking">تفاصيل الحجز</div>
+      <div class="section-title" id="d_sec_booking"></div>
       <table class="doc-table">
         <tr>
-          <td class="label-cell" id="d_lbl_checkin">تاريخ الدخول</td>
+          <td class="label-cell" id="d_lbl_checkin"></td>
           <td class="value-cell" id="d_checkin">—</td>
-          <td class="label-cell" id="d_lbl_checkout">تاريخ الخروج</td>
+          <td class="label-cell" id="d_lbl_checkout"></td>
           <td class="value-cell" id="d_checkout">—</td>
         </tr>
         <tr>
-          <td class="label-cell" id="d_lbl_nights">عدد الليالي</td>
+          <td class="label-cell" id="d_lbl_nights"></td>
           <td class="value-cell" id="d_nights">—</td>
-          <td class="label-cell" id="d_lbl_room">نوع الغرفة</td>
+          <td class="label-cell" id="d_lbl_room"></td>
           <td class="value-cell" id="d_room">—</td>
         </tr>
         <tr>
-          <td class="label-cell" id="d_lbl_meals">الوجبات</td>
+          <td class="label-cell" id="d_lbl_meals"></td>
           <td class="value-cell" colspan="3" id="d_meals">—</td>
         </tr>
       </table>
 
-      <!-- Signature -->
       <div class="v-sigfooter">
         <div class="v-issued">
-          <div class="lbl" id="d_lbl_issuer">صادرة عن / الموظف المختص</div>
+          <div class="lbl" id="d_lbl_issuer"></div>
           <div class="val" id="d_issuer">—</div>
-          <div class="sig-line" id="d_lbl_sig">التوقيع المعتمد</div>
+          <div class="sig-line" id="d_lbl_sig"></div>
         </div>
         <div class="v-qr">
           <canvas id="qr"></canvas>
-          <p id="d_lbl_qr">امسح للتحقق</p>
+          <p id="d_lbl_qr"></p>
         </div>
       </div>
 
-      <!-- Notes -->
       <div class="notes">
-        <h4 id="d_lbl_notes">إشعارات هامة</h4>
+        <h4 id="d_lbl_notes"></h4>
         <ol id="d_notes"></ol>
       </div>
 
-      <!-- Footer -->
       <div class="v-docfooter">
-        <div id="d_footer_left"><strong>اليامي للسفر والسياحة</strong> · هذه الوثيقة صادرة إلكترونياً ولا تحتاج إلى توقيع</div>
-        <div class="seal" id="d_footer_right">ALYAME · 2026 ©</div>
+        <div id="d_footer_left"></div>
+        <div class="seal" id="d_footer_right"></div>
       </div>
     </div>
   </div>
@@ -337,74 +313,91 @@
   const $ = id => document.getElementById(id);
   let lang = 'ar';
 
+  // Per-language data store (so switching preserves what was typed in other lang)
+  const store = { ar: {}, en: {} };
+  const TEXT_FIELDS = ['hotel','loc','guest','room','meals'];
+  const SHARED_FIELDS = ['ref','status','checkin','checkout','nights','issuer'];
+
   const T = {
     ar: {
-      co_name: 'اليامي للسفر والسياحة',
-      co_sub: 'Alyame Travel & Tourism',
-      libya: 'ليبيا:',
-      egypt: 'مصر:',
-      pill: 'وثيقة رسمية · OFFICIAL DOCUMENT',
-      title: 'قسيمة حجز فندقي',
-      ref: 'المرجع',
-      status: 'الحالة',
-      date: 'تاريخ الإصدار',
-      hotel: 'الفندق',
-      sec_guest: 'معلومات العميل',
-      sec_booking: 'تفاصيل الحجز',
-      guest: 'اسم العميل',
-      checkin: 'تاريخ الدخول',
-      checkout: 'تاريخ الخروج',
-      nights_l: 'عدد الليالي',
-      room: 'نوع الغرفة',
-      meals: 'الوجبات',
-      issuer: 'صادرة عن / الموظف المختص',
-      sig: 'التوقيع المعتمد',
-      qr: 'امسح للتحقق',
-      notes: 'إشعارات هامة',
-      footer_left: '<strong>اليامي للسفر والسياحة</strong> · هذه الوثيقة صادرة إلكترونياً ولا تحتاج إلى توقيع',
-      footer_right: 'اليامي · ٢٠٢٦ ©',
-      status_map: { confirmed:'مؤكد', pending:'قيد المراجعة', cancelled:'ملغي' },
-      nights_fmt: n => `${n} ليالي`,
-      notes_list: [
-        'يُرجى تقديم هذه القسيمة مع هوية شخصية سارية عند الوصول إلى الفندق.',
-        'وقت الدخول القياسي ٢ ظهراً · الخروج ١٢ ظهراً (حسب سياسة الفندق).',
-        'أي تعديل أو إلغاء يجب أن يتم قبل ٤٨ ساعة من تاريخ الدخول على الأقل.',
-        'هذه القسيمة غير قابلة للتحويل وصالحة فقط للعميل المذكور.'
-      ]
+      page_title: 'نظام إصدار قسائم الحجز الفندقي',
+      form: {
+        ref:'مرجع القسيمة', status:'الحالة',
+        hotel:'اسم الفندق', loc:'الموقع', guest:'اسم العميل',
+        room:'نوع الغرفة', checkin:'تاريخ الدخول', checkout:'تاريخ الخروج',
+        nights:'عدد الليالي', meals:'الوجبات', issuer:'الموظف المختص',
+        gen:'توليد القسيمة', print:'طباعة / PDF', reset:'مسح', install:'📲 تثبيت'
+      },
+      placeholders: {
+        ref:'MR-2026-0001', hotel:'فندق ريجنسي بالاس', loc:'طريق الملك فهد، الرياض',
+        guest:'محمد أحمد علي', room:'جناح ملكي', meals:'إقامة شاملة', nights:'تلقائي'
+      },
+      status_opt: { confirmed:'مؤكد', pending:'قيد المراجعة', cancelled:'ملغي' },
+      doc: {
+        co_name: 'اليامي للسفر والسياحة',
+        co_sub: 'خدمات السفر والسياحة',
+        libya: 'ليبيا:', egypt: 'مصر:',
+        pill: 'وثيقة رسمية',
+        title: 'قسيمة حجز فندقي',
+        ref: 'المرجع', status: 'الحالة', date: 'تاريخ الإصدار',
+        hotel: 'الفندق',
+        sec_guest: 'معلومات العميل', sec_booking: 'تفاصيل الحجز',
+        guest: 'اسم العميل', checkin: 'تاريخ الدخول', checkout: 'تاريخ الخروج',
+        nights_l: 'عدد الليالي', room: 'نوع الغرفة', meals: 'الوجبات',
+        issuer: 'صادرة عن', sig: 'التوقيع المعتمد',
+        qr: 'امسح للتحقق',
+        notes: 'إشعارات هامة',
+        footer_left: '<strong>اليامي للسفر والسياحة</strong> · هذه الوثيقة صادرة إلكترونياً ولا تحتاج إلى توقيع',
+        footer_right: 'اليامي · ٢٠٢٦ ©',
+        status_map: { confirmed:'مؤكد', pending:'قيد المراجعة', cancelled:'ملغي' },
+        nights_fmt: n => `${n} ${n===1?'ليلة':n===2?'ليلتان':'ليالي'}`,
+        notes_list: [
+          'يُرجى تقديم هذه القسيمة مع هوية شخصية سارية عند الوصول إلى الفندق.',
+          'وقت الدخول القياسي ٢ ظهراً · الخروج ١٢ ظهراً (حسب سياسة الفندق).',
+          'أي تعديل أو إلغاء يجب أن يتم قبل ٤٨ ساعة من تاريخ الدخول على الأقل.',
+          'هذه القسيمة غير قابلة للتحويل وصالحة فقط للعميل المذكور.'
+        ]
+      }
     },
     en: {
-      co_name: 'ALYAME TRAVEL & TOURISM',
-      co_sub: 'اليامي للسفر والسياحة',
-      libya: 'Libya:',
-      egypt: 'Egypt:',
-      pill: 'OFFICIAL DOCUMENT',
-      title: 'HOTEL VOUCHER',
-      ref: 'Voucher Ref',
-      status: 'Status',
-      date: 'Issue Date',
-      hotel: 'Hotel',
-      sec_guest: 'Guest Information',
-      sec_booking: 'Booking Details',
-      guest: 'Guest Name',
-      checkin: 'Check-in',
-      checkout: 'Check-out',
-      nights_l: 'Nights',
-      room: 'Room Type',
-      meals: 'Meals',
-      issuer: 'Issued By',
-      sig: 'Authorized Signature',
-      qr: 'Scan to verify',
-      notes: 'Important Notes',
-      footer_left: '<strong>Alyame Travel & Tourism</strong> · Electronically generated · No signature required',
-      footer_right: 'ALYAME · 2026 ©',
-      status_map: { confirmed:'Confirmed', pending:'Pending', cancelled:'Cancelled' },
-      nights_fmt: n => `${n} Night${n!==1?'s':''}`,
-      notes_list: [
-        'Please present this voucher together with a valid photo ID upon arrival at the hotel.',
-        'Standard check-in 14:00 · Check-out 12:00 (subject to hotel policy).',
-        'Any changes or cancellations must be made at least 48 hours before check-in.',
-        'This voucher is non-transferable and is valid only for the named guest.'
-      ]
+      page_title: 'Hotel Voucher Issuing System',
+      form: {
+        ref:'Voucher Reference', status:'Status',
+        hotel:'Hotel Name', loc:'Location', guest:'Guest Name',
+        room:'Room Type', checkin:'Check-in Date', checkout:'Check-out Date',
+        nights:'Nights', meals:'Meals', issuer:'Issued By',
+        gen:'Generate Voucher', print:'Print / PDF', reset:'Reset', install:'📲 Install'
+      },
+      placeholders: {
+        ref:'MR-2026-0001', hotel:'Regency Palace Hotel', loc:'King Fahd Rd, Riyadh',
+        guest:'Mohammed Ahmed Ali', room:'Royal Suite', meals:'All Inclusive', nights:'Auto'
+      },
+      status_opt: { confirmed:'Confirmed', pending:'Pending', cancelled:'Cancelled' },
+      doc: {
+        co_name: 'ALYAME TRAVEL & TOURISM',
+        co_sub: 'Travel & Tourism Services',
+        libya: 'Libya:', egypt: 'Egypt:',
+        pill: 'Official Document',
+        title: 'HOTEL VOUCHER',
+        ref: 'Voucher Ref', status: 'Status', date: 'Issue Date',
+        hotel: 'Hotel',
+        sec_guest: 'Guest Information', sec_booking: 'Booking Details',
+        guest: 'Guest Name', checkin: 'Check-in', checkout: 'Check-out',
+        nights_l: 'Nights', room: 'Room Type', meals: 'Meals',
+        issuer: 'Issued By', sig: 'Authorized Signature',
+        qr: 'Scan to verify',
+        notes: 'Important Notes',
+        footer_left: '<strong>Alyame Travel & Tourism</strong> · Electronically generated · No signature required',
+        footer_right: 'ALYAME · 2026 ©',
+        status_map: { confirmed:'Confirmed', pending:'Pending', cancelled:'Cancelled' },
+        nights_fmt: n => `${n} ${n===1?'Night':'Nights'}`,
+        notes_list: [
+          'Please present this voucher together with a valid photo ID upon arrival at the hotel.',
+          'Standard check-in 14:00 · Check-out 12:00 (subject to hotel policy).',
+          'Any changes or cancellations must be made at least 48 hours before check-in.',
+          'This voucher is non-transferable and is valid only for the named guest.'
+        ]
+      }
     }
   };
 
@@ -428,139 +421,177 @@
     return `MR-${y}-${r}`;
   }
 
+  // Save current form values to store for current lang
+  function saveCurrent(){
+    TEXT_FIELDS.forEach(f => { store[lang][f] = $(f).value; });
+    SHARED_FIELDS.forEach(f => { store.shared = store.shared || {}; store.shared[f] = $(f).value; });
+  }
+
+  // Load store values into form for given lang
+  function loadForLang(l){
+    TEXT_FIELDS.forEach(f => { $(f).value = (store[l] && store[l][f]) || ''; });
+    if(store.shared){
+      SHARED_FIELDS.forEach(f => { if(store.shared[f] != null) $(f).value = store.shared[f]; });
+    }
+  }
+
+  function applyFormLang(l){
+    const t = T[l];
+    document.documentElement.setAttribute('dir', l === 'ar' ? 'rtl' : 'ltr');
+    document.documentElement.setAttribute('lang', l);
+    document.body.setAttribute('data-lang', l);
+    $('ui_title').textContent = t.page_title;
+    // Labels
+    $('lbl_ref').textContent = t.form.ref;
+    $('lbl_status').textContent = t.form.status;
+    $('lbl_hotel_in').textContent = t.form.hotel;
+    $('lbl_loc_in').textContent = t.form.loc;
+    $('lbl_guest_in').textContent = t.form.guest;
+    $('lbl_room_in').textContent = t.form.room;
+    $('lbl_checkin_in').textContent = t.form.checkin;
+    $('lbl_checkout_in').textContent = t.form.checkout;
+    $('lbl_nights_in').textContent = t.form.nights;
+    $('lbl_meals_in').textContent = t.form.meals;
+    $('lbl_issuer_in').textContent = t.form.issuer;
+    // Buttons
+    $('btn_gen').textContent = t.form.gen;
+    $('btn_print').textContent = t.form.print;
+    $('btn_reset').textContent = t.form.reset;
+    const installBtn = $('btnInstall');
+    if(installBtn) installBtn.textContent = t.form.install;
+    // Placeholders
+    Object.keys(t.placeholders).forEach(k => {
+      const el = $(k); if(el) el.placeholder = t.placeholders[k];
+    });
+    // Status select options
+    $('opt_confirmed').textContent = t.status_opt.confirmed;
+    $('opt_pending').textContent = t.status_opt.pending;
+    $('opt_cancelled').textContent = t.status_opt.cancelled;
+  }
+
+  function setLang(l){
+    if(l === lang){ return; }
+    saveCurrent();
+    lang = l;
+    $('btnAr').classList.toggle('active', l === 'ar');
+    $('btnEn').classList.toggle('active', l === 'en');
+    $('doc').setAttribute('data-lang', l);
+    applyFormLang(l);
+    loadForLang(l);
+    generate();
+    try { localStorage.setItem('hotelVoucher:lang', l); } catch(e){}
+  }
+
   function initDefaults(){
     if(!$('ref').value) $('ref').value = genRef();
     if(!$('checkin').value) $('checkin').value = todayISO();
     if(!$('checkout').value) $('checkout').value = addDays($('checkin').value || todayISO(), 3);
   }
 
-  function setLang(l){
-    lang = l;
-    $('btnAr').classList.toggle('active', l === 'ar');
-    $('btnEn').classList.toggle('active', l === 'en');
-    $('doc').setAttribute('data-lang', l);
-    document.documentElement.setAttribute('dir', l === 'ar' ? 'rtl' : 'ltr');
-    generate();
-    try { localStorage.setItem('hotelVoucher:lang', l); } catch(e){}
-  }
-
   function generate(){
     initDefaults();
+    saveCurrent();
     const t = T[lang];
+    const d = t.doc;
 
-    const data = {
-      ref: $('ref').value,
-      status: $('status').value,
-      hotel_ar: $('hotel_ar').value,
-      hotel_en: $('hotel_en').value,
-      loc_ar: $('loc_ar').value,
-      loc_en: $('loc_en').value,
-      guest_ar: $('guest_ar').value,
-      guest_en: $('guest_en').value,
-      room_ar: $('room_ar').value,
-      room_en: $('room_en').value,
-      checkin: $('checkin').value,
-      checkout: $('checkout').value,
-      meals_ar: $('meals_ar').value,
-      meals_en: $('meals_en').value,
-      issuer: $('issuer').value,
-      nights: $('nights').value
-    };
-
-    // Static labels
-    $('d_co_name').textContent = t.co_name;
-    $('d_co_sub').textContent = t.co_sub;
-    $('d_lbl_libya').textContent = t.libya;
-    $('d_lbl_egypt').textContent = t.egypt;
-    $('d_pill').textContent = t.pill;
-    $('d_title').textContent = t.title;
-    $('d_lbl_ref').textContent = t.ref;
-    $('d_lbl_status').textContent = t.status;
-    $('d_lbl_date').textContent = t.date;
-    $('d_lbl_hotel').textContent = t.hotel;
-    $('d_sec_guest').textContent = t.sec_guest;
-    $('d_sec_booking').textContent = t.sec_booking;
-    $('d_lbl_guest').textContent = t.guest;
-    $('d_lbl_checkin').textContent = t.checkin;
-    $('d_lbl_checkout').textContent = t.checkout;
-    $('d_lbl_nights').textContent = t.nights_l;
-    $('d_lbl_room').textContent = t.room;
-    $('d_lbl_meals').textContent = t.meals;
-    $('d_lbl_issuer').textContent = t.issuer;
-    $('d_lbl_sig').textContent = t.sig;
-    $('d_lbl_qr').textContent = t.qr;
-    $('d_lbl_notes').textContent = t.notes;
-    $('d_footer_left').innerHTML = t.footer_left;
-    $('d_footer_right').textContent = t.footer_right;
-
-    // Notes list
-    $('d_notes').innerHTML = t.notes_list.map(n => `<li>${n}</li>`).join('');
+    // Document labels
+    $('d_co_name').textContent = d.co_name;
+    $('d_co_sub').textContent = d.co_sub;
+    $('d_lbl_libya').textContent = d.libya;
+    $('d_lbl_egypt').textContent = d.egypt;
+    $('d_pill').textContent = d.pill;
+    $('d_title').textContent = d.title;
+    $('d_lbl_ref').textContent = d.ref;
+    $('d_lbl_status').textContent = d.status;
+    $('d_lbl_date').textContent = d.date;
+    $('d_lbl_hotel').textContent = d.hotel;
+    $('d_sec_guest').textContent = d.sec_guest;
+    $('d_sec_booking').textContent = d.sec_booking;
+    $('d_lbl_guest').textContent = d.guest;
+    $('d_lbl_checkin').textContent = d.checkin;
+    $('d_lbl_checkout').textContent = d.checkout;
+    $('d_lbl_nights').textContent = d.nights_l;
+    $('d_lbl_room').textContent = d.room;
+    $('d_lbl_meals').textContent = d.meals;
+    $('d_lbl_issuer').textContent = d.issuer;
+    $('d_lbl_sig').textContent = d.sig;
+    $('d_lbl_qr').textContent = d.qr;
+    $('d_lbl_notes').textContent = d.notes;
+    $('d_footer_left').innerHTML = d.footer_left;
+    $('d_footer_right').textContent = d.footer_right;
+    $('d_notes').innerHTML = d.notes_list.map(n => `<li>${n}</li>`).join('');
 
     // Dynamic values
-    $('d_ref_top').textContent = data.ref || '—';
+    $('d_ref_top').textContent = $('ref').value || '—';
     $('d_date').textContent = fmtDate(todayISO(), lang);
-    $('d_hotel').textContent = (lang === 'ar' ? data.hotel_ar : data.hotel_en) || '—';
-    $('d_loc').textContent = (lang === 'ar' ? data.loc_ar : data.loc_en) || '—';
-    $('d_guest').textContent = (lang === 'ar' ? data.guest_ar : data.guest_en) || (data.guest_ar || data.guest_en) || '—';
-    $('d_room').textContent = (lang === 'ar' ? data.room_ar : data.room_en) || '—';
-    $('d_meals').textContent = (lang === 'ar' ? data.meals_ar : data.meals_en) || '—';
-    $('d_checkin').textContent = fmtDate(data.checkin, lang);
-    $('d_checkout').textContent = fmtDate(data.checkout, lang);
+    $('d_hotel').textContent = $('hotel').value || '—';
+    $('d_loc').textContent = $('loc').value || '—';
+    $('d_guest').textContent = $('guest').value || '—';
+    $('d_room').textContent = $('room').value || '—';
+    $('d_meals').textContent = $('meals').value || '—';
+    $('d_checkin').textContent = fmtDate($('checkin').value, lang);
+    $('d_checkout').textContent = fmtDate($('checkout').value, lang);
 
-    const manualN = parseInt(data.nights, 10);
-    const autoN = calcNights(data.checkin, data.checkout);
+    const manualN = parseInt($('nights').value, 10);
+    const autoN = calcNights($('checkin').value, $('checkout').value);
     const n = (manualN && manualN > 0) ? manualN : autoN;
-    $('d_nights').textContent = n ? t.nights_fmt(n) : '—';
+    $('d_nights').textContent = n ? d.nights_fmt(n) : '—';
 
-    $('d_issuer').textContent = data.issuer || '—';
+    $('d_issuer').textContent = $('issuer').value || '—';
 
-    // Status badge
+    // Status
     const badge = $('d_status');
-    const baseCls = 'status-badge';
+    const statusVal = $('status').value;
     const statusCls = { confirmed: '', pending: ' status-pending', cancelled: ' status-cancelled' };
-    badge.textContent = t.status_map[data.status] || t.status_map.confirmed;
-    badge.className = baseCls + (statusCls[data.status] || '');
+    badge.textContent = d.status_map[statusVal] || d.status_map.confirmed;
+    badge.className = 'status-badge' + (statusCls[statusVal] || '');
 
-    // QR
+    // QR (always uses raw data, language-agnostic)
     const qrPayload = JSON.stringify({
-      ref: data.ref,
-      guest: data.guest_en || data.guest_ar,
-      hotel: data.hotel_en || data.hotel_ar,
-      in: data.checkin,
-      out: data.checkout,
-      status: data.status
+      ref: $('ref').value,
+      guest_ar: store.ar.guest || '',
+      guest_en: store.en.guest || '',
+      hotel_ar: store.ar.hotel || '',
+      hotel_en: store.en.hotel || '',
+      in: $('checkin').value,
+      out: $('checkout').value,
+      status: statusVal
     });
     new QRious({
-      element: $('qr'),
-      value: qrPayload,
-      size: 200,
-      foreground: '#0f172a',
-      background: '#ffffff',
-      padding: 0
+      element: $('qr'), value: qrPayload, size: 200,
+      foreground: '#0f172a', background: '#ffffff', padding: 0
     });
 
-    try { localStorage.setItem('hotelVoucher:last', JSON.stringify(data)); } catch(e){}
+    // Persist
+    try {
+      localStorage.setItem('hotelVoucher:store', JSON.stringify(store));
+    } catch(e){}
   }
 
   function resetForm(){
     document.querySelectorAll('input').forEach(i => i.value='');
     $('status').selectedIndex = 0;
+    store.ar = {}; store.en = {}; store.shared = {};
     initDefaults();
     generate();
   }
 
   // Load saved
   try {
-    const saved = JSON.parse(localStorage.getItem('hotelVoucher:last') || '{}');
-    if(saved.ref){
-      Object.keys(saved).forEach(k => {
-        const el = $(k);
-        if(el) el.value = saved[k];
-      });
-    }
+    const saved = JSON.parse(localStorage.getItem('hotelVoucher:store') || '{}');
+    if(saved.ar) store.ar = saved.ar;
+    if(saved.en) store.en = saved.en;
+    if(saved.shared) store.shared = saved.shared;
     const savedLang = localStorage.getItem('hotelVoucher:lang');
-    if(savedLang === 'en') lang = 'en';
+    if(savedLang === 'en' || savedLang === 'ar') lang = savedLang;
   } catch(e){}
+
+  // Init UI
+  applyFormLang(lang);
+  loadForLang(lang);
+  $('doc').setAttribute('data-lang', lang);
+  $('btnAr').classList.toggle('active', lang === 'ar');
+  $('btnEn').classList.toggle('active', lang === 'en');
 
   $('ref').addEventListener('dblclick', () => { $('ref').value = genRef(); });
   function syncNights(){
@@ -570,7 +601,7 @@
   $('checkin').addEventListener('change', syncNights);
   $('checkout').addEventListener('change', syncNights);
 
-  setLang(lang);
+  generate();
 
   // PWA
   if('serviceWorker' in navigator){
@@ -592,7 +623,10 @@
   });
   function installApp(){
     if(!deferredPrompt){
-      alert('لتثبيت التطبيق على iPhone: افتح في Safari ثم اضغط "مشاركة" → "إضافة إلى الشاشة الرئيسية".\n\nعلى Android/الكمبيوتر: استخدم قائمة المتصفح → "تثبيت التطبيق".');
+      const msg = lang === 'ar'
+        ? 'لتثبيت التطبيق على iPhone: افتح في Safari ثم اضغط "مشاركة" → "إضافة إلى الشاشة الرئيسية".\n\nعلى Android/الكمبيوتر: استخدم قائمة المتصفح → "تثبيت التطبيق".'
+        : 'To install on iPhone: open in Safari, tap "Share" → "Add to Home Screen".\n\nOn Android / Desktop: use your browser menu → "Install App".';
+      alert(msg);
       return;
     }
     deferredPrompt.prompt();
