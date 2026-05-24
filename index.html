@@ -99,11 +99,21 @@
   .label-cell{background:#f5f2e8;font-weight:700;width:24%;color:#0f172a;font-size:10px;letter-spacing:.5px;text-transform:uppercase}
   .value-cell{background:#fff;color:#1a1a1a;font-weight:500;font-size:12px}
 
-  .v-sigfooter{margin-top:6mm;display:flex;justify-content:space-between;align-items:flex-end;gap:8mm;padding:5mm;border:1px solid #e5e0d0;background:#fafafa;page-break-inside:avoid}
-  .v-issued{flex:1}
+  .v-sigfooter{margin-top:6mm;display:flex;justify-content:space-between;align-items:flex-end;gap:6mm;padding:5mm;border:1px solid #e5e0d0;background:#fafafa;page-break-inside:avoid}
+  .v-issued{flex:1;min-width:0}
   .v-issued .lbl{font-size:9px;color:#888;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:2mm;font-weight:600}
-  .v-issued .val{font-size:14px;color:#0f172a;font-weight:700;margin-bottom:4mm}
-  .v-issued .sig-line{border-top:1px solid #999;width:60mm;padding-top:1.5mm;font-size:9px;color:#888;font-style:italic}
+  .v-issued .val{font-size:14px;color:#0f172a;font-weight:700;margin-bottom:1.5mm}
+  .v-issued-email{font-size:9.5px;color:#0f172a;margin-bottom:3mm;direction:ltr;text-align:start;font-family:'Consolas','Courier New',monospace}
+  .voucher[data-lang="ar"] .v-issued-email{text-align:right}
+  .v-issued .sig-line{border-top:1px solid #999;width:55mm;padding-top:1.5mm;font-size:9px;color:#888;font-style:italic}
+
+  .v-stamp{flex-shrink:0;display:flex;align-items:center;justify-content:center}
+  .stamp-circle{width:28mm;height:28mm;border:2px solid #C5A059;border-radius:50%;display:flex;align-items:center;justify-content:center;position:relative;transform:rotate(-12deg);opacity:.85}
+  .stamp-circle::before{content:'';position:absolute;inset:2mm;border:1px dashed #C5A059;border-radius:50%}
+  .stamp-inner{text-align:center;color:#C5A059}
+  .stamp-co{font-size:10px;font-weight:800;letter-spacing:2px;line-height:1}
+  .stamp-sub{font-size:7px;font-weight:600;letter-spacing:3px;margin-top:1.5mm}
+
   .v-qr{text-align:center;flex-shrink:0}
   .v-qr canvas{width:25mm;height:25mm;border:1px solid #C5A059;padding:1mm;background:#fff;display:block}
   .v-qr p{font-size:8.5px;color:#666;margin:2mm 0 0;line-height:1.3;letter-spacing:.3px;font-weight:600}
@@ -115,9 +125,13 @@
   .notes ol{margin:0;padding-inline-start:5mm;font-size:10.5px;line-height:1.7;color:#333}
   .notes li{margin:1.5mm 0}
 
-  .v-docfooter{position:absolute;bottom:8mm;left:16mm;right:16mm;padding-top:3mm;border-top:2px solid #C5A059;display:flex;justify-content:space-between;align-items:center;font-size:9px;color:#666}
+  .v-docfooter{position:absolute;bottom:6mm;left:16mm;right:16mm}
+  .v-docfooter-line{height:1px;background:linear-gradient(to right,transparent,#C5A059,#0f172a,#C5A059,transparent);margin-bottom:2mm}
+  .v-docfooter-row{display:flex;justify-content:space-between;align-items:center;font-size:9px;color:#666;padding:1mm 0}
   .v-docfooter strong{color:#0f172a}
-  .v-docfooter .seal{font-size:9.5px;letter-spacing:1px;color:#C5A059;font-weight:700}
+  .v-docfooter .seal{font-size:9.5px;letter-spacing:1.5px;color:#C5A059;font-weight:700}
+  .v-docfooter .center{font-size:8.5px;color:#888;text-align:center;letter-spacing:1px;text-transform:uppercase}
+  .v-docfooter-bar{margin-top:1.5mm;height:3mm;background:linear-gradient(to right,#0f172a 0%,#0f172a 35%,#C5A059 35%,#C5A059 65%,#0f172a 65%,#0f172a 100%)}
 
   .watermark{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;opacity:.035;font-size:140px;font-weight:800;color:#0f172a;transform:rotate(-25deg);letter-spacing:10px;font-family:'Times New Roman',serif;z-index:0}
   .voucher > *:not(.watermark):not(.v-topband){position:relative;z-index:1}
@@ -153,6 +167,12 @@
 
   <div class="panel no-print">
     <div class="grid">
+      <div><label id="lbl_company">الشركة المُصدِرة</label>
+        <select id="company">
+          <option value="alyame">اليامي للسفر والسياحة - Alyame</option>
+          <option value="imagine">Imagine Travel - إميجن ترافل</option>
+        </select>
+      </div>
       <div><label id="lbl_ref">مرجع القسيمة</label><input id="ref" placeholder="MR-2026-0001"/></div>
       <div><label id="lbl_status">الحالة</label>
         <select id="status">
@@ -191,31 +211,27 @@
   <div class="doc-wrap">
     <div class="voucher" id="doc" data-lang="ar">
       <div class="v-topband"></div>
-      <div class="watermark">ALYAME</div>
+      <div class="watermark" id="d_watermark">ALYAME</div>
 
       <div class="v-letterhead">
-        <img src="logo.png" alt="Alyame Travel" class="v-logo-img"/>
+        <img id="d_logo" src="logo.png" alt="Company Logo" class="v-logo-img"/>
         <div class="v-co-block">
           <h3 class="v-co-name" id="d_co_name"></h3>
           <div class="v-co-sub" id="d_co_sub"></div>
           <div class="v-co-contact">
-            <div class="row">
+            <div class="row" id="d_row_libya">
               <svg viewBox="0 0 24 24"><path d="M20 15.5c-1.25 0-2.45-.2-3.57-.57-.35-.11-.74-.03-1.02.25l-2.2 2.2c-2.83-1.44-5.15-3.75-6.59-6.58l2.2-2.21c.28-.27.36-.66.25-1.01C8.7 6.45 8.5 5.25 8.5 4c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.5c0-.55-.45-1-1-1z"/></svg>
               <span class="label" id="d_lbl_libya"></span>
-              <span class="phone-list"><span>+218 91 325 7652</span></span>
+              <span class="phone-list" id="d_phones_libya"></span>
             </div>
             <div class="row">
               <svg viewBox="0 0 24 24"><path d="M20 15.5c-1.25 0-2.45-.2-3.57-.57-.35-.11-.74-.03-1.02.25l-2.2 2.2c-2.83-1.44-5.15-3.75-6.59-6.58l2.2-2.21c.28-.27.36-.66.25-1.01C8.7 6.45 8.5 5.25 8.5 4c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.5c0-.55-.45-1-1-1z"/></svg>
               <span class="label" id="d_lbl_egypt"></span>
-              <span class="phone-list">
-                <span>+20 110 110 9022</span>
-                <span>· +20 101 785 7655</span>
-                <span>· +20 114 337 7200</span>
-              </span>
+              <span class="phone-list" id="d_phones_egypt"></span>
             </div>
             <div class="row">
               <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
-              <span>info@alyametravel.com</span>
+              <span id="d_email"></span>
             </div>
           </div>
         </div>
@@ -288,7 +304,16 @@
         <div class="v-issued">
           <div class="lbl" id="d_lbl_issuer"></div>
           <div class="val" id="d_issuer">—</div>
+          <div class="v-issued-email" id="d_issuer_email"></div>
           <div class="sig-line" id="d_lbl_sig"></div>
+        </div>
+        <div class="v-stamp">
+          <div class="stamp-circle">
+            <div class="stamp-inner">
+              <div class="stamp-co" id="d_stamp_co">ALYAME</div>
+              <div class="stamp-sub" id="d_stamp_sub">OFFICIAL</div>
+            </div>
+          </div>
         </div>
         <div class="v-qr">
           <canvas id="qr"></canvas>
@@ -302,8 +327,13 @@
       </div>
 
       <div class="v-docfooter">
-        <div id="d_footer_left"></div>
-        <div class="seal" id="d_footer_right"></div>
+        <div class="v-docfooter-line"></div>
+        <div class="v-docfooter-row">
+          <div id="d_footer_left"></div>
+          <div class="center" id="d_footer_center"></div>
+          <div class="seal" id="d_footer_right"></div>
+        </div>
+        <div class="v-docfooter-bar"></div>
       </div>
     </div>
   </div>
@@ -316,12 +346,51 @@
   // Per-language data store (so switching preserves what was typed in other lang)
   const store = { ar: {}, en: {} };
   const TEXT_FIELDS = ['hotel','loc','guest','room','meals'];
-  const SHARED_FIELDS = ['ref','status','checkin','checkout','nights','issuer'];
+  const SHARED_FIELDS = ['ref','status','checkin','checkout','nights','issuer','company'];
+
+  // Company profiles
+  const COMPANIES = {
+    alyame: {
+      logo: 'logo.png',
+      name_ar: 'اليامي للسفر والسياحة',
+      name_en: 'ALYAME TRAVEL & TOURISM',
+      sub_ar: 'خدمات السفر والسياحة',
+      sub_en: 'Travel & Tourism Services',
+      phones_libya: ['+218 91 325 7652'],
+      phones_egypt: ['+20 110 110 9022', '+20 101 785 7655', '+20 114 337 7200'],
+      email: 'info@alyametravel.com',
+      watermark: 'ALYAME',
+      stamp: 'ALYAME',
+      seal_ar: 'اليامي · ٢٠٢٦ ©',
+      seal_en: 'ALYAME · 2026 ©'
+    },
+    imagine: {
+      logo: 'imagine-logo.svg',
+      name_ar: 'إميجن ترافل',
+      name_en: 'IMAGINE TRAVEL',
+      sub_ar: 'خدمات السفر والسياحة',
+      sub_en: 'Travel & Tourism Services',
+      phones_libya: [],
+      phones_egypt: ['+20 110 110 9022', '+20 101 785 7655', '+20 114 337 7200'],
+      email: 'info@imaginetravelegypt.com',
+      watermark: 'IMAGINE',
+      stamp: 'IMAGINE',
+      seal_ar: 'إميجن · ٢٠٢٦ ©',
+      seal_en: 'IMAGINE · 2026 ©'
+    }
+  };
+
+  // Staff emails (work at Imagine Travel)
+  const STAFF_EMAIL = {
+    Basent: 'Operation2@imaginetravelegypt.com',
+    Marwa: 'Operation3@imaginetravelegypt.com'
+  };
 
   const T = {
     ar: {
       page_title: 'نظام إصدار قسائم الحجز الفندقي',
       form: {
+        company:'الشركة المُصدِرة',
         ref:'مرجع القسيمة', status:'الحالة',
         hotel:'اسم الفندق', loc:'الموقع', guest:'اسم العميل',
         room:'نوع الغرفة', checkin:'تاريخ الدخول', checkout:'تاريخ الخروج',
@@ -362,6 +431,7 @@
     en: {
       page_title: 'Hotel Voucher Issuing System',
       form: {
+        company:'Issuing Company',
         ref:'Voucher Reference', status:'Status',
         hotel:'Hotel Name', loc:'Location', guest:'Guest Name',
         room:'Room Type', checkin:'Check-in Date', checkout:'Check-out Date',
@@ -442,6 +512,7 @@
     document.body.setAttribute('data-lang', l);
     $('ui_title').textContent = t.page_title;
     // Labels
+    $('lbl_company').textContent = t.form.company;
     $('lbl_ref').textContent = t.form.ref;
     $('lbl_status').textContent = t.form.status;
     $('lbl_hotel_in').textContent = t.form.hotel;
@@ -493,10 +564,24 @@
     saveCurrent();
     const t = T[lang];
     const d = t.doc;
+    const co = COMPANIES[$('company').value] || COMPANIES.alyame;
 
-    // Document labels
-    $('d_co_name').textContent = d.co_name;
-    $('d_co_sub').textContent = d.co_sub;
+    // Company-specific letterhead
+    $('d_logo').src = co.logo;
+    $('d_logo').alt = co.name_en;
+    $('d_watermark').textContent = co.watermark;
+    $('d_co_name').textContent = lang === 'ar' ? co.name_ar : co.name_en;
+    $('d_co_sub').textContent = lang === 'ar' ? co.sub_ar : co.sub_en;
+    $('d_email').textContent = co.email;
+    $('d_stamp_co').textContent = co.stamp;
+    $('d_stamp_sub').textContent = lang === 'ar' ? 'مختوم' : 'OFFICIAL';
+
+    // Phone rows (hide Libya row if no Libya phones)
+    $('d_row_libya').style.display = co.phones_libya.length ? 'flex' : 'none';
+    $('d_phones_libya').innerHTML = co.phones_libya.map((p,i) => `<span>${i?'· ':''}${p}</span>`).join('');
+    $('d_phones_egypt').innerHTML = co.phones_egypt.map((p,i) => `<span>${i?'· ':''}${p}</span>`).join('');
+
+    // Bilingual labels
     $('d_lbl_libya').textContent = d.libya;
     $('d_lbl_egypt').textContent = d.egypt;
     $('d_pill').textContent = d.pill;
@@ -517,8 +602,14 @@
     $('d_lbl_sig').textContent = d.sig;
     $('d_lbl_qr').textContent = d.qr;
     $('d_lbl_notes').textContent = d.notes;
-    $('d_footer_left').innerHTML = d.footer_left;
-    $('d_footer_right').textContent = d.footer_right;
+    const coFooterName = lang === 'ar' ? co.name_ar : co.name_en;
+    $('d_footer_left').innerHTML = `<strong>${coFooterName}</strong> · ` + (lang === 'ar'
+      ? 'وثيقة إلكترونية لا تحتاج إلى توقيع'
+      : 'Electronically generated · No signature required');
+    $('d_footer_center').textContent = lang === 'ar'
+      ? `${co.email}  ·  Hotel Voucher`
+      : `${co.email}  ·  قسيمة فندق`;
+    $('d_footer_right').textContent = lang === 'ar' ? co.seal_ar : co.seal_en;
     $('d_notes').innerHTML = d.notes_list.map(n => `<li>${n}</li>`).join('');
 
     // Dynamic values
@@ -537,7 +628,9 @@
     const n = (manualN && manualN > 0) ? manualN : autoN;
     $('d_nights').textContent = n ? d.nights_fmt(n) : '—';
 
-    $('d_issuer').textContent = $('issuer').value || '—';
+    const issuerName = $('issuer').value || '';
+    $('d_issuer').textContent = issuerName || '—';
+    $('d_issuer_email').textContent = STAFF_EMAIL[issuerName] || '';
 
     // Status
     const badge = $('d_status');
@@ -600,6 +693,8 @@
   }
   $('checkin').addEventListener('change', syncNights);
   $('checkout').addEventListener('change', syncNights);
+  $('company').addEventListener('change', generate);
+  $('issuer').addEventListener('change', generate);
 
   generate();
 
