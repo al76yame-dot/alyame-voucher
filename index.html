@@ -444,13 +444,13 @@
         qr: 'امسح للتحقق',
         notes: 'إشعارات هامة',
         footer_left: '<strong>اليامي للسفر والسياحة</strong> · هذه الوثيقة صادرة إلكترونياً ولا تحتاج إلى توقيع',
-        footer_right: 'اليامي · ٢٠٢٦ ©',
+        footer_right: 'اليامي · 2026 ©',
         status_map: { confirmed:'مؤكد', pending:'قيد المراجعة', cancelled:'ملغي' },
         nights_fmt: n => `${n} ${n===1?'ليلة':n===2?'ليلتان':'ليالي'}`,
         notes_list: [
           'يُرجى تقديم هذه القسيمة مع هوية شخصية سارية عند الوصول إلى الفندق.',
-          'وقت الدخول القياسي ٢ ظهراً · الخروج ١٢ ظهراً (حسب سياسة الفندق).',
-          'أي تعديل أو إلغاء يجب أن يتم قبل ٤٨ ساعة من تاريخ الدخول على الأقل.',
+          'وقت الدخول القياسي 2 ظهراً · الخروج 12 ظهراً (حسب سياسة الفندق).',
+          'أي تعديل أو إلغاء يجب أن يتم قبل 48 ساعة من تاريخ الدخول على الأقل.',
           'هذه القسيمة غير قابلة للتحويل وصالحة فقط للعميل المذكور.'
         ]
       }
@@ -507,8 +507,9 @@
     if(!iso) return '—';
     try {
       const d = new Date(iso);
-      return d.toLocaleDateString(locale === 'ar' ? 'ar-EG' : 'en-GB',
-        { day:'2-digit', month:'long', year:'numeric' });
+      // Force Western (Latin) digits even in Arabic mode
+      const tag = locale === 'ar' ? 'ar-EG-u-nu-latn' : 'en-GB';
+      return d.toLocaleDateString(tag, { day:'2-digit', month:'long', year:'numeric' });
     } catch(e){ return iso; }
   }
   function calcNights(ci,co){
@@ -629,7 +630,7 @@
       ? 'وثيقة إلكترونية لا تحتاج إلى توقيع'
       : 'Electronically generated · No signature required');
     $('d_footer_center').textContent = 'info@alyametravel.com  ·  www.alyametravel.com';
-    $('d_footer_right').textContent = lang === 'ar' ? 'اليامي · ٢٠٢٦ ©' : 'ALYAME · 2026 ©';
+    $('d_footer_right').textContent = lang === 'ar' ? 'اليامي · 2026 ©' : 'ALYAME · 2026 ©';
     $('d_notes').innerHTML = d.notes_list.map(n => `<li>${n}</li>`).join('');
 
     // Dynamic values
