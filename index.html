@@ -14,9 +14,14 @@
 <script src="https://cdn.jsdelivr.net/npm/qrious@4.0.2/dist/qrious.min.js"></script>
 <style>
   *{box-sizing:border-box}
-  :root{color-scheme:light}
-  html,body{background:#f0f2f5;color:#222}
-  body{margin:0;padding:0;background:#f0f2f5;color:#222;forced-color-adjust:none}
+  html{color-scheme:light !important}
+  :root{color-scheme:light !important;forced-color-adjust:none}
+  html,body{background:#f0f2f5 !important;color:#222 !important}
+  body{margin:0;padding:0;background:#f0f2f5 !important;color:#222 !important;forced-color-adjust:none !important}
+  @media (prefers-color-scheme:dark){
+    html,body{background:#f0f2f5 !important;color:#222 !important}
+    .voucher{background:#fff !important;color:#1a1a1a !important}
+  }
   body[data-lang="ar"]{font-family:'Cairo','Tahoma','Segoe UI',sans-serif;direction:rtl}
   body[data-lang="en"]{font-family:'Segoe UI','Helvetica Neue',Arial,sans-serif;direction:ltr}
   .app{max-width:1100px;margin:0 auto;padding:16px}
@@ -41,9 +46,10 @@
   /* ===== A4 Voucher (compact, single page) ===== */
   .doc-wrap{display:flex;justify-content:center;padding:20px 0}
   .voucher{
-    width:210mm;height:297mm;padding:13mm 14mm 20mm;background:#fff;position:relative;
-    color:#1a1a1a;font-size:10.5px;line-height:1.45;
+    width:210mm;height:297mm;padding:13mm 14mm 20mm;background:#fff !important;position:relative;
+    color:#1a1a1a !important;font-size:10.5px;line-height:1.45;
     box-shadow:0 8px 30px rgba(15,23,42,.15);overflow:hidden;
+    color-scheme:light;forced-color-adjust:none;
   }
   .voucher::before,.voucher::after{
     content:'';position:absolute;width:18mm;height:18mm;pointer-events:none;z-index:2;
