@@ -404,6 +404,7 @@
       <div><label id="lbl_checkin_in">تاريخ الدخول</label><input id="checkin" type="date"/></div>
       <div><label id="lbl_checkout_in">تاريخ الخروج</label><input id="checkout" type="date"/></div>
       <div><label id="lbl_nights_in">عدد الليالي</label><input id="nights" type="number" min="1"/></div>
+      <div><label id="lbl_rooms_in">عدد الغرف</label><input id="rooms" type="number" min="1" value="1"/></div>
       <div><label id="lbl_meals_in">الوجبات</label><input id="meals"/></div>
       <div><label id="lbl_issuer_in">الموظف المختص</label>
         <select id="issuer">
@@ -520,12 +521,14 @@
         <tr>
           <td class="label-cell" id="d_lbl_nights"></td>
           <td class="value-cell" id="d_nights">—</td>
-          <td class="label-cell" id="d_lbl_room"></td>
-          <td class="value-cell" id="d_room">—</td>
+          <td class="label-cell" id="d_lbl_rooms"></td>
+          <td class="value-cell" id="d_rooms">—</td>
         </tr>
         <tr>
+          <td class="label-cell" id="d_lbl_room"></td>
+          <td class="value-cell" id="d_room">—</td>
           <td class="label-cell" id="d_lbl_meals"></td>
-          <td class="value-cell" colspan="3" id="d_meals">—</td>
+          <td class="value-cell" id="d_meals">—</td>
         </tr>
       </table>
 
@@ -584,7 +587,7 @@
   // Per-language data store (so switching preserves what was typed in other lang)
   const store = { ar: {}, en: {} };
   const TEXT_FIELDS = ['hotel','loc','guest','room','meals'];
-  const SHARED_FIELDS = ['ref','confirm','status','checkin','checkout','nights','issuer'];
+  const SHARED_FIELDS = ['ref','confirm','status','checkin','checkout','nights','rooms','issuer'];
 
   // Staff emails (Imagine Travel operations)
   const STAFF_EMAIL = {
@@ -599,7 +602,7 @@
         ref:'مرجع القسيمة', confirm:'رقم التأكيد من الفندق', status:'الحالة',
         hotel:'اسم الفندق', loc:'الموقع', guest:'اسم العميل',
         room:'نوع الغرفة', checkin:'تاريخ الدخول', checkout:'تاريخ الخروج',
-        nights:'عدد الليالي', meals:'الوجبات', issuer:'الموظف المختص',
+        nights:'عدد الليالي', rooms:'عدد الغرف', meals:'الوجبات', issuer:'الموظف المختص',
         gen:'توليد القسيمة', print:'طباعة / PDF', reset:'مسح', install:'📲 تثبيت'
       },
       placeholders: {
@@ -621,7 +624,7 @@
         hotel: 'الفندق',
         sec_guest: 'معلومات العميل', sec_booking: 'تفاصيل الحجز',
         guest: 'اسم العميل', checkin: 'تاريخ الدخول', checkout: 'تاريخ الخروج',
-        nights_l: 'عدد الليالي', room: 'نوع الغرفة', meals: 'الوجبات',
+        nights_l: 'عدد الليالي', rooms_l: 'عدد الغرف', room: 'نوع الغرفة', meals: 'الوجبات',
         issuer: 'صادرة عن', sig: 'التوقيع المعتمد',
         qr: 'امسح للتحقق',
         notes: 'إشعارات هامة',
@@ -644,7 +647,7 @@
         ref:'Voucher Reference', confirm:'Hotel Confirmation No.', status:'Status',
         hotel:'Hotel Name', loc:'Location', guest:'Guest Name',
         room:'Room Type', checkin:'Check-in Date', checkout:'Check-out Date',
-        nights:'Nights', meals:'Meals', issuer:'Issued By',
+        nights:'Nights', rooms:'Rooms', meals:'Meals', issuer:'Issued By',
         gen:'Generate Voucher', print:'Print / PDF', reset:'Reset', install:'📲 Install'
       },
       placeholders: {
@@ -666,7 +669,7 @@
         hotel: 'Hotel',
         sec_guest: 'Guest Information', sec_booking: 'Booking Details',
         guest: 'Guest Name', checkin: 'Check-in', checkout: 'Check-out',
-        nights_l: 'Nights', room: 'Room Type', meals: 'Meals',
+        nights_l: 'Nights', rooms_l: 'Rooms', room: 'Room Type', meals: 'Meals',
         issuer: 'Issued By', sig: 'Authorized Signature',
         qr: 'Scan to verify',
         notes: 'Important Notes',
@@ -737,6 +740,7 @@
     $('lbl_checkin_in').textContent = t.form.checkin;
     $('lbl_checkout_in').textContent = t.form.checkout;
     $('lbl_nights_in').textContent = t.form.nights;
+    $('lbl_rooms_in').textContent = t.form.rooms;
     $('lbl_meals_in').textContent = t.form.meals;
     $('lbl_issuer_in').textContent = t.form.issuer;
     // Buttons
@@ -805,6 +809,7 @@
     $('d_lbl_checkin').textContent = d.checkin;
     $('d_lbl_checkout').textContent = d.checkout;
     $('d_lbl_nights').textContent = d.nights_l;
+    $('d_lbl_rooms').textContent = d.rooms_l;
     $('d_lbl_room').textContent = d.room;
     $('d_lbl_meals').textContent = d.meals;
     $('d_lbl_issuer').textContent = d.issuer;
@@ -832,6 +837,9 @@
     $('d_meals').textContent = $('meals').value || '—';
     $('d_checkin').textContent = fmtDate($('checkin').value, lang);
     $('d_checkout').textContent = fmtDate($('checkout').value, lang);
+
+    const r = parseInt($('rooms').value, 10) || 1;
+    $('d_rooms').textContent = lang === 'ar' ? `${r} ${r===1?'غرفة':r===2?'غرفتان':'غرف'}` : `${r} Room${r!==1?'s':''}`;
 
     const manualN = parseInt($('nights').value, 10);
     const autoN = calcNights($('checkin').value, $('checkout').value);
