@@ -279,10 +279,11 @@
 
     /* Footer pinned to bottom of A4 — absolute so it never pushes page break */
     .v-docfooter{
-      position:absolute !important;bottom:6mm !important;
+      position:absolute !important;bottom:0 !important;
       left:11mm !important;right:11mm !important;
-      margin:0 !important;padding:0 !important;
+      margin:0 !important;padding:0 0 8mm 0 !important;
     }
+    .v-docfooter-bar{margin-bottom:0 !important}
 
     /* Inner gold frame spans full page */
     .voucher::before{
