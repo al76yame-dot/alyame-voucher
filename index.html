@@ -46,45 +46,19 @@
   /* ===== A4 Voucher (compact, single page) ===== */
   .doc-wrap{display:flex;justify-content:center;padding:20px 0}
   .voucher{
-    width:210mm;height:297mm;padding:13mm 14mm 20mm;background:#fff !important;position:relative;
+    width:210mm;min-height:297mm;padding:10mm 14mm 8mm;background:#fff !important;position:relative;
     color:#1a1a1a !important;font-size:10.5px;line-height:1.45;
-    box-shadow:0 8px 30px rgba(15,23,42,.15);overflow:hidden;
+    box-shadow:0 8px 30px rgba(15,23,42,.15);
     color-scheme:light;forced-color-adjust:none;
   }
-  .voucher::before,.voucher::after{
-    content:'';position:absolute;width:18mm;height:18mm;pointer-events:none;z-index:2;
-    background-image:
-      linear-gradient(#C5A059,#C5A059),
-      linear-gradient(#C5A059,#C5A059),
-      linear-gradient(#0f172a,#0f172a),
-      linear-gradient(#0f172a,#0f172a);
-    background-repeat:no-repeat;
+  /* Elegant inner double-line frame for both screen + print */
+  .voucher::before{
+    content:'';position:absolute;
+    top:5mm;left:5mm;right:5mm;bottom:5mm;
+    border:1px double #C5A059;
+    pointer-events:none;z-index:0;
   }
-  .voucher::before{top:5mm;left:5mm;
-    background-size:14mm 1px,1px 14mm,8mm 2px,2px 8mm;
-    background-position:0 0,0 0,0 3mm,3mm 0;
-  }
-  .voucher::after{top:5mm;right:5mm;
-    background-size:14mm 1px,1px 14mm,8mm 2px,2px 8mm;
-    background-position:100% 0,100% 0,100% 3mm,calc(100% - 3mm) 0;
-  }
-  .v-corner-bl,.v-corner-br{
-    content:'';position:absolute;width:18mm;height:18mm;pointer-events:none;z-index:2;
-    background-image:
-      linear-gradient(#C5A059,#C5A059),
-      linear-gradient(#C5A059,#C5A059),
-      linear-gradient(#0f172a,#0f172a),
-      linear-gradient(#0f172a,#0f172a);
-    background-repeat:no-repeat;
-  }
-  .v-corner-bl{bottom:5mm;left:5mm;
-    background-size:14mm 1px,1px 14mm,8mm 2px,2px 8mm;
-    background-position:0 100%,0 100%,0 calc(100% - 3mm),3mm 100%;
-  }
-  .v-corner-br{bottom:5mm;right:5mm;
-    background-size:14mm 1px,1px 14mm,8mm 2px,2px 8mm;
-    background-position:100% 100%,100% 100%,100% calc(100% - 3mm),calc(100% - 3mm) 100%;
-  }
+  .v-corner-bl,.v-corner-br{display:none}
   .voucher[data-lang="ar"]{direction:rtl;font-family:'Cairo','Tahoma','Segoe UI',sans-serif}
   .voucher[data-lang="en"]{direction:ltr;font-family:'Cambria','Georgia','Times New Roman',serif}
 
@@ -250,7 +224,7 @@
   .notes li{margin:.6mm 0;padding-inline-start:1mm}
   .notes li::marker{color:#C5A059;font-weight:700}
 
-  .v-docfooter{position:absolute;bottom:0;left:0;right:0;padding:0 14mm 5mm}
+  .v-docfooter{margin-top:6mm;padding:0}
   .v-docfooter-deco{
     display:flex;align-items:center;justify-content:center;gap:6px;
     margin-bottom:2mm;
@@ -293,26 +267,14 @@
 
     .voucher{
       box-shadow:none !important;margin:0 !important;
-      width:210mm !important;height:297mm !important;
-      padding:9mm 11mm 8mm !important;
+      width:210mm !important;height:auto !important;min-height:297mm;
+      padding:8mm 11mm 6mm !important;
       page-break-after:avoid;page-break-inside:avoid;
       background:#fff !important;
       border:none !important;position:relative;
       overflow:visible !important;
-      display:flex !important;flex-direction:column;
+      display:block !important;
     }
-
-    /* Reset screen corner decorations completely */
-    .voucher::before{
-      content:'' !important;position:absolute !important;
-      top:5mm !important;left:5mm !important;right:5mm !important;bottom:5mm !important;
-      width:auto !important;height:auto !important;
-      background:none !important;background-image:none !important;background-size:auto !important;background-position:0 0 !important;
-      border:0.4mm double #C5A059 !important;
-      pointer-events:none;z-index:0;
-    }
-    .voucher::after{display:none !important;content:none !important}
-    .v-corner-bl,.v-corner-br{display:none !important}
 
     /* Slightly tighten top spacing & enlarge title for print */
     .v-letterhead{margin-top:3mm;padding-bottom:3mm}
@@ -369,10 +331,10 @@
     .notes li{color:#1a1a1a !important;font-size:9px !important}
     .notes li::marker{color:#C5A059 !important}
 
-    /* Footer — pin natural at end of flex column (no absolute) */
+    /* Footer flows naturally at end (no absolute positioning) */
     .v-docfooter{
       position:static !important;bottom:auto !important;left:auto !important;right:auto !important;
-      margin-top:auto !important;padding:0 !important;
+      margin-top:5mm !important;padding:0 !important;
     }
     .v-docfooter-row{font-size:9px !important;color:#0f172a !important;padding:1.5mm 0 2mm !important}
     .v-docfooter .seal{background:#fffbf3 !important;color:#0f172a !important;border:0.3mm solid #C5A059 !important}
@@ -454,8 +416,6 @@
   <div class="doc-wrap">
     <div class="voucher" id="doc" data-lang="ar">
       <div class="v-topband"></div>
-      <div class="v-corner-bl"></div>
-      <div class="v-corner-br"></div>
       <div class="watermark" id="d_watermark">ALYAME</div>
 
       <div class="v-letterhead">
