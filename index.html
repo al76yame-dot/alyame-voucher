@@ -41,9 +41,43 @@
   /* ===== A4 Voucher (compact, single page) ===== */
   .doc-wrap{display:flex;justify-content:center;padding:20px 0}
   .voucher{
-    width:210mm;height:297mm;padding:12mm 14mm 18mm;background:#fff;position:relative;
+    width:210mm;height:297mm;padding:13mm 14mm 20mm;background:#fff;position:relative;
     color:#1a1a1a;font-size:10.5px;line-height:1.45;
-    box-shadow:0 4px 18px rgba(0,0,0,.12);overflow:hidden;
+    box-shadow:0 8px 30px rgba(15,23,42,.15);overflow:hidden;
+  }
+  .voucher::before,.voucher::after{
+    content:'';position:absolute;width:18mm;height:18mm;pointer-events:none;z-index:2;
+    background-image:
+      linear-gradient(#C5A059,#C5A059),
+      linear-gradient(#C5A059,#C5A059),
+      linear-gradient(#0f172a,#0f172a),
+      linear-gradient(#0f172a,#0f172a);
+    background-repeat:no-repeat;
+  }
+  .voucher::before{top:5mm;left:5mm;
+    background-size:14mm 1px,1px 14mm,8mm 2px,2px 8mm;
+    background-position:0 0,0 0,0 3mm,3mm 0;
+  }
+  .voucher::after{top:5mm;right:5mm;
+    background-size:14mm 1px,1px 14mm,8mm 2px,2px 8mm;
+    background-position:100% 0,100% 0,100% 3mm,calc(100% - 3mm) 0;
+  }
+  .v-corner-bl,.v-corner-br{
+    content:'';position:absolute;width:18mm;height:18mm;pointer-events:none;z-index:2;
+    background-image:
+      linear-gradient(#C5A059,#C5A059),
+      linear-gradient(#C5A059,#C5A059),
+      linear-gradient(#0f172a,#0f172a),
+      linear-gradient(#0f172a,#0f172a);
+    background-repeat:no-repeat;
+  }
+  .v-corner-bl{bottom:5mm;left:5mm;
+    background-size:14mm 1px,1px 14mm,8mm 2px,2px 8mm;
+    background-position:0 100%,0 100%,0 calc(100% - 3mm),3mm 100%;
+  }
+  .v-corner-br{bottom:5mm;right:5mm;
+    background-size:14mm 1px,1px 14mm,8mm 2px,2px 8mm;
+    background-position:100% 100%,100% 100%,100% calc(100% - 3mm),calc(100% - 3mm) 100%;
   }
   .voucher[data-lang="ar"]{direction:rtl;font-family:'Cairo','Tahoma','Segoe UI',sans-serif}
   .voucher[data-lang="en"]{direction:ltr;font-family:'Cambria','Georgia','Times New Roman',serif}
@@ -65,18 +99,46 @@
   .v-co-contact .label{font-weight:700;color:#0f172a;display:inline-block}
   .v-co-contact .phone-list{display:flex;flex-wrap:wrap;gap:0 6px;direction:ltr}
 
-  .v-title{text-align:center;margin:3mm 0 2mm}
-  .v-title .t-pill{display:inline-block;background:#0f172a;color:#C5A059;padding:1mm 6mm;font-size:9px;font-weight:700;letter-spacing:3px;border-radius:2px;margin-bottom:1.5mm;text-transform:uppercase}
-  .v-title h2{margin:0;font-size:22px;letter-spacing:3px;color:#0f172a;font-weight:700}
-  .voucher[data-lang="en"] .v-title h2{font-family:'Times New Roman',serif}
-  .v-title .deco{display:flex;align-items:center;justify-content:center;gap:5px;margin-top:1.5mm}
-  .v-title .deco span{height:1px;width:30mm;background:linear-gradient(to right,transparent,#C5A059,transparent)}
-  .v-title .deco .dot{width:4px;height:4px;background:#C5A059;transform:rotate(45deg)}
+  .v-title{text-align:center;margin:4mm 0 3mm;position:relative}
+  .v-title .t-pill{
+    display:inline-block;background:linear-gradient(135deg,#0f172a 0%,#1e293b 100%);
+    color:#C5A059;padding:1.2mm 7mm;font-size:8.5px;font-weight:800;letter-spacing:4px;
+    border-radius:0;margin-bottom:2mm;text-transform:uppercase;
+    border:1px solid #C5A059;position:relative;
+  }
+  .v-title .t-pill::before,.v-title .t-pill::after{
+    content:'';position:absolute;top:50%;width:3mm;height:1px;background:#C5A059;
+  }
+  .v-title .t-pill::before{left:-4mm;transform:translateY(-50%)}
+  .v-title .t-pill::after{right:-4mm;transform:translateY(-50%)}
+  .v-title h2{
+    margin:0;font-size:26px;letter-spacing:5px;color:#0f172a;font-weight:700;
+    font-family:'Times New Roman','Cambria',serif;text-shadow:0 1px 0 rgba(197,160,89,.15);
+  }
+  .v-title .deco{display:flex;align-items:center;justify-content:center;gap:5px;margin-top:2mm}
+  .v-title .deco span{height:1px;width:35mm;background:linear-gradient(to right,transparent,#C5A059 30%,#0f172a 50%,#C5A059 70%,transparent)}
+  .v-title .deco .dot{width:5px;height:5px;background:#C5A059;transform:rotate(45deg);box-shadow:0 0 0 2px #fff,0 0 0 3px #C5A059}
 
-  .v-meta{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:3mm;margin:3mm 0;padding:2.5mm 4mm;background:#0f172a;color:#fff;border-radius:2px}
-  .v-meta .item{display:flex;flex-direction:column;gap:.5mm}
-  .v-meta .lbl{font-size:7px;color:#C5A059;letter-spacing:1.2px;text-transform:uppercase;font-weight:600}
-  .v-meta .val{font-size:10.5px;font-weight:700;color:#fff}
+  .v-meta{
+    display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:0;margin:3mm 0;
+    padding:3mm 0;background:linear-gradient(135deg,#0f172a 0%,#1a2540 50%,#0f172a 100%);
+    color:#fff;border-radius:0;border-top:1px solid #C5A059;border-bottom:1px solid #C5A059;
+    position:relative;
+  }
+  .v-meta::before,.v-meta::after{
+    content:'';position:absolute;top:50%;width:5mm;height:1px;background:#C5A059;
+  }
+  .v-meta::before{left:0;transform:translateY(-50%)}
+  .v-meta::after{right:0;transform:translateY(-50%)}
+  .v-meta .item{display:flex;flex-direction:column;gap:.8mm;padding:0 4mm;position:relative}
+  .v-meta .item:not(:last-child)::after{
+    content:'';position:absolute;top:15%;bottom:15%;
+    width:1px;background:linear-gradient(to bottom,transparent,#C5A05955,transparent);
+  }
+  .voucher[data-lang="ar"] .v-meta .item:not(:last-child)::after{left:0}
+  .voucher[data-lang="en"] .v-meta .item:not(:last-child)::after{right:0}
+  .v-meta .lbl{font-size:6.5px;color:#C5A059;letter-spacing:1.5px;text-transform:uppercase;font-weight:700}
+  .v-meta .val{font-size:11px;font-weight:700;color:#fff;letter-spacing:.3px}
   .v-meta .center{text-align:center}
   .v-meta .right{text-align:right}
   .voucher[data-lang="en"] .v-meta .right{text-align:left}
@@ -84,25 +146,49 @@
   .status-pending{background:#f59e0b;color:#fff}
   .status-cancelled{background:#dc2626;color:#fff}
 
-  .v-hotel{display:flex;gap:4mm;align-items:center;padding:3.5mm 4mm;background:linear-gradient(135deg,#fafafa 0%,#fff 100%);border:1px solid #e5e0d0;margin:3mm 0}
+  .v-hotel{
+    display:flex;gap:5mm;align-items:center;padding:4mm 5mm;
+    background:linear-gradient(135deg,#fffbf3 0%,#fafafa 50%,#f5f2e8 100%);
+    border:1px solid #e5dec0;margin:3mm 0;position:relative;
+    box-shadow:inset 0 0 0 1px #fff;
+  }
   .voucher[data-lang="ar"] .v-hotel{border-right:4px solid #C5A059}
   .voucher[data-lang="en"] .v-hotel{border-left:4px solid #C5A059}
-  .v-hotel-icon{width:14mm;height:14mm;background:#0f172a;border-radius:3px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-  .v-hotel-icon svg{width:8mm;height:8mm;fill:#C5A059}
+  .v-hotel-icon{
+    width:16mm;height:16mm;background:linear-gradient(135deg,#0f172a 0%,#1e293b 100%);
+    border-radius:3px;display:flex;align-items:center;justify-content:center;flex-shrink:0;
+    box-shadow:0 2px 4px rgba(15,23,42,.2),inset 0 0 0 1px #C5A05955;
+  }
+  .v-hotel-icon svg{width:9mm;height:9mm;fill:#C5A059}
   .v-hotel-body{flex:1}
-  .v-hotel-lbl{font-size:8px;color:#888;letter-spacing:1.2px;text-transform:uppercase;margin-bottom:.8mm;font-weight:600}
-  .v-hotel-name{font-size:15px;font-weight:700;color:#0f172a;margin:0;line-height:1.2}
-  .voucher[data-lang="en"] .v-hotel-name{font-family:'Times New Roman',serif}
-  .v-hotel-loc{font-size:10px;color:#555;margin-top:1mm;display:flex;align-items:center;gap:4px}
-  .v-hotel-loc svg{width:10px;height:10px;fill:#C5A059;flex-shrink:0}
+  .v-hotel-lbl{font-size:7.5px;color:#999;letter-spacing:2px;text-transform:uppercase;margin-bottom:1mm;font-weight:700;display:flex;align-items:center;gap:3mm}
+  .v-hotel-lbl::after{content:'';flex:1;height:1px;background:linear-gradient(to right,#C5A05955,transparent)}
+  .voucher[data-lang="ar"] .v-hotel-lbl::after{background:linear-gradient(to left,#C5A05955,transparent)}
+  .v-hotel-name{font-size:16px;font-weight:700;color:#0f172a;margin:0;line-height:1.2;letter-spacing:.2px}
+  .voucher[data-lang="en"] .v-hotel-name{font-family:'Times New Roman',serif;letter-spacing:1px}
+  .v-hotel-loc{font-size:10px;color:#555;margin-top:1.5mm;display:flex;align-items:center;gap:5px}
+  .v-hotel-loc svg{width:11px;height:11px;fill:#C5A059;flex-shrink:0}
+  .v-hotel-stars{margin-top:1.5mm;display:flex;gap:1.5px;color:#C5A059;font-size:11px;letter-spacing:1px}
 
-  .section-title{font-weight:700;font-size:10px;margin:3.5mm 0 1.5mm;color:#0f172a;letter-spacing:1.8px;text-transform:uppercase;padding-bottom:1mm;border-bottom:1px solid #C5A059;display:flex;align-items:center;gap:2.5mm}
-  .section-title::before{content:'';width:2.5mm;height:2.5mm;background:#C5A059;transform:rotate(45deg);flex-shrink:0}
+  .section-title{
+    font-weight:700;font-size:10px;margin:4mm 0 2mm;color:#0f172a;
+    letter-spacing:2.5px;text-transform:uppercase;padding-bottom:1.2mm;
+    display:flex;align-items:center;gap:3mm;position:relative;
+    border-bottom:1.5px solid #0f172a;
+  }
+  .section-title::before{
+    content:'';width:3mm;height:3mm;background:#C5A059;transform:rotate(45deg);
+    flex-shrink:0;box-shadow:0 0 0 2px #fff,0 0 0 3px #C5A059;
+  }
+  .section-title::after{
+    content:'';flex:1;height:1px;background:linear-gradient(to right,#C5A059,transparent);
+    margin-inline-start:2mm;
+  }
 
-  table.doc-table{width:100%;border-collapse:collapse;margin-bottom:1.5mm;page-break-inside:avoid}
-  table.doc-table td{border:1px solid #d4d0c0;padding:2mm 3mm;vertical-align:middle;font-size:10px}
-  .label-cell{background:#f5f2e8;font-weight:700;width:22%;color:#0f172a;font-size:8.5px;letter-spacing:.4px;text-transform:uppercase}
-  .value-cell{background:#fff;color:#1a1a1a;font-weight:500;font-size:10.5px}
+  table.doc-table{width:100%;border-collapse:collapse;margin-bottom:2mm;page-break-inside:avoid;border:1px solid #d4d0c0}
+  table.doc-table td{border:1px solid #e8e2d0;padding:2.3mm 3.5mm;vertical-align:middle;font-size:10px}
+  .label-cell{background:linear-gradient(135deg,#f5f2e8 0%,#faf6e8 100%);font-weight:700;width:22%;color:#0f172a;font-size:8.5px;letter-spacing:.6px;text-transform:uppercase}
+  .value-cell{background:#fff;color:#1a1a1a;font-weight:600;font-size:10.5px;letter-spacing:.2px}
 
   .v-sigfooter{
     margin-top:4mm;display:grid;
@@ -122,15 +208,20 @@
 
   .v-stamp{display:flex;align-items:center;justify-content:center;padding:0 2mm}
   .stamp-circle{
-    width:24mm;height:24mm;border:2.5px solid #C5A059;border-radius:50%;
+    width:26mm;height:26mm;border:2.5px solid #b3433a;border-radius:50%;
     display:flex;align-items:center;justify-content:center;position:relative;
-    transform:rotate(-10deg);
-    background:radial-gradient(circle,#fffbf3 0%,#fff 100%);
+    transform:rotate(-12deg);
+    background:radial-gradient(circle,rgba(255,251,243,.4) 0%,rgba(255,255,255,.6) 100%);
+    box-shadow:inset 0 0 4mm rgba(179,67,58,.08);
+    color:#b3433a;
   }
-  .stamp-circle::before{content:'';position:absolute;inset:2mm;border:1px dashed #C5A059;border-radius:50%}
-  .stamp-inner{text-align:center;color:#C5A059}
-  .stamp-co{font-size:10px;font-weight:800;letter-spacing:2px;line-height:1}
-  .stamp-sub{font-size:6.5px;font-weight:600;letter-spacing:2.5px;margin-top:1.5mm}
+  .stamp-circle::before{content:'';position:absolute;inset:2mm;border:1.5px solid #b3433a;border-radius:50%}
+  .stamp-circle::after{content:'';position:absolute;inset:3.5mm;border:1px dashed #b3433a99;border-radius:50%}
+  .stamp-inner{text-align:center;color:#b3433a;position:relative;z-index:1}
+  .stamp-co{font-size:11px;font-weight:900;letter-spacing:2px;line-height:1;text-shadow:0 0 1px rgba(179,67,58,.3)}
+  .stamp-divider{width:10mm;height:1px;background:#b3433a;margin:1mm auto;opacity:.6}
+  .stamp-sub{font-size:7px;font-weight:700;letter-spacing:3px;margin-top:.5mm}
+  .stamp-date{font-size:6px;font-weight:600;letter-spacing:1px;margin-top:1mm;opacity:.85}
 
   .v-qr{text-align:center;display:flex;flex-direction:column;align-items:center;gap:1mm}
   .v-qr canvas{width:24mm;height:24mm;border:1.5px solid #0f172a;padding:1mm;background:#fff;display:block;border-radius:2px}
@@ -252,6 +343,8 @@
   <div class="doc-wrap">
     <div class="voucher" id="doc" data-lang="ar">
       <div class="v-topband"></div>
+      <div class="v-corner-bl"></div>
+      <div class="v-corner-br"></div>
       <div class="watermark" id="d_watermark">ALYAME</div>
 
       <div class="v-letterhead">
@@ -322,6 +415,7 @@
             <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
             <span id="d_loc">—</span>
           </p>
+          <div class="v-hotel-stars">★ ★ ★ ★ ★</div>
         </div>
       </div>
 
@@ -364,7 +458,9 @@
           <div class="stamp-circle">
             <div class="stamp-inner">
               <div class="stamp-co" id="d_stamp_co">ALYAME</div>
+              <div class="stamp-divider"></div>
               <div class="stamp-sub" id="d_stamp_sub">OFFICIAL</div>
+              <div class="stamp-date" id="d_stamp_date">2026</div>
             </div>
           </div>
         </div>
@@ -608,6 +704,7 @@
     $('d_partner_label').textContent = d.partner;
     $('d_stamp_co').textContent = 'ALYAME';
     $('d_stamp_sub').textContent = lang === 'ar' ? 'رسمي' : 'OFFICIAL';
+    $('d_stamp_date').textContent = new Date().getFullYear();
 
     // Bilingual labels
     $('d_lbl_libya').textContent = d.libya;
