@@ -30,8 +30,8 @@
   .panel{background:#fff;border-radius:10px;padding:16px;box-shadow:0 2px 8px rgba(0,0,0,.06);margin-bottom:16px}
   .grid{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
   label{display:block;font-size:13px;margin-bottom:4px;color:#444}
-  input,select{width:100%;padding:9px 10px;border:1px solid #cfd4da;border-radius:6px;font-size:14px;background:#fff;font-family:inherit}
-  input:focus,select:focus{outline:2px solid #0f172a33;border-color:#0f172a}
+  input,select,textarea{width:100%;padding:9px 10px;border:1px solid #cfd4da;border-radius:6px;font-size:14px;background:#fff;font-family:inherit;resize:vertical}
+  input:focus,select:focus,textarea:focus{outline:2px solid #0f172a33;border-color:#0f172a}
   .actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px;align-items:center}
   button{padding:10px 18px;border:0;border-radius:6px;cursor:pointer;font-size:14px;font-weight:600;font-family:inherit}
   .btn-primary{background:#0f172a;color:#C5A059}
@@ -399,7 +399,7 @@
       </div>
       <div><label id="lbl_hotel_in">اسم الفندق</label><input id="hotel"/></div>
       <div><label id="lbl_loc_in">الموقع</label><input id="loc"/></div>
-      <div><label id="lbl_guest_in">اسم العميل</label><input id="guest"/></div>
+      <div><label id="lbl_guest_in">اسم العميل (سطر لكل عميل)</label><textarea id="guest" rows="3" placeholder="محمد أحمد علي&#10;سارة محمد&#10;..."></textarea></div>
       <div><label id="lbl_room_in">نوع الغرفة</label><input id="room"/></div>
       <div><label id="lbl_checkin_in">تاريخ الدخول</label><input id="checkin" type="date"/></div>
       <div><label id="lbl_checkout_in">تاريخ الخروج</label><input id="checkout" type="date"/></div>
@@ -578,6 +578,7 @@
 
 <script>
   const $ = id => document.getElementById(id);
+  const esc = s => String(s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   let lang = 'ar';
 
   // Per-language data store (so switching preserves what was typed in other lang)
@@ -823,7 +824,10 @@
     $('d_date').textContent = fmtDate(todayISO(), lang);
     $('d_hotel').textContent = $('hotel').value || '—';
     $('d_loc').textContent = $('loc').value || '—';
-    $('d_guest').textContent = $('guest').value || '—';
+    const guestLines = ($('guest').value || '').split('\n').map(s => s.trim()).filter(Boolean);
+    if(guestLines.length === 0) $('d_guest').textContent = '—';
+    else if(guestLines.length === 1) $('d_guest').textContent = guestLines[0];
+    else $('d_guest').innerHTML = guestLines.map((n,i)=>`<div style="margin:.3mm 0">${i+1}. ${esc(n)}</div>`).join('');
     $('d_room').textContent = $('room').value || '—';
     $('d_meals').textContent = $('meals').value || '—';
     $('d_checkin').textContent = fmtDate($('checkin').value, lang);
