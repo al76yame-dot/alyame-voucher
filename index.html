@@ -267,18 +267,22 @@
 
     .voucher{
       box-shadow:none !important;margin:0 !important;
-      width:210mm !important;height:297mm !important;min-height:297mm !important;
-      padding:8mm 11mm 6mm !important;
+      width:210mm !important;height:296mm !important;
+      padding:8mm 11mm 20mm !important;
       page-break-after:avoid;page-break-inside:avoid;
       background:#fff !important;
       border:none !important;position:relative;
       overflow:hidden !important;
-      display:flex !important;flex-direction:column !important;
+      display:block !important;
       box-sizing:border-box !important;
     }
 
-    /* Footer pushed to bottom of A4 via flex auto margin */
-    .v-docfooter{margin-top:auto !important;padding:0 !important}
+    /* Footer pinned to bottom of A4 — absolute so it never pushes page break */
+    .v-docfooter{
+      position:absolute !important;bottom:6mm !important;
+      left:11mm !important;right:11mm !important;
+      margin:0 !important;padding:0 !important;
+    }
 
     /* Inner gold frame spans full page */
     .voucher::before{
