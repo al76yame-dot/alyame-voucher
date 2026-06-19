@@ -6,6 +6,7 @@
 <title>Hotel Voucher | اليامي</title>
 <link rel="manifest" href="manifest.json"/>
 <meta name="theme-color" content="#0f172a"/>
+<meta name="color-scheme" content="light"/>
 <meta name="apple-mobile-web-app-capable" content="yes"/>
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
 <meta name="apple-mobile-web-app-title" content="Hotel Voucher"/>
@@ -13,7 +14,9 @@
 <script src="https://cdn.jsdelivr.net/npm/qrious@4.0.2/dist/qrious.min.js"></script>
 <style>
   *{box-sizing:border-box}
-  body{margin:0;padding:0;background:#f0f2f5;color:#222}
+  :root{color-scheme:light}
+  html,body{background:#f0f2f5;color:#222}
+  body{margin:0;padding:0;background:#f0f2f5;color:#222;forced-color-adjust:none}
   body[data-lang="ar"]{font-family:'Cairo','Tahoma','Segoe UI',sans-serif;direction:rtl}
   body[data-lang="en"]{font-family:'Segoe UI','Helvetica Neue',Arial,sans-serif;direction:ltr}
   .app{max-width:1100px;margin:0 auto;padding:16px}
