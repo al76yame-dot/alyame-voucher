@@ -913,6 +913,8 @@
   $('checkin').addEventListener('change', syncNights);
   $('checkout').addEventListener('change', syncNights);
   $('issuer').addEventListener('change', generate);
+  $('rooms').addEventListener('input', generate);
+  $('nights').addEventListener('input', generate);
 
   generate();
 
