@@ -51,8 +51,9 @@
 
   /* ---------- Masthead ---------- */
   .mast{display:flex;align-items:flex-start;justify-content:space-between;gap:8mm}
-  .mast-logos{display:flex;align-items:center;gap:5mm;flex-shrink:0;padding-top:1mm}
-  .mast-logos img{height:20mm;width:auto;max-width:40mm;object-fit:contain}
+  .mast-logos{display:flex;align-items:center;gap:4mm;flex-shrink:0}
+  .mast-logos .lg-main{height:34mm;width:auto;max-width:62mm;object-fit:contain}
+  .mast-logos .lg-alt{height:17mm;width:auto;max-width:30mm;object-fit:contain;opacity:.92}
   .mast-right{flex:1;display:flex;flex-direction:column;align-items:flex-end;gap:1.5mm;text-align:end}
   .voucher[data-lang="ar"] .mast-right{align-items:flex-start;text-align:start}
   .agency{font-size:7.6px;line-height:1.65;color:#444;direction:ltr;text-align:right}
@@ -140,6 +141,8 @@
   @media (max-width:820px){
     .voucher{width:100%;min-height:auto;padding:7mm;font-size:10px}
     .mast{flex-direction:column;align-items:center;gap:4mm}
+    .mast-logos .lg-main{height:26mm}
+    .mast-logos .lg-alt{height:14mm}
     .mast-right{align-items:center !important;text-align:center !important}
     .agency{text-align:center !important}
     .cols{grid-template-columns:1fr;gap:5mm}
@@ -210,8 +213,8 @@
       <!-- ===== MASTHEAD ===== -->
       <div class="mast">
         <div class="mast-logos">
-          <img src="logo.png" alt="Alyame Travel"/>
-          <img src="imagine-logo.svg" alt="Imagine Travel"/>
+          <img src="logo.png" alt="Alyame Travel" class="lg-main"/>
+          <img src="imagine-logo.svg" alt="Imagine Travel" class="lg-alt"/>
         </div>
         <div class="mast-right">
           <div class="agency">
