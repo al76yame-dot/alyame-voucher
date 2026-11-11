@@ -8,7 +8,6 @@
 <meta name="theme-color" content="#0f172a"/>
 <meta name="color-scheme" content="light"/>
 <meta name="apple-mobile-web-app-capable" content="yes"/>
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
 <meta name="apple-mobile-web-app-title" content="Hotel Voucher"/>
 <link rel="apple-touch-icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'><rect width='192' height='192' rx='28' fill='%230f172a'/><text x='96' y='110' font-size='80' text-anchor='middle' fill='%23C5A059' font-family='serif' font-weight='700'>H</text></svg>"/>
 <script src="https://cdn.jsdelivr.net/npm/qrious@4.0.2/dist/qrious.min.js"></script>
@@ -17,11 +16,7 @@
   html{color-scheme:light !important}
   :root{color-scheme:light !important;forced-color-adjust:none}
   html,body{background:#f0f2f5 !important;color:#222 !important}
-  body{margin:0;padding:0;background:#f0f2f5 !important;color:#222 !important;forced-color-adjust:none !important}
-  @media (prefers-color-scheme:dark){
-    html,body{background:#f0f2f5 !important;color:#222 !important}
-    .voucher{background:#fff !important;color:#1a1a1a !important}
-  }
+  body{margin:0;padding:0;forced-color-adjust:none !important}
   body[data-lang="ar"]{font-family:'Cairo','Tahoma','Segoe UI',sans-serif;direction:rtl}
   body[data-lang="en"]{font-family:'Segoe UI','Helvetica Neue',Arial,sans-serif;direction:ltr}
   .app{max-width:1100px;margin:0 auto;padding:16px}
@@ -38,347 +33,124 @@
   .btn-secondary{background:#6c757d;color:#fff}
   .btn-print{background:#198754;color:#fff}
   button:hover{opacity:.9}
-
   .lang-switch{display:inline-flex;background:#eef0f3;border-radius:8px;padding:3px;gap:2px;margin-inline-start:auto}
   .lang-switch button{padding:7px 18px;border-radius:6px;background:transparent;color:#666;font-size:13px;font-weight:700}
-  .lang-switch button.active{background:#0f172a;color:#C5A059;box-shadow:0 1px 4px rgba(0,0,0,.15)}
+  .lang-switch button.active{background:#0f172a;color:#C5A059}
 
-  /* ===== A4 Voucher (compact, single page) ===== */
+  /* ============ A4 VOUCHER (GTE-style layout) ============ */
   .doc-wrap{display:flex;justify-content:center;padding:20px 0}
   .voucher{
-    width:210mm;min-height:297mm;padding:10mm 14mm 8mm;background:#fff !important;position:relative;
-    color:#1a1a1a !important;font-size:10.5px;line-height:1.45;
+    width:210mm;min-height:297mm;background:#fff;position:relative;
+    padding:10mm 11mm 14mm;color:#1a1a1a;font-size:9px;line-height:1.45;
     box-shadow:0 8px 30px rgba(15,23,42,.15);
-    color-scheme:light;forced-color-adjust:none;
+    display:flex;flex-direction:column;
   }
-  /* Elegant inner double-line frame for both screen + print */
-  .voucher::before{
-    content:'';position:absolute;
-    top:5mm;left:5mm;right:5mm;bottom:5mm;
-    border:1px double #C5A059;
-    pointer-events:none;z-index:0;
-  }
-  .v-corner-bl,.v-corner-br{display:none}
-  .voucher[data-lang="ar"]{direction:rtl;font-family:'Cairo','Tahoma','Segoe UI',sans-serif}
-  .voucher[data-lang="en"]{direction:ltr;font-family:'Cambria','Georgia','Times New Roman',serif}
+  .voucher[data-lang="ar"]{direction:rtl;font-family:'Cairo','Tahoma',sans-serif}
+  .voucher[data-lang="en"]{direction:ltr;font-family:'Segoe UI',Arial,sans-serif}
 
-  .v-topband{position:absolute;top:0;left:0;right:0;height:3mm;background:linear-gradient(to right,#0f172a 0%,#0f172a 40%,#C5A059 40%,#C5A059 60%,#0f172a 60%,#0f172a 100%)}
+  /* ---- Masthead ---- */
+  .vh{display:flex;align-items:flex-start;justify-content:space-between;gap:6mm;padding-bottom:4mm;border-bottom:2px solid #0f172a}
+  .vh-logos{display:flex;align-items:center;gap:4mm;flex-shrink:0}
+  .vh-logo{height:22mm;width:auto;max-width:42mm;object-fit:contain}
+  .vh-mid{flex:1;text-align:center;padding-top:1mm}
+  .vh-mid .agency{font-size:8.5px;color:#444;line-height:1.6}
+  .vh-mid .agency b{color:#0f172a}
+  .vh-right{flex-shrink:0;display:flex;align-items:flex-start;gap:3mm}
+  .vh-booking{text-align:center}
+  .vh-booking .bk-lbl{font-size:7.5px;color:#888;letter-spacing:1.2px;text-transform:uppercase;font-weight:700}
+  .vh-booking .bk-no{font-size:14px;font-weight:800;color:#C5A059;letter-spacing:1px;margin:.5mm 0}
+  .vh-booking .bk-type{font-size:8px;color:#0f172a;font-weight:700;text-transform:uppercase;letter-spacing:1px}
+  .vh-booking .bk-date{font-size:7px;color:#777;margin-top:1mm}
+  .vh-qr canvas{width:18mm;height:18mm;display:block;border:1px solid #ddd;padding:.5mm;background:#fff}
+  .vh-qr p{font-size:6px;color:#999;text-align:center;margin:.5mm 0 0;letter-spacing:.3px}
 
-  .v-letterhead{display:flex;align-items:center;justify-content:space-between;gap:5mm;margin-top:4mm;padding-bottom:3mm;border-bottom:2px solid #0f172a;position:relative}
-  .v-letterhead::after{content:'';position:absolute;bottom:-3px;left:0;right:0;height:1px;background:#C5A059}
-  .v-logo-side{flex-shrink:0;display:flex;flex-direction:column;align-items:center}
-  .v-logo-img{width:140px;height:140px;object-fit:contain}
-  .v-co-block{flex:1;text-align:center;padding:0 3mm}
-  .v-co-name{font-size:17px;font-weight:700;color:#0f172a;letter-spacing:.5px;margin:0 0 1mm}
-  .voucher[data-lang="en"] .v-co-name{font-family:'Times New Roman',serif;letter-spacing:2px}
-  .v-co-sub{font-size:9px;color:#C5A059;font-weight:600;letter-spacing:1.5px;margin-bottom:1.5mm;text-transform:uppercase}
-  .v-co-partner{font-size:8px;color:#666;font-style:italic;margin-bottom:2mm;letter-spacing:.5px}
-  .v-co-contact{font-size:8.5px;color:#444;line-height:1.5}
-  .v-co-contact .row{display:flex;align-items:center;justify-content:center;gap:4px;margin:.5mm 0;flex-wrap:wrap}
-  .v-co-contact svg{width:9px;height:9px;fill:#0f172a;flex-shrink:0}
-  .v-co-contact .label{font-weight:700;color:#0f172a;display:inline-block}
-  .v-co-contact .phone-list{display:flex;flex-wrap:wrap;gap:0 6px;direction:ltr}
+  /* ---- Status strip ---- */
+  .vstrip{display:flex;align-items:center;gap:4mm;margin:3mm 0;padding:2mm 4mm;background:#0f172a;color:#fff;flex-wrap:wrap}
+  .vstrip .cell{display:flex;align-items:baseline;gap:2mm}
+  .vstrip .k{font-size:7px;color:#C5A059;letter-spacing:1.2px;text-transform:uppercase;font-weight:700}
+  .vstrip .v{font-size:9.5px;font-weight:700;word-break:break-all}
+  .vstrip .sep{width:1px;align-self:stretch;background:#C5A05955}
+  .badge{display:inline-block;background:#C5A059;color:#0f172a;padding:1px 8px;font-size:8px;font-weight:800;letter-spacing:1px;text-transform:uppercase}
+  .badge.pending{background:#f59e0b;color:#fff}
+  .badge.cancelled{background:#dc2626;color:#fff}
 
-  .v-title{text-align:center;margin:4mm 0 3mm;position:relative}
-  .v-title .t-pill{
-    display:inline-block;background:linear-gradient(135deg,#0f172a 0%,#1e293b 100%);
-    color:#C5A059;padding:1.2mm 7mm;font-size:8.5px;font-weight:800;letter-spacing:4px;
-    border-radius:0;margin-bottom:2mm;text-transform:uppercase;
-    border:1px solid #C5A059;position:relative;
-  }
-  .v-title .t-pill::before,.v-title .t-pill::after{
-    content:'';position:absolute;top:50%;width:3mm;height:1px;background:#C5A059;
-  }
-  .v-title .t-pill::before{left:-4mm;transform:translateY(-50%)}
-  .v-title .t-pill::after{right:-4mm;transform:translateY(-50%)}
-  .v-title h2{
-    margin:0;font-size:26px;letter-spacing:5px;color:#0f172a;font-weight:700;
-    font-family:'Times New Roman','Cambria',serif;text-shadow:0 1px 0 rgba(197,160,89,.15);
-  }
-  .v-title .deco{display:flex;align-items:center;justify-content:center;gap:5px;margin-top:2mm}
-  .v-title .deco span{height:1px;width:35mm;background:linear-gradient(to right,transparent,#C5A059 30%,#0f172a 50%,#C5A059 70%,transparent)}
-  .v-title .deco .dot{width:5px;height:5px;background:#C5A059;transform:rotate(45deg);box-shadow:0 0 0 2px #fff,0 0 0 3px #C5A059}
+  /* ---- Two-column body ---- */
+  .vbody{display:grid;grid-template-columns:1fr 62mm;gap:5mm;flex:1;align-items:start}
 
-  .v-meta{
-    display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:0;margin:3mm 0;
-    padding:3mm 0;background:linear-gradient(135deg,#0f172a 0%,#1a2540 50%,#0f172a 100%);
-    color:#fff;border-radius:0;border-top:1px solid #C5A059;border-bottom:1px solid #C5A059;
-    position:relative;
-  }
-  .v-meta::before,.v-meta::after{
-    content:'';position:absolute;top:50%;width:5mm;height:1px;background:#C5A059;
-  }
-  .v-meta::before{left:0;transform:translateY(-50%)}
-  .v-meta::after{right:0;transform:translateY(-50%)}
-  .v-meta .item{display:flex;flex-direction:column;gap:.8mm;padding:0 4mm;position:relative}
-  .v-meta .item:not(:last-child)::after{
-    content:'';position:absolute;top:15%;bottom:15%;
-    width:1px;background:linear-gradient(to bottom,transparent,#C5A05955,transparent);
-  }
-  .voucher[data-lang="ar"] .v-meta .item:not(:last-child)::after{left:0}
-  .voucher[data-lang="en"] .v-meta .item:not(:last-child)::after{right:0}
-  .v-meta .lbl{font-size:6.5px;color:#C5A059;letter-spacing:1.5px;text-transform:uppercase;font-weight:700}
-  .v-meta .val{font-size:10.5px;font-weight:700;color:#fff;letter-spacing:.3px;word-break:break-all;overflow-wrap:break-word;line-height:1.3}
-  .v-meta .center{text-align:center}
-  .v-meta .right{text-align:right}
-  .voucher[data-lang="en"] .v-meta .right{text-align:left}
-  .status-badge{display:inline-block;background:#C5A059;color:#0f172a;padding:2.5px 12px;border-radius:2px;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase}
-  .status-pending{background:#f59e0b;color:#fff}
-  .status-cancelled{background:#dc2626;color:#fff}
+  .sec{margin-bottom:3.5mm}
+  .sec-h{display:flex;align-items:center;gap:2mm;font-size:9px;font-weight:800;color:#0f172a;letter-spacing:1.5px;text-transform:uppercase;padding-bottom:1mm;border-bottom:1px solid #C5A059;margin-bottom:2mm}
+  .sec-h svg{width:3.2mm;height:3.2mm;fill:#C5A059;flex-shrink:0}
 
-  .v-hotel{
-    display:flex;gap:5mm;align-items:center;padding:4mm 5mm;
-    background:linear-gradient(135deg,#fffbf3 0%,#fafafa 50%,#f5f2e8 100%);
-    border:1px solid #e5dec0;margin:3mm 0;position:relative;
-    box-shadow:inset 0 0 0 1px #fff;
-  }
-  .voucher[data-lang="ar"] .v-hotel{border-right:4px solid #C5A059}
-  .voucher[data-lang="en"] .v-hotel{border-left:4px solid #C5A059}
-  .v-hotel-icon{
-    width:16mm;height:16mm;background:linear-gradient(135deg,#0f172a 0%,#1e293b 100%);
-    border-radius:3px;display:flex;align-items:center;justify-content:center;flex-shrink:0;
-    box-shadow:0 2px 4px rgba(15,23,42,.2),inset 0 0 0 1px #C5A05955;
-  }
-  .v-hotel-icon svg{width:9mm;height:9mm;fill:#C5A059}
-  .v-hotel-body{flex:1}
-  .v-hotel-lbl{font-size:7.5px;color:#999;letter-spacing:2px;text-transform:uppercase;margin-bottom:1mm;font-weight:700;display:flex;align-items:center;gap:3mm}
-  .v-hotel-lbl::after{content:'';flex:1;height:1px;background:linear-gradient(to right,#C5A05955,transparent)}
-  .voucher[data-lang="ar"] .v-hotel-lbl::after{background:linear-gradient(to left,#C5A05955,transparent)}
-  .v-hotel-name{font-size:16px;font-weight:700;color:#0f172a;margin:0;line-height:1.2;letter-spacing:.2px}
-  .voucher[data-lang="en"] .v-hotel-name{font-family:'Times New Roman',serif;letter-spacing:1px}
-  .v-hotel-loc{font-size:10px;color:#555;margin-top:1.5mm;display:flex;align-items:center;gap:5px}
-  .v-hotel-loc svg{width:11px;height:11px;fill:#C5A059;flex-shrink:0}
-  .v-hotel-stars{margin-top:1.5mm;display:flex;gap:1.5px;color:#C5A059;font-size:11px;letter-spacing:1px}
+  .hotel-bar{background:linear-gradient(135deg,#0f172a,#1e293b);color:#fff;padding:2.2mm 3mm;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:space-between;gap:3mm}
+  .hotel-bar .stars{color:#C5A059;font-size:9px;letter-spacing:1px;flex-shrink:0}
 
-  .section-title{
-    font-weight:700;font-size:10px;margin:4mm 0 2mm;color:#0f172a;
-    letter-spacing:2.5px;text-transform:uppercase;padding-bottom:1.2mm;
-    display:flex;align-items:center;gap:3mm;position:relative;
-    border-bottom:1.5px solid #0f172a;
-  }
-  .section-title::before{
-    content:'';width:3mm;height:3mm;background:#C5A059;transform:rotate(45deg);
-    flex-shrink:0;box-shadow:0 0 0 2px #fff,0 0 0 3px #C5A059;
-  }
-  .section-title::after{
-    content:'';flex:1;height:1px;background:linear-gradient(to right,#C5A059,transparent);
-    margin-inline-start:2mm;
-  }
+  table.vt{width:100%;border-collapse:collapse;margin-top:0}
+  table.vt td{border:1px solid #d8d3c4;padding:1.8mm 2.5mm;font-size:8.5px;vertical-align:middle}
+  table.vt td b{color:#0f172a;font-weight:700}
+  table.vt td .k{color:#777;font-size:7.5px;text-transform:uppercase;letter-spacing:.6px;font-weight:700;display:block;margin-bottom:.4mm}
 
-  table.doc-table{width:100%;border-collapse:collapse;margin-bottom:2mm;page-break-inside:avoid;border:1px solid #d4d0c0}
-  table.doc-table td{border:1px solid #e8e2d0;padding:2.3mm 3.5mm;vertical-align:middle;font-size:10px}
-  .label-cell{background:linear-gradient(135deg,#f5f2e8 0%,#faf6e8 100%);font-weight:700;width:22%;color:#0f172a;font-size:8.5px;letter-spacing:.6px;text-transform:uppercase}
-  .value-cell{background:#fff;color:#1a1a1a;font-weight:600;font-size:10.5px;letter-spacing:.2px}
+  .hinfo{display:flex;gap:3mm;margin-top:2mm;padding:2.5mm 3mm;background:#faf8f2;border:1px solid #e8e2d0}
+  .hinfo-ico{width:12mm;height:12mm;background:#0f172a;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+  .hinfo-ico svg{width:7mm;height:7mm;fill:#C5A059}
+  .hinfo-body{flex:1;font-size:8px;line-height:1.6}
+  .hinfo-body .row{display:flex;gap:1.5mm}
+  .hinfo-body .k{color:#0f172a;font-weight:700;flex-shrink:0}
 
-  .v-sigfooter{
-    margin-top:4mm;display:grid;
-    grid-template-columns:1fr auto auto;gap:6mm;
-    padding:4mm 5mm;border:1px solid #e5e0d0;
-    background:linear-gradient(135deg,#fcfaf4 0%,#fafafa 50%,#f5f2e8 100%);
-    page-break-inside:avoid;align-items:center;
-    border-radius:2px;position:relative;
-  }
-  .v-sigfooter::before{content:'';position:absolute;top:0;left:5mm;right:5mm;height:2px;background:linear-gradient(to right,transparent,#C5A059,transparent)}
-  .v-issued{min-width:0}
-  .v-issued .lbl{font-size:8px;color:#888;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:1.5mm;font-weight:700}
-  .v-issued .val{font-size:14px;color:#0f172a;font-weight:700;margin-bottom:1mm;letter-spacing:.3px}
-  .v-issued-email{font-size:9px;color:#555;margin-bottom:2.5mm;direction:ltr;text-align:start;font-family:'Consolas','Courier New',monospace;letter-spacing:.2px}
-  .voucher[data-lang="ar"] .v-issued-email{text-align:right}
-  .v-issued .sig-line{border-top:1.5px solid #0f172a;width:50mm;padding-top:1mm;font-size:8px;color:#666;font-style:italic;letter-spacing:.5px}
+  .plain{font-size:8.5px;line-height:1.6;color:#333}
+  .plain b{color:#0f172a}
+  .guest-list{margin:0;padding:0;list-style:none}
+  .guest-list li{padding:1mm 0;border-bottom:1px dotted #ddd;font-size:9px;display:flex;gap:2mm}
+  .guest-list li:last-child{border-bottom:0}
+  .guest-list .n{color:#C5A059;font-weight:800;flex-shrink:0}
 
-  .v-stamp{display:flex;align-items:center;justify-content:center;padding:0 2mm}
-  .stamp-circle{
-    width:26mm;height:26mm;border:2.5px solid #b3433a;border-radius:50%;
-    display:flex;align-items:center;justify-content:center;position:relative;
-    transform:rotate(-12deg);
-    background:radial-gradient(circle,rgba(255,251,243,.4) 0%,rgba(255,255,255,.6) 100%);
-    box-shadow:inset 0 0 4mm rgba(179,67,58,.08);
-    color:#b3433a;
-  }
-  .stamp-circle::before{content:'';position:absolute;inset:2mm;border:1.5px solid #b3433a;border-radius:50%}
-  .stamp-circle::after{content:'';position:absolute;inset:3.5mm;border:1px dashed #b3433a99;border-radius:50%}
-  .stamp-inner{text-align:center;color:#b3433a;position:relative;z-index:1}
-  .stamp-co{font-size:11px;font-weight:900;letter-spacing:2px;line-height:1;text-shadow:0 0 1px rgba(179,67,58,.3)}
-  .stamp-divider{width:10mm;height:1px;background:#b3433a;margin:1mm auto;opacity:.6}
-  .stamp-sub{font-size:7px;font-weight:700;letter-spacing:3px;margin-top:.5mm}
-  .stamp-date{font-size:6px;font-weight:600;letter-spacing:1px;margin-top:1mm;opacity:.85}
+  .terms{font-size:7.5px;line-height:1.55;color:#444;text-align:justify}
+  .terms p{margin:0 0 1.5mm}
+  .terms b{color:#0f172a}
 
-  .v-qr{text-align:center;display:flex;flex-direction:column;align-items:center;gap:1mm}
-  .v-qr canvas{width:24mm;height:24mm;border:1.5px solid #0f172a;padding:1mm;background:#fff;display:block;border-radius:2px}
-  .v-qr p{font-size:7.5px;color:#0f172a;margin:0;line-height:1.3;letter-spacing:.5px;font-weight:700;text-transform:uppercase}
+  /* ---- Sidebar ---- */
+  .side-card{border:1px solid #e0dac8;margin-bottom:3.5mm;background:#fff}
+  .side-card-h{display:flex;align-items:center;gap:2mm;background:#faf8f2;padding:1.8mm 2.5mm;border-bottom:1px solid #e0dac8;font-size:8.5px;font-weight:800;color:#0f172a;letter-spacing:1px;text-transform:uppercase}
+  .side-card-h svg{width:3.2mm;height:3.2mm;fill:#C5A059;flex-shrink:0}
+  .side-card-b{padding:2.5mm;font-size:8px;line-height:1.7}
+  .side-card-b .k{color:#777;font-weight:700}
+  .side-card-b .v{color:#0f172a;font-weight:600;word-break:break-word}
+  .side-card-b .ltr{direction:ltr;display:inline-block;unicode-bidi:embed}
 
-  .notes{
-    margin-top:3mm;border:1px solid #e0d8c0;padding:3mm 4mm;
-    background:linear-gradient(to bottom,#fffbf3 0%,#fff 100%);
-    page-break-inside:avoid;border-radius:2px;position:relative;
-  }
-  .voucher[data-lang="ar"] .notes{border-right:3px solid #C5A059}
-  .voucher[data-lang="en"] .notes{border-left:3px solid #C5A059}
-  .notes h4{
-    margin:0 0 1.5mm;font-size:9px;color:#0f172a;letter-spacing:1.5px;
-    text-transform:uppercase;padding-bottom:1mm;
-    border-bottom:1px solid #C5A05955;display:flex;align-items:center;gap:2mm;
-  }
-  .notes h4::before{content:'';width:2mm;height:2mm;background:#C5A059;transform:rotate(45deg);flex-shrink:0}
-  .notes ol{margin:0;padding-inline-start:4mm;font-size:8.5px;line-height:1.55;color:#333;counter-reset:item}
-  .notes li{margin:.6mm 0;padding-inline-start:1mm}
-  .notes li::marker{color:#C5A059;font-weight:700}
+  .stamp-box{display:flex;align-items:center;justify-content:center;padding:3mm 0}
+  .stamp{width:26mm;height:26mm;border:2px solid #b3433a;border-radius:50%;display:flex;align-items:center;justify-content:center;position:relative;transform:rotate(-10deg);color:#b3433a;text-align:center}
+  .stamp::before{content:'';position:absolute;inset:1.8mm;border:1px dashed #b3433a99;border-radius:50%}
+  .stamp .co{font-size:10px;font-weight:900;letter-spacing:1.5px;line-height:1}
+  .stamp .dv{width:9mm;height:1px;background:#b3433a;margin:1mm auto;opacity:.6}
+  .stamp .sb{font-size:6.5px;font-weight:700;letter-spacing:2px}
+  .stamp .yr{font-size:6px;margin-top:.7mm;opacity:.85}
 
-  .v-docfooter{margin-top:6mm;padding:0}
-  .v-docfooter-deco{
-    display:flex;align-items:center;justify-content:center;gap:6px;
-    margin-bottom:2mm;
-  }
-  .v-docfooter-deco .line{flex:1;height:1px;background:linear-gradient(to right,transparent 0%,#C5A059 50%,transparent 100%)}
-  .v-docfooter-deco .diamond{width:5px;height:5px;background:#C5A059;transform:rotate(45deg)}
-  .v-docfooter-deco .dot{width:3px;height:3px;background:#0f172a;border-radius:50%}
-  .v-docfooter-row{
-    display:grid;grid-template-columns:1fr auto 1fr;gap:4mm;
-    align-items:center;font-size:8.5px;color:#555;padding:1mm 0 2mm;
-  }
-  .v-docfooter strong{color:#0f172a;font-weight:700}
-  .v-docfooter .seal{
-    font-size:9px;letter-spacing:1.5px;color:#0f172a;font-weight:800;
-    padding:1mm 3mm;border:1px solid #C5A059;border-radius:1mm;
-    background:#fffbf3;text-align:center;
-  }
-  .v-docfooter .center{
-    font-size:8px;color:#666;text-align:center;letter-spacing:.6px;
-    direction:ltr;font-family:'Consolas','Courier New',monospace;
-  }
-  .v-docfooter .left{text-align:start;line-height:1.5}
-  .voucher[data-lang="ar"] .v-docfooter .left{font-family:'Cairo',sans-serif}
-  .v-docfooter-bar{height:2.5mm;background:linear-gradient(to right,#0f172a 0%,#0f172a 30%,#C5A059 30%,#C5A059 70%,#0f172a 70%,#0f172a 100%);border-radius:1px}
-
-  .watermark{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;opacity:.04;font-size:110px;font-weight:800;color:#0f172a;transform:rotate(-25deg);letter-spacing:8px;font-family:'Times New Roman',serif;z-index:0}
-  .voucher > *:not(.watermark):not(.v-topband){position:relative;z-index:1}
+  /* ---- Footer ---- */
+  .vfoot{margin-top:auto;padding-top:3mm;border-top:1px solid #C5A059;display:flex;justify-content:space-between;align-items:flex-end;gap:4mm;font-size:7.5px;color:#666}
+  .vfoot .sig{flex:1}
+  .vfoot .sig .k{color:#888;text-transform:uppercase;letter-spacing:1px;font-weight:700;font-size:7px}
+  .vfoot .sig .nm{font-size:10px;color:#0f172a;font-weight:800;margin:.6mm 0}
+  .vfoot .sig .em{font-size:7.5px;color:#555;direction:ltr;font-family:'Consolas',monospace}
+  .vfoot .sig .line{border-top:1px solid #999;width:42mm;margin-top:2mm;padding-top:.7mm;font-style:italic;font-size:7px}
+  .vfoot .meta{text-align:end;flex-shrink:0;line-height:1.6}
+  .vfoot .meta b{color:#0f172a}
+  .vbar{height:2mm;margin-top:2.5mm;background:linear-gradient(to right,#0f172a 0%,#0f172a 30%,#C5A059 30%,#C5A059 70%,#0f172a 70%,#0f172a 100%)}
 
   @media print{
     @page{size:A4;margin:0}
-    html,body{background:#fff !important;margin:0;padding:0;width:210mm;height:297mm}
+    html,body{background:#fff !important;margin:0;padding:0}
     .panel,h1,.no-print{display:none !important}
-    .doc-wrap{padding:0;display:block;margin:0}
-    *{
-      -webkit-print-color-adjust:exact !important;
-      print-color-adjust:exact !important;
-      color-adjust:exact !important;
-      -webkit-filter:none !important;filter:none !important;
-    }
-
-    .voucher{
-      box-shadow:none !important;margin:0 !important;
-      width:210mm !important;height:296mm !important;
-      padding:8mm 11mm 20mm !important;
-      page-break-after:avoid;page-break-inside:avoid;
-      background:#fff !important;
-      border:none !important;position:relative;
-      overflow:hidden !important;
-      display:block !important;
-      box-sizing:border-box !important;
-    }
-
-    /* Footer pinned to bottom of A4 — absolute so it never pushes page break */
-    .v-docfooter{
-      position:absolute !important;bottom:0 !important;
-      left:11mm !important;right:11mm !important;
-      margin:0 !important;padding:0 0 8mm 0 !important;
-    }
-    .v-docfooter-bar{margin-bottom:0 !important}
-
-    /* Inner gold frame spans full page */
-    .voucher::before{
-      top:5mm !important;left:5mm !important;right:5mm !important;bottom:5mm !important;
-      border:1px double #C5A059 !important;
-    }
-
-    /* Slightly tighten top spacing & enlarge title for print */
-    .v-letterhead{margin-top:3mm;padding-bottom:3mm}
-    .v-logo-img{width:120px !important;height:120px !important}
-    .v-co-name{font-size:18px !important}
-    .v-title{margin:4mm 0 3mm}
-    .v-title h2{font-size:28px !important;letter-spacing:6px !important}
-    .v-title .t-pill{font-size:9px !important;letter-spacing:5px !important;padding:1.2mm 8mm !important}
-
-    /* Meta bar: ensure dark prints fully */
-    .v-meta{
-      background:#0f172a !important;color:#fff !important;
-      padding:3mm 4mm !important;
-      border-top:0.5mm solid #C5A059 !important;
-      border-bottom:0.5mm solid #C5A059 !important;
-    }
-    .v-meta .lbl{color:#C5A059 !important}
-    .v-meta .val{color:#fff !important}
-    .status-badge{background:#C5A059 !important;color:#0f172a !important}
-
-    /* Hotel block — stronger contrast */
-    .v-hotel{
-      background:#fffbf3 !important;border:0.4mm solid #C5A059 !important;
-      padding:4mm 5mm !important;
-    }
-    .v-hotel-icon{background:#0f172a !important}
-    .v-hotel-icon svg{fill:#C5A059 !important}
-    .v-hotel-name{color:#0f172a !important;font-size:17px !important}
-    .v-hotel-stars{color:#C5A059 !important;font-size:13px !important}
-
-    /* Tables — crisp lines */
-    table.doc-table{border:0.4mm solid #0f172a !important}
-    table.doc-table td{border:0.2mm solid #c4bea8 !important;padding:2.5mm 4mm !important}
-    .label-cell{background:#f5f2e8 !important;color:#0f172a !important;font-size:9px !important}
-    .value-cell{background:#fff !important;color:#0f172a !important;font-size:11px !important;font-weight:600 !important}
-
-    /* Sigfooter — premium */
-    .v-sigfooter{
-      background:#fffbf3 !important;border:0.4mm solid #C5A059 !important;
-      padding:5mm !important;margin-top:5mm !important;
-    }
-    .v-issued .val{font-size:15px !important}
-    .v-issued-email{color:#0f172a !important}
-    .stamp-circle{border-color:#b3433a !important}
-    .stamp-circle::before,.stamp-circle::after{border-color:#b3433a !important}
-    .stamp-inner,.stamp-co,.stamp-sub,.stamp-date{color:#b3433a !important}
-    .v-qr canvas{border:0.5mm solid #0f172a !important}
-
-    /* Notes */
-    .notes{
-      background:#fffbf3 !important;border:0.3mm solid #C5A059 !important;
-      padding:3.5mm 5mm !important;margin-top:4mm !important;
-    }
-    .notes li{color:#1a1a1a !important;font-size:9px !important}
-    .notes li::marker{color:#C5A059 !important}
-
-    /* Footer override at end of file no longer needed (handled above with flex auto margin) */
-    .v-docfooter-row{font-size:9px !important;color:#0f172a !important;padding:1.5mm 0 2mm !important}
-    .v-docfooter .seal{background:#fffbf3 !important;color:#0f172a !important;border:0.3mm solid #C5A059 !important}
-    .v-docfooter-bar{
-      background:linear-gradient(to right,#0f172a 0%,#0f172a 30%,#C5A059 30%,#C5A059 70%,#0f172a 70%,#0f172a 100%) !important;
-      height:3mm !important;
-    }
-
-    /* Avoid splits */
-    .v-meta,.v-hotel,.v-sigfooter,.notes,table.doc-table,.v-letterhead,.v-title,.section-title{
-      page-break-inside:avoid;break-inside:avoid;
-    }
-
-    /* Watermark a touch more visible on paper */
-    .watermark{opacity:0.05 !important;color:#0f172a !important}
-    .v-topband{
-      background:linear-gradient(to right,#0f172a 0%,#0f172a 40%,#C5A059 40%,#C5A059 60%,#0f172a 60%,#0f172a 100%) !important;
-      height:3.5mm !important;
-    }
+    .doc-wrap{padding:0;display:block}
+    *{-webkit-print-color-adjust:exact !important;print-color-adjust:exact !important}
+    .voucher{box-shadow:none !important;margin:0 !important;width:210mm !important;height:296mm !important;overflow:hidden}
+    .sec,.side-card,.vstrip,.vh,table.vt,.hinfo,.vfoot{page-break-inside:avoid;break-inside:avoid}
   }
 
-  @media (max-width:768px){
-    .voucher{width:100%;min-height:auto;padding:8mm}
-    .v-topband{height:4mm}
-    .v-letterhead{flex-direction:column;text-align:center;gap:4mm}
-    .v-logo-img{width:100px;height:100px}
-    .v-title h2{font-size:22px;letter-spacing:2px}
-    .v-meta{grid-template-columns:1fr;gap:2mm;padding:3mm}
-    .v-hotel{flex-direction:column;text-align:center;gap:3mm}
-    table.doc-table td{padding:2mm 3mm;font-size:10.5px}
-    .label-cell{font-size:9px}
-    .v-sigfooter{flex-direction:column;align-items:stretch}
-    .v-docfooter{position:static;flex-direction:column;gap:2mm;margin-top:6mm}
+  @media (max-width:820px){
+    .voucher{width:100%;min-height:auto;padding:7mm;font-size:10px}
+    .vh{flex-direction:column;align-items:center;text-align:center;gap:3mm}
+    .vbody{grid-template-columns:1fr}
+    .vstrip{flex-direction:column;align-items:flex-start;gap:2mm}
+    .vstrip .sep{display:none}
   }
 </style>
 </head>
@@ -388,7 +160,7 @@
 
   <div class="panel no-print">
     <div class="grid">
-      <div><label id="lbl_ref">مرجع القسيمة</label><input id="ref" placeholder="MR-2026-0001"/></div>
+      <div><label id="lbl_ref">مرجع الحجز</label><input id="ref" placeholder="MR-2026-0001"/></div>
       <div><label id="lbl_confirm">رقم التأكيد من الفندق</label><input id="confirm" placeholder="HTL-CONF-XXXXXX"/></div>
       <div><label id="lbl_status">الحالة</label>
         <select id="status">
@@ -398,26 +170,39 @@
         </select>
       </div>
       <div><label id="lbl_hotel_in">اسم الفندق</label><input id="hotel"/></div>
-      <div><label id="lbl_loc_in">الموقع</label><input id="loc"/></div>
-      <div><label id="lbl_guest_in">اسم العميل (سطر لكل عميل)</label><textarea id="guest" rows="3" placeholder="محمد أحمد علي&#10;سارة محمد&#10;..."></textarea></div>
-      <div><label id="lbl_room_in">نوع الغرفة</label><input id="room"/></div>
+      <div><label id="lbl_stars_in">تصنيف النجوم</label>
+        <select id="stars">
+          <option value="5">★★★★★</option>
+          <option value="4">★★★★</option>
+          <option value="3">★★★</option>
+          <option value="0">بدون</option>
+        </select>
+      </div>
+      <div><label id="lbl_loc_in">عنوان الفندق</label><input id="loc"/></div>
+      <div><label id="lbl_zone_in">المدينة / المنطقة</label><input id="zone"/></div>
+      <div><label id="lbl_hphone_in">هاتف الفندق</label><input id="hphone" dir="ltr"/></div>
       <div><label id="lbl_checkin_in">تاريخ الدخول</label><input id="checkin" type="date"/></div>
       <div><label id="lbl_checkout_in">تاريخ الخروج</label><input id="checkout" type="date"/></div>
       <div><label id="lbl_nights_in">عدد الليالي</label><input id="nights" type="number" min="1"/></div>
       <div><label id="lbl_rooms_in">عدد الغرف</label><input id="rooms" type="number" min="1" value="1"/></div>
+      <div><label id="lbl_room_in">نوع الغرفة</label><input id="room"/></div>
       <div><label id="lbl_meals_in">الوجبات</label><input id="meals"/></div>
+      <div style="grid-column:1/-1"><label id="lbl_guest_in">أسماء النزلاء (سطر لكل اسم)</label><textarea id="guest" rows="3" placeholder="MOHAMED AHMED ALI&#10;SARA MOHAMED"></textarea></div>
+      <div><label id="lbl_gemail_in">إيميل صاحب الحجز</label><input id="gemail" dir="ltr" placeholder="name@mail.com"/></div>
+      <div><label id="lbl_gphone_in">هاتف صاحب الحجز</label><input id="gphone" dir="ltr" placeholder="+20 1xx xxx xxxx"/></div>
       <div><label id="lbl_issuer_in">الموظف المختص</label>
         <select id="issuer">
           <option value="Basent">Basent</option>
           <option value="Marwa">Marwa</option>
         </select>
       </div>
+      <div style="grid-column:1/-1"><label id="lbl_notes_in">ملاحظات إضافية (اختياري)</label><textarea id="xnotes" rows="2"></textarea></div>
     </div>
     <div class="actions">
       <button class="btn-primary" id="btn_gen" onclick="generate()">توليد القسيمة</button>
       <button class="btn-print" id="btn_print" onclick="window.print()">طباعة / PDF</button>
       <button class="btn-secondary" id="btn_reset" onclick="resetForm()">مسح</button>
-      <button id="btnInstall" class="btn-primary" style="display:none;background:#198754;color:#fff" onclick="installApp()">📲 تثبيت</button>
+      <button id="btnInstall" class="btn-primary" style="display:none;background:#198754;color:#fff" onclick="installApp()">تثبيت</button>
       <div class="lang-switch">
         <button id="btnAr" class="active" onclick="setLang('ar')">العربية</button>
         <button id="btnEn" onclick="setLang('en')">English</button>
@@ -427,154 +212,170 @@
 
   <div class="doc-wrap">
     <div class="voucher" id="doc" data-lang="ar">
-      <div class="v-topband"></div>
-      <div class="watermark" id="d_watermark">ALYAME</div>
 
-      <div class="v-letterhead">
-        <div class="v-logo-side primary">
-          <img src="logo.png" alt="Alyame Travel" class="v-logo-img"/>
+      <!-- MASTHEAD -->
+      <div class="vh">
+        <div class="vh-logos">
+          <img src="logo.png" alt="Alyame" class="vh-logo"/>
+          <img src="imagine-logo.svg" alt="Imagine Travel" class="vh-logo"/>
         </div>
-        <div class="v-co-block">
-          <h3 class="v-co-name" id="d_co_name"></h3>
-          <div class="v-co-sub" id="d_co_sub"></div>
-          <div class="v-co-partner" id="d_partner_label"></div>
-          <div class="v-co-contact">
-            <div class="row">
-              <svg viewBox="0 0 24 24"><path d="M20 15.5c-1.25 0-2.45-.2-3.57-.57-.35-.11-.74-.03-1.02.25l-2.2 2.2c-2.83-1.44-5.15-3.75-6.59-6.58l2.2-2.21c.28-.27.36-.66.25-1.01C8.7 6.45 8.5 5.25 8.5 4c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.5c0-.55-.45-1-1-1z"/></svg>
-              <span class="label" id="d_lbl_libya"></span>
-              <span class="phone-list"><span>+218 91 325 7652</span></span>
+        <div class="vh-mid">
+          <div class="agency">
+            <div><b id="d_co">اليامي للسفر والسياحة</b></div>
+            <div><span id="d_k_city">المدينة</span>: <span id="d_city">Nasr City / Cairo</span> &middot; <span id="d_k_country">الدولة</span>: EG</div>
+            <div dir="ltr"><span id="d_k_tel">Tel</span>: +218 91 325 7652 &middot; +20 110 110 9022</div>
+            <div dir="ltr">info@alyametravel.com</div>
+          </div>
+        </div>
+        <div class="vh-right">
+          <div class="vh-booking">
+            <div class="bk-lbl" id="d_k_booking">Booking</div>
+            <div class="bk-no" id="d_ref">—</div>
+            <div class="bk-type" id="d_status_txt">مؤكد</div>
+            <div class="bk-date" id="d_issued">—</div>
+          </div>
+          <div class="vh-qr">
+            <canvas id="qr"></canvas>
+            <p id="d_k_qr">امسح للتحقق</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- STATUS STRIP -->
+      <div class="vstrip">
+        <div class="cell"><span class="k" id="d_k_conf">رقم التأكيد</span><span class="v" id="d_conf">—</span></div>
+        <div class="sep"></div>
+        <div class="cell"><span class="k" id="d_k_status">الحالة</span><span class="badge" id="d_badge">—</span></div>
+        <div class="sep"></div>
+        <div class="cell"><span class="k" id="d_k_nights">الليالي</span><span class="v" id="d_nights">—</span></div>
+        <div class="sep"></div>
+        <div class="cell"><span class="k" id="d_k_rooms">الغرف</span><span class="v" id="d_rooms">—</span></div>
+      </div>
+
+      <!-- BODY: main + sidebar -->
+      <div class="vbody">
+        <div class="vmain">
+
+          <div class="sec">
+            <div class="sec-h">
+              <svg viewBox="0 0 24 24"><path d="M7 13c1.66 0 3-1.34 3-3S8.66 7 7 7s-3 1.34-3 3 1.34 3 3 3zm12-6h-8v7H3V5H1v15h2v-3h18v3h2v-9c0-2.21-1.79-4-4-4z"/></svg>
+              <span id="d_k_hotel">الفندق</span>
             </div>
-            <div class="row">
-              <svg viewBox="0 0 24 24"><path d="M20 15.5c-1.25 0-2.45-.2-3.57-.57-.35-.11-.74-.03-1.02.25l-2.2 2.2c-2.83-1.44-5.15-3.75-6.59-6.58l2.2-2.21c.28-.27.36-.66.25-1.01C8.7 6.45 8.5 5.25 8.5 4c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.5c0-.55-.45-1-1-1z"/></svg>
-              <span class="label" id="d_lbl_egypt"></span>
-              <span class="phone-list">
-                <span>+20 110 110 9022</span><span>· +20 101 785 7655</span><span>· +20 114 337 7200</span>
-              </span>
+            <div class="hotel-bar">
+              <span id="d_hotel">—</span>
+              <span class="stars" id="d_stars">★★★★★</span>
             </div>
-            <div class="row">
-              <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
-              <span>info@alyametravel.com</span>
+            <table class="vt">
+              <tr>
+                <td style="width:34%"><span class="k" id="d_k_in">تاريخ الدخول</span><b id="d_in">—</b></td>
+                <td style="width:34%"><span class="k" id="d_k_out">تاريخ الخروج</span><b id="d_out">—</b></td>
+                <td><span class="k" id="d_k_room">نوع الغرفة</span><b id="d_room">—</b></td>
+              </tr>
+            </table>
+            <div class="hinfo">
+              <div class="hinfo-ico">
+                <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+              </div>
+              <div class="hinfo-body">
+                <div class="row"><span class="k" id="d_k_addr">العنوان:</span><span id="d_loc">—</span></div>
+                <div class="row"><span class="k" id="d_k_zone">المنطقة:</span><span id="d_zone">—</span></div>
+                <div class="row"><span class="k" id="d_k_hphone">هاتف:</span><span id="d_hphone" dir="ltr">—</span></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="sec">
+            <div class="sec-h">
+              <svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
+              <span id="d_k_guests">النزلاء</span>
+            </div>
+            <ul class="guest-list" id="d_guests"><li>—</li></ul>
+          </div>
+
+          <div class="sec">
+            <div class="sec-h">
+              <svg viewBox="0 0 24 24"><path d="M11 9H9V2H7v7H5V2H3v7c0 2.12 1.66 3.84 3.75 3.97V22h2.5v-9.03C11.34 12.84 13 11.12 13 9V2h-2v7zm5-3v8h2.5v8H21V2c-2.76 0-5 2.24-5 4z"/></svg>
+              <span id="d_k_meals">الوجبات والخدمات</span>
+            </div>
+            <div class="plain" id="d_meals">—</div>
+          </div>
+
+          <div class="sec">
+            <div class="sec-h">
+              <svg viewBox="0 0 24 24"><path d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/></svg>
+              <span id="d_k_terms">شروط وأحكام</span>
+            </div>
+            <div class="terms" id="d_terms"></div>
+          </div>
+
+        </div>
+
+        <!-- SIDEBAR -->
+        <div class="vside">
+          <div class="side-card">
+            <div class="side-card-h">
+              <svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+              <span id="d_k_holder">صاحب الحجز</span>
+            </div>
+            <div class="side-card-b">
+              <div><span class="k" id="d_k_hname">الاسم</span>: <span class="v" id="d_holder">—</span></div>
+              <div><span class="k" id="d_k_hmail">الإيميل</span>: <span class="v ltr" id="d_gemail">—</span></div>
+              <div><span class="k" id="d_k_hphone2">الهاتف</span>: <span class="v ltr" id="d_gphone">—</span></div>
+            </div>
+          </div>
+
+          <div class="side-card">
+            <div class="side-card-h">
+              <svg viewBox="0 0 24 24"><path d="M20 15.5c-1.25 0-2.45-.2-3.57-.57-.35-.11-.74-.03-1.02.25l-2.2 2.2c-2.83-1.44-5.15-3.75-6.59-6.58l2.2-2.21c.28-.27.36-.66.25-1.01C8.7 6.45 8.5 5.25 8.5 4c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.5c0-.55-.45-1-1-1z"/></svg>
+              <span id="d_k_contact">جهة الاتصال</span>
+            </div>
+            <div class="side-card-b">
+              <div><span class="k" id="d_k_cname">الاسم</span>: <span class="v" id="d_cname">اليامي للسفر والسياحة</span></div>
+              <div><span class="k" id="d_k_caddr">العنوان</span>: <span class="v">Nasr City / Cairo, EG</span></div>
+              <div dir="ltr"><span class="k">Libya</span>: <span class="v">+218 91 325 7652</span></div>
+              <div dir="ltr"><span class="k">Egypt</span>: <span class="v">+20 110 110 9022</span></div>
+              <div dir="ltr"><span class="v">+20 101 785 7655</span></div>
+              <div dir="ltr"><span class="v">+20 114 337 7200</span></div>
+              <div dir="ltr"><span class="v">info@alyametravel.com</span></div>
+            </div>
+          </div>
+
+          <div class="side-card" id="xnotes-card" style="display:none">
+            <div class="side-card-h">
+              <svg viewBox="0 0 24 24"><path d="M3 18h12v-2H3v2zM3 6v2h18V6H3zm0 7h18v-2H3v2z"/></svg>
+              <span id="d_k_xnotes">ملاحظات</span>
+            </div>
+            <div class="side-card-b" id="d_xnotes"></div>
+          </div>
+
+          <div class="stamp-box">
+            <div class="stamp">
+              <div>
+                <div class="co">ALYAME</div>
+                <div class="dv"></div>
+                <div class="sb" id="d_stamp_sb">OFFICIAL</div>
+                <div class="yr" id="d_stamp_yr">2026</div>
+              </div>
             </div>
           </div>
         </div>
-        <div class="v-logo-side partner">
-          <img src="imagine-logo.svg" alt="Imagine Travel" class="v-logo-img"/>
-        </div>
       </div>
 
-      <div class="v-title">
-        <div class="t-pill" id="d_pill"></div>
-        <h2 id="d_title"></h2>
-        <div class="deco"><span></span><span class="dot"></span><span></span></div>
-      </div>
-
-      <div class="v-meta">
-        <div class="item">
-          <span class="lbl" id="d_lbl_ref"></span>
-          <span class="val" id="d_ref_top">—</span>
+      <!-- FOOTER -->
+      <div class="vfoot">
+        <div class="sig">
+          <div class="k" id="d_k_issuer">صادرة عن</div>
+          <div class="nm" id="d_issuer">—</div>
+          <div class="em" id="d_issuer_email"></div>
+          <div class="line" id="d_k_sig">التوقيع المعتمد</div>
         </div>
-        <div class="item">
-          <span class="lbl" id="d_lbl_confirm"></span>
-          <span class="val" id="d_confirm">—</span>
-        </div>
-        <div class="item center">
-          <span class="lbl" id="d_lbl_status"></span>
-          <span id="d_status" class="status-badge">—</span>
-        </div>
-        <div class="item right">
-          <span class="lbl" id="d_lbl_date"></span>
-          <span class="val" id="d_date">—</span>
+        <div class="meta">
+          <div><b id="d_foot_co">اليامي للسفر والسياحة</b></div>
+          <div id="d_foot_note">وثيقة إلكترونية لا تحتاج إلى توقيع</div>
+          <div id="d_foot_page">صفحة 1 / 1</div>
         </div>
       </div>
-
-      <div class="v-hotel">
-        <div class="v-hotel-icon">
-          <svg viewBox="0 0 24 24"><path d="M7 13c1.66 0 3-1.34 3-3S8.66 7 7 7s-3 1.34-3 3 1.34 3 3 3zm12-6h-8v7H3V5H1v15h2v-3h18v3h2v-9c0-2.21-1.79-4-4-4z"/></svg>
-        </div>
-        <div class="v-hotel-body">
-          <div class="v-hotel-lbl" id="d_lbl_hotel"></div>
-          <p class="v-hotel-name" id="d_hotel">—</p>
-          <p class="v-hotel-loc">
-            <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
-            <span id="d_loc">—</span>
-          </p>
-          <div class="v-hotel-stars">★ ★ ★ ★ ★</div>
-        </div>
-      </div>
-
-      <div class="section-title" id="d_sec_guest"></div>
-      <table class="doc-table">
-        <tr>
-          <td class="label-cell" id="d_lbl_guest"></td>
-          <td class="value-cell" colspan="3" id="d_guest">—</td>
-        </tr>
-      </table>
-
-      <div class="section-title" id="d_sec_booking"></div>
-      <table class="doc-table">
-        <tr>
-          <td class="label-cell" id="d_lbl_checkin"></td>
-          <td class="value-cell" id="d_checkin">—</td>
-          <td class="label-cell" id="d_lbl_checkout"></td>
-          <td class="value-cell" id="d_checkout">—</td>
-        </tr>
-        <tr>
-          <td class="label-cell" id="d_lbl_nights"></td>
-          <td class="value-cell" id="d_nights">—</td>
-          <td class="label-cell" id="d_lbl_rooms"></td>
-          <td class="value-cell" id="d_rooms">—</td>
-        </tr>
-        <tr>
-          <td class="label-cell" id="d_lbl_room"></td>
-          <td class="value-cell" id="d_room">—</td>
-          <td class="label-cell" id="d_lbl_meals"></td>
-          <td class="value-cell" id="d_meals">—</td>
-        </tr>
-      </table>
-
-      <div class="v-sigfooter">
-        <div class="v-issued">
-          <div class="lbl" id="d_lbl_issuer"></div>
-          <div class="val" id="d_issuer">—</div>
-          <div class="v-issued-email" id="d_issuer_email"></div>
-          <div class="sig-line" id="d_lbl_sig"></div>
-        </div>
-        <div class="v-stamp">
-          <div class="stamp-circle">
-            <div class="stamp-inner">
-              <div class="stamp-co" id="d_stamp_co">ALYAME</div>
-              <div class="stamp-divider"></div>
-              <div class="stamp-sub" id="d_stamp_sub">OFFICIAL</div>
-              <div class="stamp-date" id="d_stamp_date">2026</div>
-            </div>
-          </div>
-        </div>
-        <div class="v-qr">
-          <canvas id="qr"></canvas>
-          <p id="d_lbl_qr"></p>
-        </div>
-      </div>
-
-      <div class="notes">
-        <h4 id="d_lbl_notes"></h4>
-        <ol id="d_notes"></ol>
-      </div>
-
-      <div class="v-docfooter">
-        <div class="v-docfooter-deco">
-          <span class="line"></span>
-          <span class="dot"></span>
-          <span class="diamond"></span>
-          <span class="dot"></span>
-          <span class="line"></span>
-        </div>
-        <div class="v-docfooter-row">
-          <div class="left" id="d_footer_left"></div>
-          <div class="seal" id="d_footer_right"></div>
-          <div class="center" id="d_footer_center"></div>
-        </div>
-        <div class="v-docfooter-bar"></div>
-      </div>
+      <div class="vbar"></div>
     </div>
   </div>
 </div>
@@ -584,368 +385,254 @@
   const esc = s => String(s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   let lang = 'ar';
 
-  // Per-language data store (so switching preserves what was typed in other lang)
-  const store = { ar: {}, en: {} };
-  const TEXT_FIELDS = ['hotel','loc','guest','room','meals'];
-  const SHARED_FIELDS = ['ref','confirm','status','checkin','checkout','nights','rooms','issuer'];
+  const store = { ar:{}, en:{} };
+  const TEXT_FIELDS = ['hotel','loc','zone','guest','room','meals','xnotes'];
+  const SHARED_FIELDS = ['ref','confirm','status','stars','hphone','checkin','checkout','nights','rooms','gemail','gphone','issuer'];
 
-  // Staff emails (Imagine Travel operations)
   const STAFF_EMAIL = {
-    Basent: 'Operation2@imaginetravelegypt.com',
-    Marwa: 'Operation3@imaginetravelegypt.com'
+    Basent:'Operation2@imaginetravelegypt.com',
+    Marwa:'Operation3@imaginetravelegypt.com'
   };
 
   const T = {
-    ar: {
-      page_title: 'نظام إصدار قسائم الحجز الفندقي',
-      form: {
-        ref:'مرجع القسيمة', confirm:'رقم التأكيد من الفندق', status:'الحالة',
-        hotel:'اسم الفندق', loc:'الموقع', guest:'اسم العميل',
-        room:'نوع الغرفة', checkin:'تاريخ الدخول', checkout:'تاريخ الخروج',
-        nights:'عدد الليالي', rooms:'عدد الغرف', meals:'الوجبات', issuer:'الموظف المختص',
-        gen:'توليد القسيمة', print:'طباعة / PDF', reset:'مسح', install:'📲 تثبيت'
-      },
-      placeholders: {
-        ref:'MR-2026-0001', confirm:'HTL-CONF-XXXXXX',
-        hotel:'فندق ريجنسي بالاس', loc:'طريق الملك فهد، الرياض',
-        guest:'محمد أحمد علي', room:'جناح ملكي', meals:'إقامة شاملة', nights:'تلقائي'
-      },
-      status_opt: { confirmed:'مؤكد', pending:'قيد المراجعة', cancelled:'ملغي' },
-      doc: {
-        co_name: 'اليامي للسفر والسياحة',
-        co_sub: 'خدمات السفر والسياحة',
-        partner: 'بشراكة مع Imagine Travel · مشغّل الحجوزات',
-        tag_primary: 'شركة الإصدار',
-        tag_partner: 'شريك التشغيل',
-        libya: 'ليبيا:', egypt: 'مصر:',
-        pill: 'وثيقة رسمية',
-        title: 'قسيمة حجز فندقي',
-        ref: 'المرجع', confirm: 'رقم التأكيد', status: 'الحالة', date: 'تاريخ الإصدار',
-        hotel: 'الفندق',
-        sec_guest: 'معلومات العميل', sec_booking: 'تفاصيل الحجز',
-        guest: 'اسم العميل', checkin: 'تاريخ الدخول', checkout: 'تاريخ الخروج',
-        nights_l: 'عدد الليالي', rooms_l: 'عدد الغرف', room: 'نوع الغرفة', meals: 'الوجبات',
-        issuer: 'صادرة عن', sig: 'التوقيع المعتمد',
-        qr: 'امسح للتحقق',
-        notes: 'إشعارات هامة',
-        footer_left: '<strong>اليامي للسفر والسياحة</strong> · هذه الوثيقة صادرة إلكترونياً ولا تحتاج إلى توقيع',
-        footer_right: 'اليامي · 2026 ©',
-        status_map: { confirmed:'مؤكد', pending:'قيد المراجعة', cancelled:'ملغي' },
-        nights_fmt: n => `${n} ${n===1?'ليلة':n===2?'ليلتان':'ليالي'}`,
-        notes_list: [
-          'يُرجى تقديم هذه القسيمة مع هوية شخصية سارية عند الوصول إلى الفندق.',
-          'وقت الدخول القياسي 2 ظهراً · الخروج 12 ظهراً (حسب سياسة الفندق).',
-          'في بعض الحجوزات، أي تعديل أو إلغاء يجب أن يتم قبل 48 ساعة من تاريخ الدخول على الأقل.',
-          'هذه القسيمة غير قابلة للتحويل وصالحة فقط للعميل المذكور.',
-          'بعض الحجوزات غير مستردّة القيمة بعد إصدار الفاوتشر.'
-        ]
+    ar:{
+      page_title:'نظام إصدار قسائم الحجز الفندقي',
+      form:{ ref:'مرجع الحجز', confirm:'رقم التأكيد من الفندق', status:'الحالة',
+        hotel:'اسم الفندق', stars:'تصنيف النجوم', loc:'عنوان الفندق', zone:'المدينة / المنطقة', hphone:'هاتف الفندق',
+        guest:'أسماء النزلاء (سطر لكل اسم)', room:'نوع الغرفة', checkin:'تاريخ الدخول', checkout:'تاريخ الخروج',
+        nights:'عدد الليالي', rooms:'عدد الغرف', meals:'الوجبات', gemail:'إيميل صاحب الحجز', gphone:'هاتف صاحب الحجز',
+        issuer:'الموظف المختص', xnotes:'ملاحظات إضافية (اختياري)',
+        gen:'توليد القسيمة', print:'طباعة / PDF', reset:'مسح', install:'تثبيت' },
+      ph:{ ref:'MR-2026-0001', confirm:'HTL-CONF-XXXXXX', hotel:'فندق ريجنسي بالاس',
+        loc:'شارع العروبة، مصر الجديدة', zone:'القاهرة', hphone:'+20 2 2696 0000',
+        guest:'MOHAMED AHMED ALI\nSARA MOHAMED', room:'جناح ملكي', meals:'إفطار بوفيه',
+        nights:'تلقائي', gemail:'name@mail.com', gphone:'+20 1xx xxx xxxx' },
+      status_opt:{ confirmed:'مؤكد', pending:'قيد المراجعة', cancelled:'ملغي' },
+      doc:{
+        co:'اليامي للسفر والسياحة', city:'المدينة', country:'الدولة', tel:'هاتف',
+        booking:'رقم الحجز', qr:'امسح للتحقق',
+        conf:'رقم التأكيد', status:'الحالة', nights:'الليالي', rooms:'الغرف',
+        hotel:'الفندق', in:'تاريخ الدخول', out:'تاريخ الخروج', room:'نوع الغرفة',
+        addr:'العنوان:', zone:'المنطقة:', hphone:'هاتف:',
+        guests:'النزلاء', meals:'الوجبات والخدمات', terms:'شروط وأحكام',
+        holder:'صاحب الحجز', hname:'الاسم', hmail:'الإيميل', hphone2:'الهاتف',
+        contact:'جهة الاتصال', cname:'الاسم', caddr:'العنوان',
+        xnotes:'ملاحظات', issuer:'صادرة عن', sig:'التوقيع المعتمد',
+        stamp_sb:'رسمي',
+        foot_note:'وثيقة إلكترونية لا تحتاج إلى توقيع', foot_page:'صفحة 1 / 1',
+        nights_f:n=>`${n} ${n===1?'ليلة':n===2?'ليلتان':'ليالي'}`,
+        rooms_f:n=>`${n} ${n===1?'غرفة':n===2?'غرفتان':'غرف'}`,
+        terms_html:`
+          <p><b>1.</b> يُرجى تقديم هذه القسيمة مع هوية شخصية سارية عند الوصول إلى الفندق.</p>
+          <p><b>2.</b> وقت الدخول القياسي 2 ظهراً · الخروج 12 ظهراً (حسب سياسة الفندق). قد يطلب الفندق بطاقة ائتمانية كضمان عند الوصول للمصاريف الإضافية.</p>
+          <p><b>3.</b> في بعض الحجوزات، أي تعديل أو إلغاء يجب أن يتم قبل 48 ساعة من تاريخ الدخول على الأقل.</p>
+          <p><b>4.</b> هذه القسيمة غير قابلة للتحويل وصالحة فقط للنزلاء المذكورين أعلاه.</p>
+          <p><b>5.</b> بعض الحجوزات غير مستردّة القيمة بعد إصدار الفاوتشر.</p>
+          <p><b>6.</b> في حالة المغادرة المبكرة، تُطبّق رسوم الحجز كاملة ولا يحق المطالبة بأي استرداد.</p>
+          <p><b>7.</b> جميع الرسوم مغطاة في هذا الحجز باستثناء الضرائب الحكومية أو رسوم المنتجع (إن وُجدت) والتي تُدفع مباشرة للفندق عند الوصول.</p>`
       }
     },
-    en: {
-      page_title: 'Hotel Voucher Issuing System',
-      form: {
-        ref:'Voucher Reference', confirm:'Hotel Confirmation No.', status:'Status',
-        hotel:'Hotel Name', loc:'Location', guest:'Guest Name',
-        room:'Room Type', checkin:'Check-in Date', checkout:'Check-out Date',
-        nights:'Nights', rooms:'Rooms', meals:'Meals', issuer:'Issued By',
-        gen:'Generate Voucher', print:'Print / PDF', reset:'Reset', install:'📲 Install'
-      },
-      placeholders: {
-        ref:'MR-2026-0001', confirm:'HTL-CONF-XXXXXX',
-        hotel:'Regency Palace Hotel', loc:'King Fahd Rd, Riyadh',
-        guest:'Mohammed Ahmed Ali', room:'Royal Suite', meals:'All Inclusive', nights:'Auto'
-      },
-      status_opt: { confirmed:'Confirmed', pending:'Pending', cancelled:'Cancelled' },
-      doc: {
-        co_name: 'ALYAME TRAVEL & TOURISM',
-        co_sub: 'Travel & Tourism Services',
-        partner: 'In partnership with Imagine Travel · Booking Operator',
-        tag_primary: 'Issuing Company',
-        tag_partner: 'Operations Partner',
-        libya: 'Libya:', egypt: 'Egypt:',
-        pill: 'Official Document',
-        title: 'HOTEL VOUCHER',
-        ref: 'Voucher Ref', confirm: 'Confirmation No.', status: 'Status', date: 'Issue Date',
-        hotel: 'Hotel',
-        sec_guest: 'Guest Information', sec_booking: 'Booking Details',
-        guest: 'Guest Name', checkin: 'Check-in', checkout: 'Check-out',
-        nights_l: 'Nights', rooms_l: 'Rooms', room: 'Room Type', meals: 'Meals',
-        issuer: 'Issued By', sig: 'Authorized Signature',
-        qr: 'Scan to verify',
-        notes: 'Important Notes',
-        footer_left: '<strong>Alyame Travel & Tourism</strong> · Electronically generated · No signature required',
-        footer_right: 'ALYAME · 2026 ©',
-        status_map: { confirmed:'Confirmed', pending:'Pending', cancelled:'Cancelled' },
-        nights_fmt: n => `${n} ${n===1?'Night':'Nights'}`,
-        notes_list: [
-          'Please present this voucher together with a valid photo ID upon arrival at the hotel.',
-          'Standard check-in 14:00 · Check-out 12:00 (subject to hotel policy).',
-          'For some bookings, any changes or cancellations must be made at least 48 hours before check-in.',
-          'This voucher is non-transferable and is valid only for the named guest.',
-          'Some bookings are non-refundable once the voucher has been issued.'
-        ]
+    en:{
+      page_title:'Hotel Voucher Issuing System',
+      form:{ ref:'Booking Reference', confirm:'Hotel Confirmation No.', status:'Status',
+        hotel:'Hotel Name', stars:'Star Rating', loc:'Hotel Address', zone:'City / Zone', hphone:'Hotel Phone',
+        guest:'Guest Names (one per line)', room:'Room Type', checkin:'Check-in Date', checkout:'Check-out Date',
+        nights:'Nights', rooms:'Rooms', meals:'Meals', gemail:'Booking Holder Email', gphone:'Booking Holder Phone',
+        issuer:'Issued By', xnotes:'Additional Notes (optional)',
+        gen:'Generate Voucher', print:'Print / PDF', reset:'Reset', install:'Install' },
+      ph:{ ref:'MR-2026-0001', confirm:'HTL-CONF-XXXXXX', hotel:'Regency Palace Hotel',
+        loc:'Orouba Street, Heliopolis', zone:'Cairo', hphone:'+20 2 2696 0000',
+        guest:'MOHAMED AHMED ALI\nSARA MOHAMED', room:'Royal Suite', meals:'Buffet Breakfast',
+        nights:'Auto', gemail:'name@mail.com', gphone:'+20 1xx xxx xxxx' },
+      status_opt:{ confirmed:'Confirmed', pending:'Pending', cancelled:'Cancelled' },
+      doc:{
+        co:'ALYAME TRAVEL & TOURISM', city:'City', country:'Country', tel:'Tel',
+        booking:'Booking', qr:'Scan to verify',
+        conf:'Confirmation No.', status:'Status', nights:'Nights', rooms:'Rooms',
+        hotel:'Hotel', in:'Arrival date', out:'Departure date', room:'Room type',
+        addr:'Address:', zone:'Zone:', hphone:'Phone:',
+        guests:'Guests', meals:'Meals & Services', terms:'Terms & Conditions',
+        holder:'Booking Holder', hname:'Name', hmail:'Email', hphone2:'Phone',
+        contact:'Contact', cname:'Name', caddr:'Address',
+        xnotes:'Notes', issuer:'Issued by', sig:'Authorized Signature',
+        stamp_sb:'OFFICIAL',
+        foot_note:'Electronically generated · No signature required', foot_page:'page 1 / 1',
+        nights_f:n=>`${n} Night${n!==1?'s':''}`,
+        rooms_f:n=>`${n} Room${n!==1?'s':''}`,
+        terms_html:`
+          <p><b>1.</b> Please present this voucher together with a valid photo ID upon arrival at the hotel.</p>
+          <p><b>2.</b> Standard check-in 14:00 · Check-out 12:00 (subject to hotel policy). A major credit card may be required at check-in for deposit and incidentals.</p>
+          <p><b>3.</b> For some bookings, any changes or cancellations must be made at least 48 hours before check-in.</p>
+          <p><b>4.</b> This voucher is non-transferable and valid only for the guests named above.</p>
+          <p><b>5.</b> Some bookings are non-refundable once the voucher has been issued.</p>
+          <p><b>6.</b> In case of early departure, the full reservation charge is applicable and no refund will be claimed.</p>
+          <p><b>7.</b> All charges are covered for this booking excluding government taxes or resort fees (if any), to be paid by the guest directly at the hotel upon arrival.</p>`
       }
     }
   };
 
-  function todayISO(){ return new Date().toISOString().slice(0,10); }
-  function addDays(iso,n){ const d=new Date(iso); d.setDate(d.getDate()+n); return d.toISOString().slice(0,10); }
-  function fmtDate(iso, locale){
+  const todayISO = () => new Date().toISOString().slice(0,10);
+  const addDays = (iso,n)=>{const d=new Date(iso);d.setDate(d.getDate()+n);return d.toISOString().slice(0,10);};
+  function fmtDate(iso,l){
     if(!iso) return '—';
-    try {
-      const d = new Date(iso);
-      // Force Western (Latin) digits even in Arabic mode
-      const tag = locale === 'ar' ? 'ar-EG-u-nu-latn' : 'en-GB';
-      return d.toLocaleDateString(tag, { day:'2-digit', month:'long', year:'numeric' });
-    } catch(e){ return iso; }
+    try{ return new Date(iso).toLocaleDateString(l==='ar'?'ar-EG-u-nu-latn':'en-GB',{day:'2-digit',month:'short',year:'numeric'}); }
+    catch(e){ return iso; }
   }
-  function calcNights(ci,co){
-    if(!ci||!co) return 0;
-    return Math.max(1, Math.round((new Date(co)-new Date(ci))/86400000));
-  }
-  function genRef(){
-    const y = new Date().getFullYear();
-    const r = Math.floor(1000 + Math.random()*9000);
-    return `MR-${y}-${r}`;
-  }
+  const calcNights=(a,b)=> (!a||!b)?0:Math.max(1,Math.round((new Date(b)-new Date(a))/86400000));
+  const genRef=()=>`MR-${new Date().getFullYear()}-${Math.floor(1000+Math.random()*9000)}`;
 
-  // Save current form values to store for current lang
   function saveCurrent(){
-    TEXT_FIELDS.forEach(f => { store[lang][f] = $(f).value; });
-    SHARED_FIELDS.forEach(f => { store.shared = store.shared || {}; store.shared[f] = $(f).value; });
+    TEXT_FIELDS.forEach(f=>{store[lang][f]=$(f).value;});
+    store.shared = store.shared||{};
+    SHARED_FIELDS.forEach(f=>{store.shared[f]=$(f).value;});
   }
-
-  // Load store values into form for given lang
   function loadForLang(l){
-    TEXT_FIELDS.forEach(f => { $(f).value = (store[l] && store[l][f]) || ''; });
-    if(store.shared){
-      SHARED_FIELDS.forEach(f => { if(store.shared[f] != null) $(f).value = store.shared[f]; });
-    }
+    TEXT_FIELDS.forEach(f=>{$(f).value=(store[l]&&store[l][f])||'';});
+    if(store.shared) SHARED_FIELDS.forEach(f=>{ if(store.shared[f]!=null) $(f).value=store.shared[f]; });
   }
 
   function applyFormLang(l){
-    const t = T[l];
-    document.documentElement.setAttribute('dir', l === 'ar' ? 'rtl' : 'ltr');
+    const t=T[l];
+    document.documentElement.setAttribute('dir', l==='ar'?'rtl':'ltr');
     document.documentElement.setAttribute('lang', l);
     document.body.setAttribute('data-lang', l);
-    $('ui_title').textContent = t.page_title;
-    // Labels
-    $('lbl_ref').textContent = t.form.ref;
-    $('lbl_confirm').textContent = t.form.confirm;
-    $('lbl_status').textContent = t.form.status;
-    $('lbl_hotel_in').textContent = t.form.hotel;
-    $('lbl_loc_in').textContent = t.form.loc;
-    $('lbl_guest_in').textContent = t.form.guest;
-    $('lbl_room_in').textContent = t.form.room;
-    $('lbl_checkin_in').textContent = t.form.checkin;
-    $('lbl_checkout_in').textContent = t.form.checkout;
-    $('lbl_nights_in').textContent = t.form.nights;
-    $('lbl_rooms_in').textContent = t.form.rooms;
-    $('lbl_meals_in').textContent = t.form.meals;
-    $('lbl_issuer_in').textContent = t.form.issuer;
-    // Buttons
-    $('btn_gen').textContent = t.form.gen;
-    $('btn_print').textContent = t.form.print;
-    $('btn_reset').textContent = t.form.reset;
-    const installBtn = $('btnInstall');
-    if(installBtn) installBtn.textContent = t.form.install;
-    // Placeholders
-    Object.keys(t.placeholders).forEach(k => {
-      const el = $(k); if(el) el.placeholder = t.placeholders[k];
-    });
-    // Status select options
-    $('opt_confirmed').textContent = t.status_opt.confirmed;
-    $('opt_pending').textContent = t.status_opt.pending;
-    $('opt_cancelled').textContent = t.status_opt.cancelled;
+    $('ui_title').textContent=t.page_title;
+    const map={ref:'lbl_ref',confirm:'lbl_confirm',status:'lbl_status',hotel:'lbl_hotel_in',stars:'lbl_stars_in',
+      loc:'lbl_loc_in',zone:'lbl_zone_in',hphone:'lbl_hphone_in',guest:'lbl_guest_in',room:'lbl_room_in',
+      checkin:'lbl_checkin_in',checkout:'lbl_checkout_in',nights:'lbl_nights_in',rooms:'lbl_rooms_in',
+      meals:'lbl_meals_in',gemail:'lbl_gemail_in',gphone:'lbl_gphone_in',issuer:'lbl_issuer_in',xnotes:'lbl_notes_in'};
+    Object.keys(map).forEach(k=>{ const el=$(map[k]); if(el) el.textContent=t.form[k]; });
+    $('btn_gen').textContent=t.form.gen;
+    $('btn_print').textContent=t.form.print;
+    $('btn_reset').textContent=t.form.reset;
+    if($('btnInstall')) $('btnInstall').textContent=t.form.install;
+    Object.keys(t.ph).forEach(k=>{ const el=$(k); if(el) el.placeholder=t.ph[k]; });
+    $('opt_confirmed').textContent=t.status_opt.confirmed;
+    $('opt_pending').textContent=t.status_opt.pending;
+    $('opt_cancelled').textContent=t.status_opt.cancelled;
   }
 
   function setLang(l){
-    if(l === lang){ return; }
-    saveCurrent();
-    lang = l;
-    $('btnAr').classList.toggle('active', l === 'ar');
-    $('btnEn').classList.toggle('active', l === 'en');
+    if(l===lang) return;
+    saveCurrent(); lang=l;
+    $('btnAr').classList.toggle('active', l==='ar');
+    $('btnEn').classList.toggle('active', l==='en');
     $('doc').setAttribute('data-lang', l);
-    applyFormLang(l);
-    loadForLang(l);
-    generate();
-    try { localStorage.setItem('hotelVoucher:lang', l); } catch(e){}
+    applyFormLang(l); loadForLang(l); generate();
+    try{ localStorage.setItem('hv:lang', l); }catch(e){}
   }
 
   function initDefaults(){
-    if(!$('ref').value) $('ref').value = genRef();
-    if(!$('checkin').value) $('checkin').value = todayISO();
-    if(!$('checkout').value) $('checkout').value = addDays($('checkin').value || todayISO(), 3);
+    if(!$('ref').value) $('ref').value=genRef();
+    if(!$('checkin').value) $('checkin').value=todayISO();
+    if(!$('checkout').value) $('checkout').value=addDays($('checkin').value||todayISO(),3);
   }
 
   function generate(){
-    initDefaults();
-    saveCurrent();
-    const t = T[lang];
-    const d = t.doc;
+    initDefaults(); saveCurrent();
+    const t=T[lang], d=t.doc;
 
-    // Letterhead (Alyame is the primary issuer)
-    $('d_watermark').textContent = 'ALYAME';
-    $('d_co_name').textContent = d.co_name;
-    $('d_co_sub').textContent = d.co_sub;
-    $('d_partner_label').textContent = d.partner;
-    $('d_stamp_co').textContent = 'ALYAME';
-    $('d_stamp_sub').textContent = lang === 'ar' ? 'رسمي' : 'OFFICIAL';
-    $('d_stamp_date').textContent = new Date().getFullYear();
+    // static labels
+    const L={d_co:d.co,d_k_city:d.city,d_k_country:d.country,d_k_tel:d.tel,d_k_booking:d.booking,d_k_qr:d.qr,
+      d_k_conf:d.conf,d_k_status:d.status,d_k_nights:d.nights,d_k_rooms:d.rooms,
+      d_k_hotel:d.hotel,d_k_in:d.in,d_k_out:d.out,d_k_room:d.room,
+      d_k_addr:d.addr,d_k_zone:d.zone,d_k_hphone:d.hphone,
+      d_k_guests:d.guests,d_k_meals:d.meals,d_k_terms:d.terms,
+      d_k_holder:d.holder,d_k_hname:d.hname,d_k_hmail:d.hmail,d_k_hphone2:d.hphone2,
+      d_k_contact:d.contact,d_k_cname:d.cname,d_k_caddr:d.caddr,d_cname:d.co,
+      d_k_xnotes:d.xnotes,d_k_issuer:d.issuer,d_k_sig:d.sig,
+      d_stamp_sb:d.stamp_sb,d_foot_co:d.co,d_foot_note:d.foot_note,d_foot_page:d.foot_page};
+    Object.keys(L).forEach(k=>{ const el=$(k); if(el) el.textContent=L[k]; });
+    $('d_terms').innerHTML=d.terms_html;
+    $('d_stamp_yr').textContent=new Date().getFullYear();
 
-    // Bilingual labels
-    $('d_lbl_libya').textContent = d.libya;
-    $('d_lbl_egypt').textContent = d.egypt;
-    $('d_lbl_confirm').textContent = d.confirm;
-    $('d_pill').textContent = d.pill;
-    $('d_title').textContent = d.title;
-    $('d_lbl_ref').textContent = d.ref;
-    $('d_lbl_status').textContent = d.status;
-    $('d_lbl_date').textContent = d.date;
-    $('d_lbl_hotel').textContent = d.hotel;
-    $('d_sec_guest').textContent = d.sec_guest;
-    $('d_sec_booking').textContent = d.sec_booking;
-    $('d_lbl_guest').textContent = d.guest;
-    $('d_lbl_checkin').textContent = d.checkin;
-    $('d_lbl_checkout').textContent = d.checkout;
-    $('d_lbl_nights').textContent = d.nights_l;
-    $('d_lbl_rooms').textContent = d.rooms_l;
-    $('d_lbl_room').textContent = d.room;
-    $('d_lbl_meals').textContent = d.meals;
-    $('d_lbl_issuer').textContent = d.issuer;
-    $('d_lbl_sig').textContent = d.sig;
-    $('d_lbl_qr').textContent = d.qr;
-    $('d_lbl_notes').textContent = d.notes;
-    $('d_footer_left').innerHTML = `<strong>${d.co_name}</strong> · ` + (lang === 'ar'
-      ? 'وثيقة إلكترونية لا تحتاج إلى توقيع'
-      : 'Electronically generated · No signature required');
-    $('d_footer_center').textContent = 'info@alyametravel.com  ·  www.alyametravel.com';
-    $('d_footer_right').textContent = lang === 'ar' ? 'اليامي · 2026 ©' : 'ALYAME · 2026 ©';
-    $('d_notes').innerHTML = d.notes_list.map(n => `<li>${n}</li>`).join('');
+    // dynamic
+    $('d_ref').textContent=$('ref').value||'—';
+    $('d_conf').textContent=$('confirm').value||'—';
+    $('d_issued').textContent=fmtDate(todayISO(),lang);
+    $('d_hotel').textContent=$('hotel').value||'—';
+    $('d_loc').textContent=$('loc').value||'—';
+    $('d_zone').textContent=$('zone').value||'—';
+    $('d_hphone').textContent=$('hphone').value||'—';
+    $('d_room').textContent=$('room').value||'—';
+    $('d_meals').textContent=$('meals').value||'—';
+    $('d_in').textContent=fmtDate($('checkin').value,lang);
+    $('d_out').textContent=fmtDate($('checkout').value,lang);
+    $('d_gemail').textContent=$('gemail').value||'—';
+    $('d_gphone').textContent=$('gphone').value||'—';
 
-    // Dynamic values
-    $('d_ref_top').textContent = $('ref').value || '—';
-    $('d_confirm').textContent = $('confirm').value || '—';
-    $('d_date').textContent = fmtDate(todayISO(), lang);
-    $('d_hotel').textContent = $('hotel').value || '—';
-    $('d_loc').textContent = $('loc').value || '—';
-    const guestLines = ($('guest').value || '').split('\n').map(s => s.trim()).filter(Boolean);
-    if(guestLines.length === 0) $('d_guest').textContent = '—';
-    else if(guestLines.length === 1) $('d_guest').textContent = guestLines[0];
-    else $('d_guest').innerHTML = guestLines.map((n,i)=>`<div style="margin:.3mm 0">${i+1}. ${esc(n)}</div>`).join('');
-    $('d_room').textContent = $('room').value || '—';
-    $('d_meals').textContent = $('meals').value || '—';
-    $('d_checkin').textContent = fmtDate($('checkin').value, lang);
-    $('d_checkout').textContent = fmtDate($('checkout').value, lang);
+    const sv=parseInt($('stars').value,10)||0;
+    $('d_stars').textContent=sv?'★'.repeat(sv):'';
 
-    const r = parseInt($('rooms').value, 10) || 1;
-    $('d_rooms').textContent = lang === 'ar' ? `${r} ${r===1?'غرفة':r===2?'غرفتان':'غرف'}` : `${r} Room${r!==1?'s':''}`;
+    const g=($('guest').value||'').split('\n').map(s=>s.trim()).filter(Boolean);
+    $('d_guests').innerHTML = g.length
+      ? g.map((n,i)=>`<li><span class="n">${i+1}.</span><span>${esc(n)}</span></li>`).join('')
+      : '<li>—</li>';
+    $('d_holder').textContent = g[0] || '—';
 
-    const manualN = parseInt($('nights').value, 10);
-    const autoN = calcNights($('checkin').value, $('checkout').value);
-    const n = (manualN && manualN > 0) ? manualN : autoN;
-    $('d_nights').textContent = n ? d.nights_fmt(n) : '—';
+    const r=parseInt($('rooms').value,10)||1;
+    $('d_rooms').textContent=d.rooms_f(r);
+    const mn=parseInt($('nights').value,10), an=calcNights($('checkin').value,$('checkout').value);
+    const n=(mn&&mn>0)?mn:an;
+    $('d_nights').textContent= n?d.nights_f(n):'—';
 
-    const issuerName = $('issuer').value || '';
-    $('d_issuer').textContent = issuerName || '—';
-    $('d_issuer_email').textContent = STAFF_EMAIL[issuerName] || '';
+    const sVal=$('status').value;
+    $('d_badge').textContent=d_statusText(sVal);
+    $('d_badge').className='badge'+(sVal==='pending'?' pending':sVal==='cancelled'?' cancelled':'');
+    $('d_status_txt').textContent=d_statusText(sVal);
+    function d_statusText(v){ return t.status_opt[v]||t.status_opt.confirmed; }
 
-    // Status
-    const badge = $('d_status');
-    const statusVal = $('status').value;
-    const statusCls = { confirmed: '', pending: ' status-pending', cancelled: ' status-cancelled' };
-    badge.textContent = d.status_map[statusVal] || d.status_map.confirmed;
-    badge.className = 'status-badge' + (statusCls[statusVal] || '');
+    const iss=$('issuer').value||'';
+    $('d_issuer').textContent=iss||'—';
+    $('d_issuer_email').textContent=STAFF_EMAIL[iss]||'';
 
-    // QR (always uses raw data, language-agnostic)
-    const qrPayload = JSON.stringify({
-      ref: $('ref').value,
-      confirm: $('confirm').value,
-      guest_ar: store.ar.guest || '',
-      guest_en: store.en.guest || '',
-      hotel_ar: store.ar.hotel || '',
-      hotel_en: store.en.hotel || '',
-      in: $('checkin').value,
-      out: $('checkout').value,
-      status: statusVal
-    });
-    new QRious({
-      element: $('qr'), value: qrPayload, size: 200,
-      foreground: '#0f172a', background: '#ffffff', padding: 0
-    });
+    const xn=($('xnotes').value||'').trim();
+    $('xnotes-card').style.display = xn ? '' : 'none';
+    $('d_xnotes').textContent = xn;
 
-    // Persist
-    try {
-      localStorage.setItem('hotelVoucher:store', JSON.stringify(store));
-    } catch(e){}
+    new QRious({element:$('qr'),value:JSON.stringify({
+      ref:$('ref').value, conf:$('confirm').value,
+      guests:g, hotel:$('hotel').value,
+      in:$('checkin').value, out:$('checkout').value,
+      rooms:r, nights:n, status:sVal
+    }),size:200,foreground:'#0f172a',background:'#ffffff',padding:0});
+
+    try{ localStorage.setItem('hv:store', JSON.stringify(store)); }catch(e){}
   }
 
   function resetForm(){
-    document.querySelectorAll('input').forEach(i => i.value='');
-    $('status').selectedIndex = 0;
-    store.ar = {}; store.en = {}; store.shared = {};
-    initDefaults();
-    generate();
+    document.querySelectorAll('input,textarea').forEach(i=>i.value='');
+    $('status').selectedIndex=0; $('stars').selectedIndex=0; $('rooms').value='1';
+    store.ar={}; store.en={}; store.shared={};
+    initDefaults(); generate();
   }
 
-  // Load saved
-  try {
-    const saved = JSON.parse(localStorage.getItem('hotelVoucher:store') || '{}');
-    if(saved.ar) store.ar = saved.ar;
-    if(saved.en) store.en = saved.en;
-    if(saved.shared) store.shared = saved.shared;
-    const savedLang = localStorage.getItem('hotelVoucher:lang');
-    if(savedLang === 'en' || savedLang === 'ar') lang = savedLang;
-  } catch(e){}
+  try{
+    const s=JSON.parse(localStorage.getItem('hv:store')||'{}');
+    if(s.ar) store.ar=s.ar; if(s.en) store.en=s.en; if(s.shared) store.shared=s.shared;
+    const sl=localStorage.getItem('hv:lang'); if(sl==='en'||sl==='ar') lang=sl;
+  }catch(e){}
 
-  // Init UI
-  applyFormLang(lang);
-  loadForLang(lang);
-  $('doc').setAttribute('data-lang', lang);
-  $('btnAr').classList.toggle('active', lang === 'ar');
-  $('btnEn').classList.toggle('active', lang === 'en');
+  applyFormLang(lang); loadForLang(lang);
+  $('doc').setAttribute('data-lang',lang);
+  $('btnAr').classList.toggle('active',lang==='ar');
+  $('btnEn').classList.toggle('active',lang==='en');
 
-  $('ref').addEventListener('dblclick', () => { $('ref').value = genRef(); });
-  function syncNights(){
-    const n = calcNights($('checkin').value, $('checkout').value);
-    if(n) $('nights').value = n;
-  }
-  $('checkin').addEventListener('change', syncNights);
-  $('checkout').addEventListener('change', syncNights);
-  $('issuer').addEventListener('change', generate);
-  $('rooms').addEventListener('input', generate);
-  $('nights').addEventListener('input', generate);
+  $('ref').addEventListener('dblclick',()=>{$('ref').value=genRef();});
+  function syncNights(){ const n=calcNights($('checkin').value,$('checkout').value); if(n) $('nights').value=n; }
+  $('checkin').addEventListener('change',()=>{syncNights();generate();});
+  $('checkout').addEventListener('change',()=>{syncNights();generate();});
+  ['rooms','nights','stars','status','issuer'].forEach(id=>$(id).addEventListener('input',generate));
 
   generate();
 
-  // PWA
-  if('serviceWorker' in navigator){
-    window.addEventListener('load', () => {
-      navigator.serviceWorker.register('sw.js').catch(err => console.warn('SW:', err));
-    });
-  }
-  let deferredPrompt = null;
-  window.addEventListener('beforeinstallprompt', e => {
-    e.preventDefault();
-    deferredPrompt = e;
-    const btn = $('btnInstall');
-    if(btn) btn.style.display = 'inline-block';
-  });
-  window.addEventListener('appinstalled', () => {
-    deferredPrompt = null;
-    const btn = $('btnInstall');
-    if(btn) btn.style.display = 'none';
-  });
+  if('serviceWorker' in navigator) window.addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}));
+  let dp=null;
+  window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();dp=e;$('btnInstall').style.display='inline-block';});
+  window.addEventListener('appinstalled',()=>{dp=null;$('btnInstall').style.display='none';});
   function installApp(){
-    if(!deferredPrompt){
-      const msg = lang === 'ar'
-        ? 'لتثبيت التطبيق على iPhone: افتح في Safari ثم اضغط "مشاركة" → "إضافة إلى الشاشة الرئيسية".\n\nعلى Android/الكمبيوتر: استخدم قائمة المتصفح → "تثبيت التطبيق".'
-        : 'To install on iPhone: open in Safari, tap "Share" → "Add to Home Screen".\n\nOn Android / Desktop: use your browser menu → "Install App".';
-      alert(msg);
-      return;
-    }
-    deferredPrompt.prompt();
-    deferredPrompt.userChoice.finally(() => { deferredPrompt = null; });
+    if(!dp){ alert(lang==='ar'?'على iPhone: Safari ← مشاركة ← إضافة إلى الشاشة الرئيسية.\nعلى Android/الكمبيوتر: قائمة المتصفح ← تثبيت التطبيق.':'On iPhone: Safari → Share → Add to Home Screen.\nOn Android/Desktop: browser menu → Install App.'); return; }
+    dp.prompt(); dp.userChoice.finally(()=>{dp=null;});
   }
 </script>
 </body>
