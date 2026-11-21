@@ -67,7 +67,12 @@
     letter-spacing:.5px;word-spacing:3px;color:#1a5490;margin-top:.4mm;direction:ltr;white-space:nowrap;
     text-shadow:1px 1px 0 rgba(0,0,0,.12);
   }
-  .lg-alt{height:15mm;width:auto;max-width:32mm;object-fit:contain;display:block;opacity:.95;align-self:flex-end;margin-bottom:3mm}
+  /* Partner lockup — opposite edge from the Alyame logo */
+  .partner{display:flex;align-items:center;gap:2.5mm;padding-bottom:2mm;margin-bottom:1mm;
+           border-bottom:1px solid var(--line)}
+  .partner-k{font-size:7px;color:#8a8a8a;font-weight:700;letter-spacing:1.4px;
+             text-transform:uppercase;white-space:nowrap}
+  .lg-alt{height:22mm;width:auto;max-width:40mm;object-fit:contain;display:block}
 
   .mast-right{flex:1;display:flex;flex-direction:column;align-items:flex-end;gap:2.5mm}
   .agency{font-size:9px;line-height:1.75;text-align:right;direction:ltr}
@@ -225,9 +230,12 @@
             <div class="lg-wordmark">ATT</div>
             <div class="lg-tagline">ALYAME TRAVEL &amp; TOURISM</div>
           </div>
-          <img src="imagine-logo.svg" alt="Imagine Travel" class="lg-alt"/>
         </div>
         <div class="mast-right">
+          <div class="partner">
+            <span class="partner-k" id="d_k_partner">In partnership with</span>
+            <img src="imagine-logo.svg" alt="Imagine Travel" class="lg-alt"/>
+          </div>
           <div class="agency">
             <div><b id="d_k_name">Name</b>: <span id="d_co">ALYAME TRAVEL &amp; TOURISM</span></div>
             <div><b id="d_k_addr2">Address</b>: <span id="d_addr2">—</span></div>
@@ -414,6 +422,7 @@
       doc:{
         co:'اليامي للسفر والسياحة',
         k_name:'الاسم', k_addr2:'العنوان', k_city:'المدينة', k_country:'الدولة', k_phone:'الهاتف',
+        k_partner:'بالشراكة مع',
         addr2:'شارع الباندونج', city:'طرابلس', country:'ليبيا',
         caddr:'شارع الباندونج، طرابلس، ليبيا',
         booking:'حجز رقم', issued:'تاريخ الإصدار', conf:'رقم التأكيد', qr:'نسخة إلكترونية',
@@ -454,6 +463,7 @@
       doc:{
         co:'ALYAME TRAVEL & TOURISM',
         k_name:'Name', k_addr2:'Address', k_city:'City', k_country:'Country', k_phone:'Phone',
+        k_partner:'In partnership with',
         addr2:'Bandung Street', city:'Tripoli', country:'Libya',
         caddr:'Bandung Street, Tripoli, Libya',
         booking:'Booking', issued:'Issued at', conf:'Confirmation', qr:'Digital version',
@@ -542,7 +552,7 @@
     const t=T[lang], d=t.doc;
 
     const L={d_co:d.co,d_k_name:d.k_name,d_k_addr2:d.k_addr2,d_addr2:d.addr2,d_k_city:d.k_city,d_city:d.city,
-      d_k_country:d.k_country,d_country:d.country,d_k_phone:d.k_phone,d_caddr:d.caddr,
+      d_k_country:d.k_country,d_country:d.country,d_k_phone:d.k_phone,d_caddr:d.caddr,d_k_partner:d.k_partner,
       d_k_booking:d.booking,d_k_issued:d.issued,d_k_conf:d.conf,d_k_qr:d.qr,
       d_k_hotel:d.hotel,d_k_in:d.in,d_k_out:d.out,d_k_nights:d.nights,
       d_k_addr:d.addr,d_k_zone:d.zone,d_k_hphone:d.hphone,d_k_roomtype:d.roomtype,
