@@ -52,14 +52,22 @@
 
   /* ---------- Masthead ---------- */
   .mast{display:flex;align-items:flex-start;justify-content:space-between;gap:6mm;margin-bottom:6mm}
-  .mast-logos{flex-shrink:0;display:flex;flex-direction:column;gap:2mm;align-items:flex-start}
-  .voucher[data-lang="ar"] .mast-logos{align-items:flex-end}
-  .lg-main{height:40mm;width:auto;max-width:86mm;object-fit:contain;display:block}
-  .lg-wordmark{font-family:'Segoe UI',Arial,sans-serif;font-weight:800;font-size:19px;letter-spacing:7px;
-               color:#15418a;line-height:1;margin-top:-1mm;text-align:center;width:100%;direction:ltr}
-  .lg-tagline{font-family:'Segoe UI',Arial,sans-serif;font-weight:700;font-size:7.5px;letter-spacing:2.2px;
-              color:#15418a;text-align:center;width:100%;margin-top:.8mm;direction:ltr}
-  .lg-alt{height:13mm;width:auto;max-width:34mm;object-fit:contain;display:block;opacity:.95;margin-top:2mm}
+  .mast-logos{flex-shrink:0;display:flex;align-items:center;gap:4mm}
+  .lg-lockup{display:flex;flex-direction:column;align-items:center}
+  .lg-main{height:34mm;width:auto;max-width:72mm;object-fit:contain;display:block}
+  /* ATT lockup — mirrors the GTE wordmark: heavy italic with 3D offset shadow */
+  .lg-wordmark{
+    font-family:'Arial Black','Segoe UI',Arial,sans-serif;font-weight:900;font-style:italic;
+    font-size:34px;letter-spacing:1px;color:#1a5490;line-height:.95;
+    margin-top:-2mm;direction:ltr;
+    text-shadow:2px 2px 0 #b9c6d6, 3px 3px 0 rgba(0,0,0,.18);
+  }
+  .lg-tagline{
+    font-family:'Arial Black','Segoe UI',Arial,sans-serif;font-weight:900;font-size:8.5px;
+    letter-spacing:.5px;word-spacing:3px;color:#1a5490;margin-top:.4mm;direction:ltr;white-space:nowrap;
+    text-shadow:1px 1px 0 rgba(0,0,0,.12);
+  }
+  .lg-alt{height:15mm;width:auto;max-width:32mm;object-fit:contain;display:block;opacity:.95;align-self:flex-end;margin-bottom:3mm}
 
   .mast-right{flex:1;display:flex;flex-direction:column;align-items:flex-end;gap:2.5mm}
   .agency{font-size:9px;line-height:1.75;text-align:right;direction:ltr}
@@ -212,9 +220,11 @@
       <!-- ===== MASTHEAD ===== -->
       <div class="mast">
         <div class="mast-logos">
-          <img src="logo.png" alt="Alyame Travel" class="lg-main"/>
-          <div class="lg-wordmark">ATT</div>
-          <div class="lg-tagline">ALYAME TRAVEL &amp; TOURISM</div>
+          <div class="lg-lockup">
+            <img src="logo.png" alt="Alyame Travel" class="lg-main"/>
+            <div class="lg-wordmark">ATT</div>
+            <div class="lg-tagline">ALYAME TRAVEL &amp; TOURISM</div>
+          </div>
           <img src="imagine-logo.svg" alt="Imagine Travel" class="lg-alt"/>
         </div>
         <div class="mast-right">
@@ -411,7 +421,7 @@
         addr:'عنوان الفندق', zone:'المنطقة', hphone:'الهاتف', roomtype:'نوع الغرفة',
         rooms:'الغرف', guests:'النزلاء', supp:'الوجبات والخدمات', others:'شروط وأحكام',
         holder:'صاحب الحجز', hname:'اسم صاحب الحجز', hmail:'الإيميل', hphone2:'رقم الهاتف',
-        contact:'جهة الاتصال', cname:'الاسم', caddr:'العنوان', cmail:'الإيميل', xnotes:'ملاحظات',
+        contact:'جهة الاتصال', cname:'الاسم', k_caddr:'العنوان', cmail:'الإيميل', xnotes:'ملاحظات',
         issuer:'صادرة عن', sig:'التوقيع المعتمد',
         eco:'نرجو مراعاة المسؤولية البيئية',
         foot_note:'وثيقة إلكترونية لا تحتاج إلى توقيع', foot_page:'صفحة 1 / 1',
@@ -451,7 +461,7 @@
         addr:'Hotel Address', zone:'Zone', hphone:'Phone', roomtype:'Room type',
         rooms:'ROOMS', guests:'GUESTS', supp:'SUPPLEMENTS', others:'OTHERS',
         holder:'BOOKING HOLDER', hname:'Booking holder name', hmail:'Email', hphone2:'Phone number',
-        contact:'CONTACT', cname:'Name', caddr:'Address', cmail:'Email', xnotes:'NOTES',
+        contact:'CONTACT', cname:'Name', k_caddr:'Address', cmail:'Email', xnotes:'NOTES',
         issuer:'Issued by', sig:'Authorized Signature',
         eco:'Please consider your environmental responsibility',
         foot_note:'Electronically generated · No signature required', foot_page:'page 1 / 1',
@@ -538,7 +548,7 @@
       d_k_addr:d.addr,d_k_zone:d.zone,d_k_hphone:d.hphone,d_k_roomtype:d.roomtype,
       d_k_rooms:d.rooms,d_k_guests:d.guests,d_k_supp:d.supp,d_k_others:d.others,
       d_k_holder:d.holder,d_k_hname:d.hname,d_k_hmail:d.hmail,d_k_hphone2:d.hphone2,
-      d_k_contact:d.contact,d_k_cname:d.cname,d_k_caddr:d.caddr,d_k_cmail:d.cmail,d_cname:d.co,d_k_xnotes:d.xnotes,
+      d_k_contact:d.contact,d_k_cname:d.cname,d_k_caddr:d.k_caddr,d_k_cmail:d.cmail,d_cname:d.co,d_k_xnotes:d.xnotes,
       d_k_issuer:d.issuer,d_k_sig:d.sig,d_k_eco:d.eco,
       d_foot_co:d.co,d_foot_note:d.foot_note,d_foot_page:d.foot_page};
     Object.keys(L).forEach(k=>{ const el=$(k); if(el) el.textContent=L[k]; });
