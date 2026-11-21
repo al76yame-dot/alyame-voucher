@@ -61,20 +61,16 @@
            drop-shadow(3px 4px 5px rgba(0,0,0,.18))
            saturate(1.08) contrast(1.05);
   }
-  /* ATT lockup — mirrors the GTE wordmark: heavy italic with 3D extruded shadow */
+  /* ATT wordmark — the gold/navy 3D artwork, sits under the falcon mark */
   .lg-wordmark{
-    font-family:'Arial Black','Segoe UI',Arial,sans-serif;font-weight:900;font-style:italic;
-    font-size:52px;letter-spacing:2px;color:#1a5490;line-height:1.05;
-    margin-top:1.5mm;direction:ltr;
-    text-shadow:
-      1px 1px 0 #2f6aa8, 2px 2px 0 #2a5f99, 3px 3px 0 #24528a,
-      4px 4px 0 #1e467a, 5px 5px 0 #193b6b,
-      6px 7px 7px rgba(0,0,0,.35);
+    height:15mm;width:auto;max-width:72mm;object-fit:contain;display:block;
+    margin-top:1.5mm;
+    filter:drop-shadow(1px 1.5px 1px rgba(0,0,0,.22)) drop-shadow(2px 3px 4px rgba(0,0,0,.14));
   }
   .lg-tagline{
-    font-family:'Arial Black','Segoe UI',Arial,sans-serif;font-weight:900;font-size:11px;
-    letter-spacing:1px;word-spacing:4px;color:#1a5490;margin-top:1.2mm;direction:ltr;white-space:nowrap;
-    text-shadow:1px 1px 0 #24528a, 2px 2px 3px rgba(0,0,0,.22);
+    font-family:'Arial Black','Segoe UI',Arial,sans-serif;font-weight:900;font-size:10px;
+    letter-spacing:1.2px;word-spacing:4px;color:#1a3a6b;margin-top:1.6mm;direction:ltr;white-space:nowrap;
+    text-shadow:1px 1px 0 rgba(197,160,89,.55);
   }
   /* Partner lockup — opposite edge from the Alyame logo */
   .partner{display:flex;align-items:center;gap:2.5mm;padding-bottom:2mm;margin-bottom:1mm;
@@ -236,7 +232,7 @@
         <div class="mast-logos">
           <div class="lg-lockup">
             <img src="logo.png" alt="Alyame Travel" class="lg-main"/>
-            <div class="lg-wordmark">ATT</div>
+            <img src="att.png" alt="ATT" class="lg-wordmark"/>
             <div class="lg-tagline">ALYAME TRAVEL &amp; TOURISM</div>
           </div>
         </div>
