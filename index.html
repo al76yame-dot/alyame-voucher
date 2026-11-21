@@ -111,9 +111,10 @@
   table.dt td{border:1px solid var(--line);padding:3mm 4mm;font-size:10px;background:var(--cell);vertical-align:middle}
 
   .haddr{display:flex;gap:4mm;margin-top:3.5mm;align-items:flex-start}
-  .hphoto{width:34mm;height:22mm;flex-shrink:0;border:1px solid var(--line);
+  .hphoto{width:34mm;height:22mm;flex-shrink:0;border:1px solid var(--line);overflow:hidden;
           background:linear-gradient(135deg,#eceae2,#f6f4ee);display:flex;align-items:center;justify-content:center}
   .hphoto svg{width:11mm;height:11mm;fill:#b4ab93}
+  .hphoto img{width:100%;height:100%;object-fit:cover;display:block}
   .haddr-body{flex:1;font-size:10px;line-height:1.85}
 
   .plainline{font-size:10.5px;color:var(--ink)}
@@ -189,11 +190,23 @@
       <div><label id="lbl_loc_in">عنوان الفندق</label><input id="loc"/></div>
       <div><label id="lbl_zone_in">المدينة / المنطقة</label><input id="zone"/></div>
       <div><label id="lbl_hphone_in">هاتف الفندق</label><input id="hphone" dir="ltr"/></div>
+      <div style="grid-column:span 2">
+        <label id="lbl_hpic_in">صورة الفندق</label>
+        <div style="display:flex;gap:8px;align-items:center">
+          <input id="hpicurl" dir="ltr" placeholder="https://... رابط صورة" style="flex:1"/>
+          <button type="button" id="btn_pic" class="btn-secondary" style="padding:8px 14px;white-space:nowrap" onclick="document.getElementById('hpicfile').click()">ملف</button>
+          <button type="button" id="btn_picx" class="btn-secondary" style="padding:8px 12px" onclick="clearPhoto()" title="مسح">&times;</button>
+        </div>
+        <input id="hpicfile" type="file" accept="image/*" style="display:none"/>
+        <div id="pic_hint" style="font-size:11px;color:#777;margin-top:4px"></div>
+      </div>
       <div><label id="lbl_checkin_in">تاريخ الدخول</label><input id="checkin" type="date"/></div>
       <div><label id="lbl_checkout_in">تاريخ الخروج</label><input id="checkout" type="date"/></div>
       <div><label id="lbl_nights_in">عدد الليالي</label><input id="nights" type="number" min="1"/></div>
       <div><label id="lbl_rooms_in">عدد الغرف</label><input id="rooms" type="number" min="1" value="1"/></div>
       <div><label id="lbl_adults_in">عدد البالغين</label><input id="adults" type="number" min="1" value="1"/></div>
+      <div><label id="lbl_children_in">عدد الأطفال</label><input id="children" type="number" min="0" value="0"/></div>
+      <div><label id="lbl_cages_in">أعمار الأطفال</label><input id="cages" placeholder="5, 9"/></div>
       <div><label id="lbl_room_in">نوع الغرفة</label><input id="room"/></div>
       <div><label id="lbl_meals_in">الوجبات</label><input id="meals"/></div>
       <div style="grid-column:1/-1"><label id="lbl_guest_in">أسماء النزلاء (سطر لكل اسم)</label><textarea id="guest" rows="3" placeholder="MOHAMED AHMED ALI&#10;SARA MOHAMED"></textarea></div>
@@ -279,7 +292,8 @@
             </table>
             <div class="haddr">
               <div class="hphoto">
-                <svg viewBox="0 0 24 24"><path d="M7 13c1.66 0 3-1.34 3-3S8.66 7 7 7s-3 1.34-3 3 1.34 3 3 3zm12-6h-8v7H3V5H1v15h2v-3h18v3h2v-9c0-2.21-1.79-4-4-4z"/></svg>
+                <img id="d_hpic" alt="" style="display:none"/>
+                <svg id="d_hpic_ph" viewBox="0 0 24 24"><path d="M7 13c1.66 0 3-1.34 3-3S8.66 7 7 7s-3 1.34-3 3 1.34 3 3 3zm12-6h-8v7H3V5H1v15h2v-3h18v3h2v-9c0-2.21-1.79-4-4-4z"/></svg>
               </div>
               <div class="haddr-body">
                 <div><b id="d_k_addr">Hotel Address</b>: <span id="d_loc">—</span></div>
@@ -396,7 +410,8 @@
 
   const store = { ar:{}, en:{} };
   const TEXT_FIELDS = ['hotel','loc','zone','guest','room','meals','xnotes'];
-  const SHARED_FIELDS = ['ref','confirm','status','stars','hphone','checkin','checkout','nights','rooms','adults','gemail','gphone','issuer'];
+  const SHARED_FIELDS = ['ref','confirm','status','stars','hphone','checkin','checkout','nights','rooms','adults','children','cages','gemail','gphone','issuer','hpicurl'];
+  let hotelPhoto = '';   // data URL of an uploaded file, when one is used
 
   const STAFF_EMAIL = {
     Basent:'Operation2@imaginetravelegypt.com',
@@ -409,7 +424,8 @@
       form:{ ref:'مرجع الحجز', confirm:'رقم التأكيد من الفندق', status:'الحالة',
         hotel:'اسم الفندق', stars:'تصنيف النجوم', loc:'عنوان الفندق', zone:'المدينة / المنطقة', hphone:'هاتف الفندق',
         guest:'أسماء النزلاء (سطر لكل اسم)', room:'نوع الغرفة', checkin:'تاريخ الدخول', checkout:'تاريخ الخروج',
-        nights:'عدد الليالي', rooms:'عدد الغرف', adults:'عدد البالغين', meals:'الوجبات',
+        nights:'عدد الليالي', rooms:'عدد الغرف', adults:'عدد البالغين',
+        children:'عدد الأطفال', cages:'أعمار الأطفال', hpic:'صورة الفندق', meals:'الوجبات',
         gemail:'إيميل صاحب الحجز', gphone:'هاتف صاحب الحجز',
         issuer:'الموظف المختص', xnotes:'ملاحظات إضافية (اختياري)',
         gen:'توليد القسيمة', print:'طباعة / PDF', reset:'مسح', install:'تثبيت' },
@@ -434,7 +450,11 @@
         eco:'نرجو مراعاة المسؤولية البيئية',
         foot_note:'وثيقة إلكترونية لا تحتاج إلى توقيع', foot_page:'صفحة 1 / 1',
         nights_f:n=>`${n}`,
-        rooms_f:(a,r)=>`${a} ${a===1?'بالغ':a===2?'بالغان':'بالغين'} — ${r===1?'غرفة واحدة':r===2?'غرفتان':r+' غرف'}`,
+        occ_f:(a,ch,ages,r)=>{
+          const parts=[`${a} ${a===1?'بالغ':a===2?'بالغان':'بالغين'}`];
+          if(ch>0) parts.push(`${ch} ${ch===1?'طفل':ch===2?'طفلان':'أطفال'}${ages?` (${ages})`:''}`);
+          return parts.join(' · ')+` — ${r===1?'غرفة واحدة':r===2?'غرفتان':r+' غرف'}`;
+        },
         terms_html:`
           <p><b>1.</b> يُرجى تقديم هذه القسيمة مع هوية شخصية سارية عند الوصول إلى الفندق. قد يطلب الفندق بطاقة ائتمانية كضمان للمصاريف الإضافية عند تسجيل الدخول.</p>
           <p><b>2.</b> وقت الدخول القياسي 2 ظهراً · وقت الخروج 12 ظهراً (حسب سياسة الفندق). أي رسوم إضافية مثل مواقف السيارات أو الخدمات الأخرى تُدفع مباشرة للفندق.</p>
@@ -450,7 +470,8 @@
       form:{ ref:'Booking Reference', confirm:'Hotel Confirmation No.', status:'Status',
         hotel:'Hotel Name', stars:'Star Rating', loc:'Hotel Address', zone:'City / Zone', hphone:'Hotel Phone',
         guest:'Guest Names (one per line)', room:'Room Type', checkin:'Check-in Date', checkout:'Check-out Date',
-        nights:'Nights', rooms:'Rooms', adults:'Adults', meals:'Meals',
+        nights:'Nights', rooms:'Rooms', adults:'Adults',
+        children:'Children', cages:'Children ages', hpic:'Hotel photo', meals:'Meals',
         gemail:'Booking Holder Email', gphone:'Booking Holder Phone',
         issuer:'Issued By', xnotes:'Additional Notes (optional)',
         gen:'Generate Voucher', print:'Print / PDF', reset:'Reset', install:'Install' },
@@ -475,7 +496,11 @@
         eco:'Please consider your environmental responsibility',
         foot_note:'Electronically generated · No signature required', foot_page:'page 1 / 1',
         nights_f:n=>`${n}`,
-        rooms_f:(a,r)=>`${a} Adult${a!==1?'s':''} — Rooms : ${r}`,
+        occ_f:(a,ch,ages,r)=>{
+          const parts=[`${a} Adult${a!==1?'s':''}`];
+          if(ch>0) parts.push(`${ch} Child${ch!==1?'ren':''}${ages?` (${ages})`:''}`);
+          return parts.join(' · ')+` — Rooms : ${r}`;
+        },
         terms_html:`
           <p><b>1.</b> Please present this voucher together with a valid photo ID upon arrival at the hotel. A major credit card may be required at check-in for deposit and incidentals.</p>
           <p><b>2.</b> Standard check-in 14:00 · Check-out 12:00 (subject to hotel policy). Any additional fees such as parking or other services are payable directly to the hotel.</p>
@@ -517,7 +542,8 @@
     const map={ref:'lbl_ref',confirm:'lbl_confirm',status:'lbl_status',hotel:'lbl_hotel_in',stars:'lbl_stars_in',
       loc:'lbl_loc_in',zone:'lbl_zone_in',hphone:'lbl_hphone_in',guest:'lbl_guest_in',room:'lbl_room_in',
       checkin:'lbl_checkin_in',checkout:'lbl_checkout_in',nights:'lbl_nights_in',rooms:'lbl_rooms_in',
-      adults:'lbl_adults_in',meals:'lbl_meals_in',gemail:'lbl_gemail_in',gphone:'lbl_gphone_in',
+      adults:'lbl_adults_in',children:'lbl_children_in',cages:'lbl_cages_in',hpic:'lbl_hpic_in',
+      meals:'lbl_meals_in',gemail:'lbl_gemail_in',gphone:'lbl_gphone_in',
       issuer:'lbl_issuer_in',xnotes:'lbl_notes_in'};
     Object.keys(map).forEach(k=>{ const el=$(map[k]); if(el) el.textContent=t.form[k]; });
     $('btn_gen').textContent=t.form.gen;
@@ -588,7 +614,10 @@
 
     const r=parseInt($('rooms').value,10)||1;
     const a=parseInt($('adults').value,10)||g.length||1;
-    $('d_roomsline').textContent=d.rooms_f(a,r);
+    const ch=parseInt($('children').value,10)||0;
+    $('d_roomsline').textContent=d.occ_f(a,ch,($('cages').value||'').trim(),r);
+
+    applyPhoto();
 
     const mn=parseInt($('nights').value,10), an=calcNights($('checkin').value,$('checkout').value);
     const n=(mn&&mn>0)?mn:an;
@@ -610,11 +639,54 @@
       in:$('checkin').value, out:$('checkout').value, rooms:r, adults:a, nights:n, status:sVal
     }),size:200,foreground:'#1a1a1a',background:'#ffffff',padding:0});
 
-    try{ localStorage.setItem('hv:store', JSON.stringify(store)); }catch(e){}
+    try{
+      localStorage.setItem('hv:store', JSON.stringify(store));
+      if(hotelPhoto) localStorage.setItem('hv:photo', hotelPhoto);
+      else localStorage.removeItem('hv:photo');
+    }catch(e){}
   }
+
+  /* ---------- Hotel photo ---------- */
+  function applyPhoto(){
+    const img=$('d_hpic'), ph=$('d_hpic_ph');
+    const src = hotelPhoto || ($('hpicurl').value || '').trim();
+    if(!src){ img.style.display='none'; img.removeAttribute('src'); ph.style.display=''; $('pic_hint').textContent=''; return; }
+    ph.style.display='none';
+    img.style.display='';
+    $('pic_hint').textContent='';
+    img.onerror=()=>{ img.style.display='none'; ph.style.display='';
+      $('pic_hint').textContent = lang==='ar'
+        ? 'تعذّر تحميل الصورة من الرابط — بعض المواقع تمنع الاستخدام الخارجي. جرّب زر «ملف».'
+        : 'Could not load that URL — some sites block hotlinking. Try the “File” button.'; };
+    img.onload=()=>{ $('pic_hint').textContent=''; };
+    img.src=src;
+  }
+
+  // Downscale before storing so a photo can't blow past the localStorage quota
+  function readPhotoFile(file){
+    const fr=new FileReader();
+    fr.onload=()=>{
+      const im=new Image();
+      im.onload=()=>{
+        const MAX=560, s=Math.min(1, MAX/im.width);
+        const cv=document.createElement('canvas');
+        cv.width=Math.round(im.width*s); cv.height=Math.round(im.height*s);
+        cv.getContext('2d').drawImage(im,0,0,cv.width,cv.height);
+        hotelPhoto=cv.toDataURL('image/jpeg',0.82);
+        $('hpicurl').value='';
+        generate();
+      };
+      im.src=fr.result;
+    };
+    fr.readAsDataURL(file);
+  }
+
+  function clearPhoto(){ hotelPhoto=''; $('hpicurl').value=''; $('hpicfile').value=''; generate(); }
 
   function resetForm(){
     document.querySelectorAll('input,textarea').forEach(i=>i.value='');
+    hotelPhoto='';
+    $('children').value='0';
     $('status').selectedIndex=0; $('stars').selectedIndex=0; $('rooms').value='1'; $('adults').value='1';
     store.ar={}; store.en={}; store.shared={};
     initDefaults(); generate();
@@ -624,6 +696,7 @@
     const s=JSON.parse(localStorage.getItem('hv:store')||'{}');
     if(s.ar) store.ar=s.ar; if(s.en) store.en=s.en; if(s.shared) store.shared=s.shared;
     const sl=localStorage.getItem('hv:lang'); if(sl==='en'||sl==='ar') lang=sl;
+    hotelPhoto = localStorage.getItem('hv:photo') || '';
   }catch(e){}
 
   applyFormLang(lang); loadForLang(lang);
@@ -635,7 +708,9 @@
   function syncNights(){ const n=calcNights($('checkin').value,$('checkout').value); if(n) $('nights').value=n; }
   $('checkin').addEventListener('change',()=>{syncNights();generate();});
   $('checkout').addEventListener('change',()=>{syncNights();generate();});
-  ['rooms','adults','nights','stars','status','issuer'].forEach(id=>$(id).addEventListener('input',generate));
+  ['rooms','adults','children','cages','nights','stars','status','issuer'].forEach(id=>$(id).addEventListener('input',generate));
+  $('hpicurl').addEventListener('change',()=>{ hotelPhoto=''; generate(); });
+  $('hpicfile').addEventListener('change',e=>{ if(e.target.files[0]) readPhotoFile(e.target.files[0]); });
 
   generate();
 
