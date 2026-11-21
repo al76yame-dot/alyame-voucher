@@ -54,18 +54,27 @@
   .mast{display:flex;align-items:flex-start;justify-content:space-between;gap:6mm;margin-bottom:6mm}
   .mast-logos{flex-shrink:0;display:flex;align-items:center;gap:4mm}
   .lg-lockup{display:flex;flex-direction:column;align-items:center}
-  .lg-main{height:34mm;width:auto;max-width:72mm;object-fit:contain;display:block}
-  /* ATT lockup — mirrors the GTE wordmark: heavy italic with 3D offset shadow */
+  /* Alyame mark — lifted off the page with a layered drop shadow */
+  .lg-main{
+    height:38mm;width:auto;max-width:80mm;object-fit:contain;display:block;
+    filter:drop-shadow(1.5px 2px 1px rgba(0,0,0,.28))
+           drop-shadow(3px 4px 5px rgba(0,0,0,.18))
+           saturate(1.08) contrast(1.05);
+  }
+  /* ATT lockup — mirrors the GTE wordmark: heavy italic with 3D extruded shadow */
   .lg-wordmark{
     font-family:'Arial Black','Segoe UI',Arial,sans-serif;font-weight:900;font-style:italic;
-    font-size:34px;letter-spacing:1px;color:#1a5490;line-height:.95;
-    margin-top:-2mm;direction:ltr;
-    text-shadow:2px 2px 0 #b9c6d6, 3px 3px 0 rgba(0,0,0,.18);
+    font-size:52px;letter-spacing:2px;color:#1a5490;line-height:.92;
+    margin-top:-3mm;direction:ltr;
+    text-shadow:
+      1px 1px 0 #2f6aa8, 2px 2px 0 #2a5f99, 3px 3px 0 #24528a,
+      4px 4px 0 #1e467a, 5px 5px 0 #193b6b,
+      6px 7px 7px rgba(0,0,0,.35);
   }
   .lg-tagline{
-    font-family:'Arial Black','Segoe UI',Arial,sans-serif;font-weight:900;font-size:8.5px;
-    letter-spacing:.5px;word-spacing:3px;color:#1a5490;margin-top:.4mm;direction:ltr;white-space:nowrap;
-    text-shadow:1px 1px 0 rgba(0,0,0,.12);
+    font-family:'Arial Black','Segoe UI',Arial,sans-serif;font-weight:900;font-size:11px;
+    letter-spacing:1px;word-spacing:4px;color:#1a5490;margin-top:1.2mm;direction:ltr;white-space:nowrap;
+    text-shadow:1px 1px 0 #24528a, 2px 2px 3px rgba(0,0,0,.22);
   }
   /* Partner lockup — opposite edge from the Alyame logo */
   .partner{display:flex;align-items:center;gap:2.5mm;padding-bottom:2mm;margin-bottom:1mm;
