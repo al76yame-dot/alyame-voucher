@@ -54,11 +54,14 @@
   .mast{display:flex;align-items:flex-start;justify-content:space-between;gap:6mm;margin-bottom:6mm}
   .mast-logos{flex-shrink:0;display:flex;flex-direction:column;gap:2mm;align-items:flex-start}
   .voucher[data-lang="ar"] .mast-logos{align-items:flex-end}
-  .lg-main{height:30mm;width:auto;max-width:70mm;object-fit:contain;display:block}
-  .lg-alt{height:13mm;width:auto;max-width:34mm;object-fit:contain;display:block;opacity:.95}
+  .lg-main{height:40mm;width:auto;max-width:86mm;object-fit:contain;display:block}
+  .lg-wordmark{font-family:'Segoe UI',Arial,sans-serif;font-weight:800;font-size:19px;letter-spacing:7px;
+               color:#15418a;line-height:1;margin-top:-1mm;text-align:center;width:100%;direction:ltr}
+  .lg-tagline{font-family:'Segoe UI',Arial,sans-serif;font-weight:700;font-size:7.5px;letter-spacing:2.2px;
+              color:#15418a;text-align:center;width:100%;margin-top:.8mm;direction:ltr}
+  .lg-alt{height:13mm;width:auto;max-width:34mm;object-fit:contain;display:block;opacity:.95;margin-top:2mm}
 
   .mast-right{flex:1;display:flex;flex-direction:column;align-items:flex-end;gap:2.5mm}
-  .voucher[data-lang="ar"] .mast-right{align-items:flex-start}
   .agency{font-size:9px;line-height:1.75;text-align:right;direction:ltr}
   .voucher[data-lang="ar"] .agency{text-align:left}
   .agency b{color:#1a1a1a}
@@ -210,15 +213,17 @@
       <div class="mast">
         <div class="mast-logos">
           <img src="logo.png" alt="Alyame Travel" class="lg-main"/>
+          <div class="lg-wordmark">ATT</div>
+          <div class="lg-tagline">ALYAME TRAVEL &amp; TOURISM</div>
           <img src="imagine-logo.svg" alt="Imagine Travel" class="lg-alt"/>
         </div>
         <div class="mast-right">
           <div class="agency">
             <div><b id="d_k_name">Name</b>: <span id="d_co">ALYAME TRAVEL &amp; TOURISM</span></div>
-            <div><b id="d_k_city">City</b>: <span>Nasr City / Cairo</span></div>
-            <div><b id="d_k_state">State / Province</b>: <span>Cairo</span></div>
-            <div><b id="d_k_country">Country</b>: <span>EG</span></div>
-            <div><b id="d_k_phone">Phone</b>: <span>+20 110 110 9022</span></div>
+            <div><b id="d_k_addr2">Address</b>: <span id="d_addr2">—</span></div>
+            <div><b id="d_k_city">City</b>: <span id="d_city">—</span></div>
+            <div><b id="d_k_country">Country</b>: <span id="d_country">—</span></div>
+            <div><b id="d_k_phone">Phone</b>: <span>+218 91 325 7652</span></div>
           </div>
           <div class="qrow">
             <div>
@@ -327,7 +332,7 @@
             </div>
             <div class="sb">
               <div><b id="d_k_cname">Name</b>: <span id="d_cname">ALYAME TRAVEL &amp; TOURISM</span></div>
-              <div><b id="d_k_caddr">Address</b>: <span>Nasr City / Cairo, EG</span></div>
+              <div><b id="d_k_caddr">Address</b>: <span id="d_caddr">—</span></div>
               <div><b class="ltr">Libya</b>: <span class="ltr">+218 91 325 7652</span></div>
               <div><b class="ltr">Egypt</b>: <span class="ltr">+20 110 110 9022</span></div>
               <div><span class="ltr">+20 101 785 7655 &middot; +20 114 337 7200</span></div>
@@ -398,7 +403,9 @@
       status_opt:{ confirmed:'مؤكد', pending:'قيد المراجعة', cancelled:'ملغي' },
       doc:{
         co:'اليامي للسفر والسياحة',
-        k_name:'الاسم', k_city:'المدينة', k_state:'المحافظة', k_country:'الدولة', k_phone:'الهاتف',
+        k_name:'الاسم', k_addr2:'العنوان', k_city:'المدينة', k_country:'الدولة', k_phone:'الهاتف',
+        addr2:'شارع الباندونج', city:'طرابلس', country:'ليبيا',
+        caddr:'شارع الباندونج، طرابلس، ليبيا',
         booking:'حجز رقم', issued:'تاريخ الإصدار', conf:'رقم التأكيد', qr:'نسخة إلكترونية',
         hotel:'الفندق', in:'تاريخ الدخول', out:'تاريخ الخروج', nights:'الليالي',
         addr:'عنوان الفندق', zone:'المنطقة', hphone:'الهاتف', roomtype:'نوع الغرفة',
@@ -436,7 +443,9 @@
       status_opt:{ confirmed:'Confirmed', pending:'Pending', cancelled:'Cancelled' },
       doc:{
         co:'ALYAME TRAVEL & TOURISM',
-        k_name:'Name', k_city:'City', k_state:'State / Province', k_country:'Country', k_phone:'Phone',
+        k_name:'Name', k_addr2:'Address', k_city:'City', k_country:'Country', k_phone:'Phone',
+        addr2:'Bandung Street', city:'Tripoli', country:'Libya',
+        caddr:'Bandung Street, Tripoli, Libya',
         booking:'Booking', issued:'Issued at', conf:'Confirmation', qr:'Digital version',
         hotel:'HOTEL', in:'Arrival date', out:'Departure date', nights:'Nights',
         addr:'Hotel Address', zone:'Zone', hphone:'Phone', roomtype:'Room type',
@@ -522,7 +531,8 @@
     initDefaults(); saveCurrent();
     const t=T[lang], d=t.doc;
 
-    const L={d_co:d.co,d_k_name:d.k_name,d_k_city:d.k_city,d_k_state:d.k_state,d_k_country:d.k_country,d_k_phone:d.k_phone,
+    const L={d_co:d.co,d_k_name:d.k_name,d_k_addr2:d.k_addr2,d_addr2:d.addr2,d_k_city:d.k_city,d_city:d.city,
+      d_k_country:d.k_country,d_country:d.country,d_k_phone:d.k_phone,d_caddr:d.caddr,
       d_k_booking:d.booking,d_k_issued:d.issued,d_k_conf:d.conf,d_k_qr:d.qr,
       d_k_hotel:d.hotel,d_k_in:d.in,d_k_out:d.out,d_k_nights:d.nights,
       d_k_addr:d.addr,d_k_zone:d.zone,d_k_hphone:d.hphone,d_k_roomtype:d.roomtype,
